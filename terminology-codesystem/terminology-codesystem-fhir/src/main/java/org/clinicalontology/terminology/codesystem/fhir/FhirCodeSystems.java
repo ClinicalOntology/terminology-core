@@ -1431,10 +1431,10 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     }
 
     private FhirCodeSystems(
-            String uri,
+            String urn,
             String... oids) {
-        super(URI.create(FHIR_CODESYSTEM_PREFIX + uri), null, null, oids);
-        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + uri, this);
+        super(URI.create(FHIR_CODESYSTEM_PREFIX + urn), null, null, oids);
+        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }
 
     public int ordinal() {

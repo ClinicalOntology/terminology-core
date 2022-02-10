@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a terminology namespace such as the URI assigned to an ontology. Typically, code systems represent
+ * Represents a terminology namespace such as the URN assigned to an ontology. Typically, code systems represent
  * the namespace that ensure the uniqueness of codes in the terminology.
  */
 @SuppressWarnings("unused")
@@ -28,9 +28,9 @@ public class CodeSystemImpl implements CodeSystem {
     private final String description;
 
     /**
-     * The unique URI representing this code system. E.g., http://hl7.org/fhir/sid/icd-10-cm.
+     * The unique URN representing this code system. E.g., http://hl7.org/fhir/sid/icd-10-cm.
      */
-    private final URI uri;
+    private final URI urn;
 
     /**
      * Associated OIDs for this code system.
@@ -38,102 +38,102 @@ public class CodeSystemImpl implements CodeSystem {
     private final Set<Oid> oids;
 
     /**
-     * Create a code system.  Returns null if the URI is null or empty.
+     * Create a code system.  Returns null if the URN is null or empty.
      *
-     * @param uri  The URI.
+     * @param urn  The URN.
      * @param oids Optional OIDs.
      * @return The newly created code system.
      */
     public static CodeSystem create(
-            String uri,
+            String urn,
             String... oids) {
-        return StringUtils.isEmpty(uri) ? null : new CodeSystemImpl(URI.create(uri), null, null, oids);
+        return StringUtils.isEmpty(urn) ? null : new CodeSystemImpl(URI.create(urn), null, null, oids);
     }
 
     /**
-     * Create a code system.  Returns null if the URI is null.
+     * Create a code system.  Returns null if the URN is null.
      *
-     * @param uri The URI.
+     * @param urn The URN.
      * @return The newly created code system.
      */
-    public static CodeSystem create(URI uri) {
-        return uri == null ? null : new CodeSystemImpl(uri, null, null);
+    public static CodeSystem create(URI urn) {
+        return urn == null ? null : new CodeSystemImpl(urn, null, null);
     }
 
     /**
      * For deserialization.
      */
     private CodeSystemImpl() {
-        uri = null;
+        urn = null;
         name = null;
         description = null;
         oids = null;
     }
 
     /**
-     * @param uri The URI for this code system.
+     * @param urn The URN for this code system.
      */
-    public CodeSystemImpl(URI uri) {
-        this(uri, null, null);
+    public CodeSystemImpl(URI urn) {
+        this(urn, null, null);
     }
 
     /**
-     * @param uri The URI for this code system as a string.
+     * @param urn The URN for this code system as a string.
      */
-    public CodeSystemImpl(String uri) {
-        this(uri, null, null);
+    public CodeSystemImpl(String urn) {
+        this(urn, null, null);
     }
 
     /**
-     * @param uri  The URI associated with this code system.
+     * @param urn  The URN associated with this code system.
      * @param name The name associated to this code system.
      */
     public CodeSystemImpl(
-            URI uri,
+            URI urn,
             String name) {
-        this(uri, name, null);
+        this(urn, name, null);
     }
 
     /**
-     * @param uri  The URI associated with this code system.
+     * @param urn  The URN associated with this code system.
      * @param name The name associated to this code system.
      */
     public CodeSystemImpl(
-            String uri,
+            String urn,
             String name) {
-        this(uri, name, null);
+        this(urn, name, null);
     }
 
     /**
-     * @param uri         The URI associated with this code system.
+     * @param urn         The URN associated with this code system.
      * @param name        The name associated to this code system.
      * @param description A description of the code system.
      * @param oids        OIDs associated with this code system.
      */
     public CodeSystemImpl(
-            URI uri,
+            URI urn,
             String name,
             String description,
             String... oids) {
-        Validate.notNull(uri, "URI must not be null.");
-        this.uri = uri;
+        Validate.notNull(urn, "URN must not be null.");
+        this.urn = urn;
         this.name = name;
         this.description = description;
         this.oids = Collections.unmodifiableSet(OidImpl.toOrderedSet(oids));
     }
 
     /**
-     * @param uri         The URI associated with this code system.
+     * @param urn         The URN associated with this code system.
      * @param name        The name associated to this code system.
      * @param description A description of the code system.
      * @param oids        OIDs associated with this code system.
      */
     public CodeSystemImpl(
-            String uri,
+            String urn,
             String name,
             String description,
             String... oids) {
-        this(URI.create(uri), name, description, oids);
+        this(URI.create(urn), name, description, oids);
     }
 
     /**
@@ -153,11 +153,11 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
-     * @return The URI of this code system.
+     * @return The URN of this code system.
      */
     @Override
-    public URI getUri() {
-        return uri;
+    public URI getUrn() {
+        return urn;
     }
 
     /**
@@ -175,12 +175,12 @@ public class CodeSystemImpl implements CodeSystem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(uri);
+        return Objects.hash(urn);
     }
 
     @Override
     public String toString() {
-        return getUriAsString();
+        return getUrnAsString();
     }
 
 }

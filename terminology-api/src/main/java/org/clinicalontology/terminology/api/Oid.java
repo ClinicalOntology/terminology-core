@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Interface for representing an OID.
  * <p>
  * Note that the toString() method of an implementation must return the
- * string equivalent of the OID without the URI prefix.
+ * string equivalent of the OID without the URN prefix.
  */
 public interface Oid extends Serializable {
 

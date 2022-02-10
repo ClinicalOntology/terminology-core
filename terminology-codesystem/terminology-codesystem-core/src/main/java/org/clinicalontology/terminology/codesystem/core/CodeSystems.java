@@ -102,8 +102,8 @@ public final class CodeSystems extends CodeSystemImpl {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
-    private CodeSystems(String uri, String... oids) {
-        super(URI.create(uri), null, null, oids);
+    private CodeSystems(String urn, String... oids) {
+        super(URI.create(urn), null, null, oids);
     }
 
     public int ordinal() {

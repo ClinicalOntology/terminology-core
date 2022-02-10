@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * CodeSystem represents a terminology namespace such as the URI assigned
+ * CodeSystem represents a terminology namespace such as the URN assigned
  * to an ontology. Typically code systems represents the namespace that ensure
  * the uniqueness of codes in the terminology.
  */
@@ -26,9 +26,9 @@ public interface CodeSystem extends Serializable {
     String getDescription();
 
     /**
-     * @return The URI of this code system.
+     * @return The URN of this code system.
      */
-    URI getUri();
+    URI getUrn();
 
     /**
      * @return The OIDs associated with this code system.
@@ -36,10 +36,10 @@ public interface CodeSystem extends Serializable {
     Set<Oid> getOids();
 
     /**
-     * @return The Uri as a string value.
+     * @return The URN as a string value.
      */
-    default String getUriAsString() {
-        return Objects.toString(getUri());
+    default String getUrnAsString() {
+        return Objects.toString(getUrn());
     }
 
     /**
@@ -76,7 +76,7 @@ public interface CodeSystem extends Serializable {
 
         CodeSystem cs = (CodeSystem) target;
 
-        if (Objects.equals(getUri(), cs.getUri())) {
+        if (Objects.equals(getUrn(), cs.getUrn())) {
             return true;
         }
 

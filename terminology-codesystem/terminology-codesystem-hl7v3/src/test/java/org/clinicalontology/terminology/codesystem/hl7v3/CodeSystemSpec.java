@@ -20,10 +20,10 @@ public class CodeSystemSpec {
 
     @Test
     public void testLookup() {
-        assertEquals(V3CodeSystems.ActCode, CodeSystemRegistry.byUri(ACTCODE_URI));
-        assertEquals(V3CodeSystems.ActCode, CodeSystemRegistry.byUri(ACTCODE_URISTR));
-        assertNull(CodeSystemRegistry.byUri(UNKNOWN_URI));
-        assertNull(CodeSystemRegistry.byUri(UNKNOWN_URISTR));
+        assertEquals(V3CodeSystems.ActCode, CodeSystemRegistry.byUrn(ACTCODE_URI));
+        assertEquals(V3CodeSystems.ActCode, CodeSystemRegistry.byUrn(ACTCODE_URISTR));
+        assertNull(CodeSystemRegistry.byUrn(UNKNOWN_URI));
+        assertNull(CodeSystemRegistry.byUrn(UNKNOWN_URISTR));
 
         assertEquals(V3CodeSystems.ActCode, CodeSystemRegistry.findCodeSystem(ACTCODE_URISTR));
         assertNull(CodeSystemRegistry.findCodeSystem(UNKNOWN_URISTR));

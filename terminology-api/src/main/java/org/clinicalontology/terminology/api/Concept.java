@@ -18,10 +18,10 @@ public interface Concept extends Serializable {
     CodeSystem getCodeSystem();
 
     /**
-     * @return The code system as a string URI.
+     * @return The code system as a string URN.
      */
     default String getCodeSystemAsString() {
-        return hasCodeSystem() ? getCodeSystem().getUri().toString() : "";
+        return hasCodeSystem() ? getCodeSystem().getUrn().toString() : "";
     }
 
     /**

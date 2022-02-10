@@ -14,7 +14,7 @@ public interface ValueSetIdentifier extends Comparable<ValueSetIdentifier>, Seri
 
     /**
      * This method returns an identifier for the collection of versions of a given value set.
-     * If you need a URI for a specific version of the value set, use getVersionedIdentifier().
+     * If you need a URN for a specific version of the value set, use getVersionedIdentifier().
      *
      * @return The common value set identifier across all versions of the value set.
      */
@@ -22,7 +22,7 @@ public interface ValueSetIdentifier extends Comparable<ValueSetIdentifier>, Seri
 
     /**
      * This method returns an identifier for the collection of versions of a given value set.
-     * If you need a URI for a specific version of the value set, use getVersionedIdentifier().
+     * If you need a URN for a specific version of the value set, use getVersionedIdentifier().
      *
      * @return The common value set identifier across all versions of the value set.
      */
@@ -46,7 +46,7 @@ public interface ValueSetIdentifier extends Comparable<ValueSetIdentifier>, Seri
     String getAlias();
 
     /**
-     * This method returns a URI that is unique for the given version of the value set.
+     * This method returns a URN that is unique for the given version of the value set.
      *
      * @return ID + / + version.
      */

@@ -27,7 +27,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Registers a set of code systems to be used for lookup by URI or OID.
+     * Registers a set of code systems to be used for lookup by URN or OID.
      *
      * @param codeSystems A list of code systems.
      */
@@ -36,7 +36,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Registers a set of code systems to be used for lookup by URI or OID.
+     * Registers a set of code systems to be used for lookup by URN or OID.
      *
      * @param codeSystems A list of code systems.
      */
@@ -45,10 +45,10 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Returns the URI of the normalized code system.
+     * Returns the URN of the normalized code system.
      *
-     * @param codeSystem The URI or OID of the code system to be normalized.
-     * @return The URI of the normalized code system.
+     * @param codeSystem The URN or OID of the code system to be normalized.
+     * @return The URN of the normalized code system.
      */
     public static String getNormalizedCodeSystem(String codeSystem) {
         codeSystem = Oid.stripPrefix(codeSystem);
@@ -59,7 +59,7 @@ public class CodeSystemRegistry {
             normalized = cs == null ? null : getNormalizedCodeSystem(cs);
         }
 
-        return normalized != null ? normalized.getUriAsString() : codeSystem;
+        return normalized != null ? normalized.getUrnAsString() : codeSystem;
     }
 
     /**
@@ -69,7 +69,7 @@ public class CodeSystemRegistry {
      * @return The normalized code system.
      */
     public static CodeSystem getNormalizedCodeSystem(CodeSystem codeSystem) {
-        CodeSystem normalized = normalizedCodeSystemMap.get(codeSystem.getUriAsString());
+        CodeSystem normalized = normalizedCodeSystemMap.get(codeSystem.getUrnAsString());
         return normalized == null ? codeSystem : normalized;
     }
 
@@ -83,7 +83,7 @@ public class CodeSystemRegistry {
     public static void registerCodeSystemNormalization(
             CodeSystem fromSystem,
             CodeSystem toSystem) {
-        registerCodeSystemNormalization(fromSystem.getUriAsString(), toSystem);
+        registerCodeSystemNormalization(fromSystem.getUrnAsString(), toSystem);
         fromSystem.getOids().forEach(oid -> registerCodeSystemNormalization(oid.toString(), toSystem));
     }
 
@@ -101,28 +101,28 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Search for code system that contains the specified URI.
+     * Search for code system that contains the specified URN.
      *
-     * @param uri The URI to match.
+     * @param urn The URN to match.
      * @return The matching code system, or null if not found.
      */
-    public static CodeSystem byUri(String uri) {
+    public static CodeSystem byUrn(String urn) {
         return codeSystems.stream()
-                .filter(cs -> (cs.getUri() != null
-                        && uri.equalsIgnoreCase(cs.getUriAsString())))
+                .filter(cs -> (cs.getUrn() != null
+                        && urn.equalsIgnoreCase(cs.getUrnAsString())))
                 .findFirst()
                 .orElse(null);
     }
 
     /**
-     * Search for code system that contains the specified URI.
+     * Search for code system that contains the specified URN.
      *
-     * @param uri The URI to match.
+     * @param urn The URN to match.
      * @return The matching code system, or null if not found.
      */
-    public static CodeSystem byUri(URI uri) {
+    public static CodeSystem byUrn(URI urn) {
         return codeSystems.stream()
-                .filter(cs -> uri.equals(cs.getUri()))
+                .filter(cs -> urn.equals(cs.getUrn()))
                 .findFirst()
                 .orElse(null);
     }
@@ -162,7 +162,7 @@ public class CodeSystemRegistry {
      * @return The corresponding code system, or null if not found.
      */
     public static CodeSystem findCodeSystem(String value) {
-        CodeSystem system = byUri(value);
+        CodeSystem system = byUrn(value);
         return system != null ? system : byOid(value);
     }
 

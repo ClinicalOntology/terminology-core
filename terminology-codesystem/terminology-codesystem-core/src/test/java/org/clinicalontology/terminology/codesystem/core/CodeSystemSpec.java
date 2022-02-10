@@ -16,9 +16,9 @@ public class CodeSystemSpec {
 
     private static final URI UNKNOWN_URI = URI.create(UNKNOWN_URISTR);
 
-    private static final String LOINC_URISTR = CodeSystems.LOINC.getUriAsString();
+    private static final String LOINC_URISTR = CodeSystems.LOINC.getUrnAsString();
 
-    private static final URI LOINC_URI = CodeSystems.LOINC.getUri();
+    private static final URI LOINC_URI = CodeSystems.LOINC.getUrn();
 
     private static final String LOINC_OIDSTR = CodeSystems.LOINC.getFirstOid().toString();
 
@@ -30,10 +30,10 @@ public class CodeSystemSpec {
 
     @Test
     public void testLookup() {
-        assertNull(CodeSystemRegistry.byUri(UNKNOWN_URI));
-        assertNull(CodeSystemRegistry.byUri(UNKNOWN_URISTR));
-        assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byUri(LOINC_URI));
-        assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byUri(LOINC_URISTR));
+        assertNull(CodeSystemRegistry.byUrn(UNKNOWN_URI));
+        assertNull(CodeSystemRegistry.byUrn(UNKNOWN_URISTR));
+        assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byUrn(LOINC_URI));
+        assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byUrn(LOINC_URISTR));
         assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byOid(LOINC_OID));
         assertEquals(CodeSystems.LOINC, CodeSystemRegistry.byOid(LOINC_OIDSTR));
         assertEquals(CodeSystems.ICD9_CM, CodeSystemRegistry.byOid(ICD9_OID));
@@ -53,7 +53,7 @@ public class CodeSystemSpec {
     public void listCodeSystems() {
         for (CodeSystem system : CodeSystems.values()) {
             System.out.println(
-                    system.getUriAsString() + ", " +
+                    system.getUrnAsString() + ", " +
                             system.getOids().stream().map(Oid::toURNString).collect(Collectors.joining(", ")));
         }
     }
