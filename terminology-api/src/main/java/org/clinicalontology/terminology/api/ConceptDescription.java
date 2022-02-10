@@ -6,6 +6,7 @@ package org.clinicalontology.terminology.api;
  * description - e.g., 'Apache' (a people, an open-source community, a helicopter).
  * TODO Flesh out for publisher once requirements are clarified
  */
+@SuppressWarnings("unused")
 public interface ConceptDescription {
 
     /**

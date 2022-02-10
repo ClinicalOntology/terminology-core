@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * An identifier of a value set. A value set is a collection of unique concept references.
  */
+@SuppressWarnings("unused")
 public interface ValueSetIdentifier extends Comparable<ValueSetIdentifier>, Serializable {
 
     /**

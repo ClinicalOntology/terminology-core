@@ -33,7 +33,7 @@ public interface Oid extends Serializable {
      * @return The OID's string value with the URN prefix.
      */
     default String toURNString() {
-        return URN_PREFIX + toString();
+        return URN_PREFIX + this;
     }
 
     /**

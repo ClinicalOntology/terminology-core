@@ -12,6 +12,7 @@ import java.util.Set;
  * to an ontology. Typically code systems represents the namespace that ensure
  * the uniqueness of codes in the terminology.
  */
+@SuppressWarnings("unused")
 public interface CodeSystem extends Serializable {
 
     /**

@@ -13,6 +13,7 @@ import java.util.stream.Stream;
  * A set of synonymous concepts (across terminologies). For collection of non-synonymous
  * concepts use a Set&lt;Concept&gt; instead.
  */
+@SuppressWarnings("unused")
 public interface ConceptSet {
 
     /**
@@ -186,7 +187,7 @@ public interface ConceptSet {
      * @param targets    The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
-    public static boolean contains(
+    default boolean contains(
             ConceptSet conceptSet,
             List<Concept> targets) {
         return targets.stream().anyMatch(conceptSet::contains);
@@ -200,7 +201,7 @@ public interface ConceptSet {
      * @param targets    The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
-    public static boolean contains(
+    default boolean contains(
             ConceptSet conceptSet,
             Concept... targets) {
         return contains(conceptSet, Arrays.asList(targets));

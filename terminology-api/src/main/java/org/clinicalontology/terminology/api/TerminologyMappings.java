@@ -6,6 +6,7 @@ import java.util.Optional;
 /**
  * A collection of concept mappings.
  */
+@SuppressWarnings("unused")
 public interface TerminologyMappings {
 
     /**
