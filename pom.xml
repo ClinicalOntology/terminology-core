@@ -47,4 +47,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>uukmm-releases</id>
+            <name>UUKMM Java Releases Repository</name>
+            <url>${uukmm.deploy.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>uukmm-snapshots</id>
+            <name>UUKMM Nexus Snapshots Repository</name>
+            <url>${uukmm.deploy.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
