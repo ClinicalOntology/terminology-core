@@ -12,8 +12,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <enforcer.fail>false</enforcer.fail>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+        <source.plugin.version>3.2.1</source.plugin.version>
+        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+        <failsafe.plugin.version>3.0.0-M5</failsafe.plugin.version>
+        <enforcer.plugin.version>3.0.0-M3</enforcer.plugin.version>
     </properties>
 
     <modules>
@@ -47,6 +55,132 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${source.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${javadoc.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <failOnError>false</failOnError>
+                                <quiet>true</quiet>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>default-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <includes>
+                            <include>%regex[.*Spec.*]</include>
+                        </includes>
+                        <excludes>
+                            <exclude>%regex[.*FunctionalSpec.*]</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${failsafe.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>functional-test</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                            <configuration>
+                                <includes>
+                                    <include>%regex[.*FunctionalSpec.*]</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>functional-test-verify</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${enforcer.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <configuration>
+                                <rules>
+                                    <DependencyConvergence />
+                                </rules>
+                            </configuration>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <distributionManagement>
         <repository>
