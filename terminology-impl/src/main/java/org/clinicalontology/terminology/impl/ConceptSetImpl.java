@@ -41,7 +41,7 @@ public class ConceptSetImpl implements ConceptSet {
         Collections.addAll(conceptSet, concepts);
     }
 
-    public ConceptSetImpl(List<Concept> concepts) {
+    public ConceptSetImpl(Collection<Concept> concepts) {
         conceptSet.addAll(concepts);
     }
 
