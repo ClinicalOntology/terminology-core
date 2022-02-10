@@ -45,10 +45,10 @@ public final class V2CodeSystems extends CodeSystemImpl {
     }
 
     private V2CodeSystems(
-            String urn,
+            String uri,
             String oid) {
-        super(URI.create(V2_CODESYSTEM_PREFIX + urn), null, null, V2_OID_PREFIX + oid);
-        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
+        super(URI.create(V2_CODESYSTEM_PREFIX + uri), null, null, V2_OID_PREFIX + oid);
+        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + uri, this);
     }
 
     public int ordinal() {

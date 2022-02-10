@@ -25,9 +25,9 @@ public interface CodeSystem extends Serializable {
     String getDescription();
 
     /**
-     * @return The URN of this code system.
+     * @return The URI of this code system.
      */
-    URI getUrn();
+    URI getUri();
 
     /**
      * @return The OIDs associated with this code system.
@@ -35,10 +35,10 @@ public interface CodeSystem extends Serializable {
     Set<Oid> getOids();
 
     /**
-     * @return The Urn as a string value.
+     * @return The Uri as a string value.
      */
-    default String getUrnAsString() {
-        return Objects.toString(getUrn());
+    default String getUriAsString() {
+        return Objects.toString(getUri());
     }
 
     /**
@@ -75,7 +75,7 @@ public interface CodeSystem extends Serializable {
 
         CodeSystem cs = (CodeSystem) target;
 
-        if (Objects.equals(getUrn(), cs.getUrn())) {
+        if (Objects.equals(getUri(), cs.getUri())) {
             return true;
         }
 

@@ -156,7 +156,7 @@ public class CodeSystemImpl implements CodeSystem {
      * @return The URI of this code system.
      */
     @Override
-    public URI getUrn() {
+    public URI getUri() {
         return uri;
     }
 
@@ -180,7 +180,7 @@ public class CodeSystemImpl implements CodeSystem {
 
     @Override
     public String toString() {
-        return getUrnAsString();
+        return getUriAsString();
     }
 
 }

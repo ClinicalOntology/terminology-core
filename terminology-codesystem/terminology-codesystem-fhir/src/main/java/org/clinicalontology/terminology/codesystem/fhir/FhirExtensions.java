@@ -68,16 +68,16 @@ public final class FhirExtensions extends CodeSystemImpl {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
-    private static FhirExtensions defaultExtension(String urn) {
-        return new FhirExtensions(DEFAULT_EXTENSION_PREFIX + urn);
+    private static FhirExtensions defaultExtension(String uri) {
+        return new FhirExtensions(DEFAULT_EXTENSION_PREFIX + uri);
     }
 
-    private static FhirExtensions hspcExtension(String urn) {
-        return new FhirExtensions(HSPC_EXTENSION_PREFIX + urn);
+    private static FhirExtensions hspcExtension(String uri) {
+        return new FhirExtensions(HSPC_EXTENSION_PREFIX + uri);
     }
 
-    private FhirExtensions(String urn) {
-        super(URI.create(urn));
+    private FhirExtensions(String uri) {
+        super(URI.create(uri));
     }
 
     public int ordinal() {

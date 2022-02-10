@@ -20,7 +20,7 @@ public interface Concept extends Serializable {
      * @return The code system as a string URI.
      */
     default String getCodeSystemAsString() {
-        return hasCodeSystem() ? getCodeSystem().getUrn().toString() : "";
+        return hasCodeSystem() ? getCodeSystem().getUri().toString() : "";
     }
 
     /**

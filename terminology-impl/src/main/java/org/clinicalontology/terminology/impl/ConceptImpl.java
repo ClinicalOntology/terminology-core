@@ -33,7 +33,7 @@ public class ConceptImpl implements Concept {
     public static Concept create(
             CodeSystem system,
             String code) {
-        return create(system == null ? null : system.getUrnAsString(), code, null);
+        return create(system == null ? null : system.getUriAsString(), code, null);
     }
 
     /**
@@ -165,7 +165,7 @@ public class ConceptImpl implements Concept {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeSystem().getUrn(), getCode());
+        return Objects.hash(getCodeSystem().getUri(), getCode());
     }
 
     @Override

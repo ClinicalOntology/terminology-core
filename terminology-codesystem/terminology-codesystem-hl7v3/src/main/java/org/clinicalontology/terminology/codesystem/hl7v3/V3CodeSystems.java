@@ -105,10 +105,10 @@ public final class V3CodeSystems extends CodeSystemImpl {
     }
 
     private V3CodeSystems(
-            String urn,
+            String uri,
             String oid) {
-        super(URI.create(V3_CODESYSTEM_PREFIX + urn), null, null, V3_OID_PREFIX + oid);
-        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
+        super(URI.create(V3_CODESYSTEM_PREFIX + uri), null, null, V3_OID_PREFIX + oid);
+        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + uri, this);
     }
 
     public int ordinal() {

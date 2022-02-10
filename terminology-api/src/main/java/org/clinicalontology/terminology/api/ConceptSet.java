@@ -69,7 +69,7 @@ public interface ConceptSet {
     default Stream<Concept> getStreamByCodeSystem(URI system) {
         return getConcepts().stream()
                 .filter(concept -> concept.hasCodeSystem() && (
-                        system.equals(concept.getCodeSystem().getUrn())));
+                        system.equals(concept.getCodeSystem().getUri())));
     }
 
     /**
@@ -99,7 +99,7 @@ public interface ConceptSet {
      * @return All concepts with the given code system.
      */
     default Set<Concept> getByCodeSystem(CodeSystem system) {
-        return getByCodeSystem(system.getUrn());
+        return getByCodeSystem(system.getUri());
     }
 
     /**
