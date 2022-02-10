@@ -13,7 +13,7 @@ import java.util.*;
  *
  * @param <T> The type of members.
  */
-public class PseudoEnumDelegate<T> {
+public class CodeSystemEnumerator<T> {
 
     private final Map<String, T> members = new LinkedHashMap<>();
 
@@ -21,12 +21,12 @@ public class PseudoEnumDelegate<T> {
 
     private final List<T> values;
 
-    public PseudoEnumDelegate(Class<T> memberType) {
+    public CodeSystemEnumerator(Class<T> memberType) {
         this(memberType, memberType);
     }
 
     @SuppressWarnings("unchecked")
-    public PseudoEnumDelegate(Class<?> pseudoEnumClass, Class<T> memberType) {
+    public CodeSystemEnumerator(Class<?> pseudoEnumClass, Class<T> memberType) {
         for (Field member : pseudoEnumClass.getDeclaredFields()) {
             try {
                 member.setAccessible(true);

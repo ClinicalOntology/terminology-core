@@ -1,7 +1,7 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.api.PseudoEnumDelegate;
+import org.clinicalontology.terminology.api.CodeSystemEnumerator;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
 
 import java.net.URI;
@@ -44,7 +44,7 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     public static final FhirExtensions EXT_TIME_WINDOW = hspcExtension("TimeWindowExt");
 
-    private static final PseudoEnumDelegate<FhirExtensions> delegate = new PseudoEnumDelegate<>(FhirExtensions.class);
+    private static final CodeSystemEnumerator<FhirExtensions> delegate = new CodeSystemEnumerator<>(FhirExtensions.class);
 
     static {
         CodeSystemRegistry.registerCodeSystems(delegate.values());

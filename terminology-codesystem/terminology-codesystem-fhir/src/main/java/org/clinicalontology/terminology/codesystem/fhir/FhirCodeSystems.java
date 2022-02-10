@@ -2,7 +2,7 @@ package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.apache.commons.lang3.StringUtils;
 import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.api.PseudoEnumDelegate;
+import org.clinicalontology.terminology.api.CodeSystemEnumerator;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
 
 import java.net.URI;
@@ -1362,7 +1362,7 @@ public final class FhirCodeSystems extends CodeSystemImpl {
 
     public static final FhirCodeSystems YESNODONTKNOW = new FhirCodeSystems("yesnodontknow");
 
-    private static final PseudoEnumDelegate<FhirCodeSystems> delegate = new PseudoEnumDelegate<>(FhirCodeSystems.class);
+    private static final CodeSystemEnumerator<FhirCodeSystems> delegate = new CodeSystemEnumerator<>(FhirCodeSystems.class);
 
     static {
         CodeSystemRegistry.registerCodeSystems(delegate.values());

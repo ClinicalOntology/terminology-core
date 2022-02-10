@@ -1,7 +1,7 @@
 package org.clinicalontology.terminology.codesystem.hl7v2;
 
 import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.api.PseudoEnumDelegate;
+import org.clinicalontology.terminology.api.CodeSystemEnumerator;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
 
 import java.net.URI;
@@ -20,7 +20,7 @@ public final class V2CodeSystems extends CodeSystemImpl {
 
     private static final String V2_OID_PREFIX = "2.16.840.1.113883.18.";
 
-    private static final PseudoEnumDelegate<V2CodeSystems> delegate = new PseudoEnumDelegate<>(V2CodeSystems.class);
+    private static final CodeSystemEnumerator<V2CodeSystems> delegate = new CodeSystemEnumerator<>(V2CodeSystems.class);
 
     static {
         CodeSystemRegistry.registerCodeSystems(delegate.values());

@@ -1,7 +1,7 @@
 package org.clinicalontology.terminology.codesystem.core;
 
 import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.api.PseudoEnumDelegate;
+import org.clinicalontology.terminology.api.CodeSystemEnumerator;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
 
 import java.net.URI;
@@ -76,7 +76,7 @@ public final class CodeSystems extends CodeSystemImpl {
 
     public static final CodeSystems UNKNOWN = new CodeSystems("");
 
-    private static final PseudoEnumDelegate<CodeSystems> delegate = new PseudoEnumDelegate<>(CodeSystems.class);
+    private static final CodeSystemEnumerator<CodeSystems> delegate = new CodeSystemEnumerator<>(CodeSystems.class);
 
     static {
         CodeSystemRegistry.registerCodeSystems(delegate.values());
