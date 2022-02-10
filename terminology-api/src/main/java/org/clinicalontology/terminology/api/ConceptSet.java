@@ -183,28 +183,22 @@ public interface ConceptSet {
      * Returns true if concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
-     * @param conceptSet The concept reference set tested.
      * @param targets    The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
-    default boolean contains(
-            ConceptSet conceptSet,
-            List<Concept> targets) {
-        return targets.stream().anyMatch(conceptSet::contains);
+    default boolean contains(List<Concept> targets) {
+        return targets.stream().anyMatch(this::contains);
     }
 
     /**
      * Returns true if concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
-     * @param conceptSet The concept reference set tested.
      * @param targets    The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
-    default boolean contains(
-            ConceptSet conceptSet,
-            Concept... targets) {
-        return contains(conceptSet, Arrays.asList(targets));
+    default boolean contains(Concept... targets) {
+        return contains(Arrays.asList(targets));
     }
 
     /**
