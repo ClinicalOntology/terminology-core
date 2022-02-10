@@ -13,11 +13,4 @@
 
     <artifactId>terminology-codesystem-fhir</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.clinicalontology</groupId>
-            <artifactId>terminology-util</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-    </dependencies>
 </project>

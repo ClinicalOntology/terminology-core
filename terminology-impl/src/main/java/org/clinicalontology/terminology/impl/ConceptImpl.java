@@ -23,12 +23,45 @@ public class ConceptImpl implements Concept {
 
     private String preferredName; //Needed to relax this from final to support Phil's specializations.
 
-    private static CodeSystem createCodeSystem(String system) {
-        return StringUtils.isEmpty(system) ? null : new CodeSystemImpl(URI.create(system), null, null);
+    /**
+     * Creates a new Concept from a system and code, unless either are null or empty, in which case it returns a null.
+     *
+     * @param system The code system.
+     * @param code   The code.
+     * @return The newly created Concept or null.
+     */
+    public static Concept create(
+            CodeSystem system,
+            String code) {
+        return create(system == null ? null : system.getUrnAsString(), code, null);
     }
 
-    private static CodeSystem createCodeSystem(URI system) {
-        return system == null ? null : new CodeSystemImpl(system, null, null);
+    /**
+     * Creates a new Concept from a system and code, unless either are null or empty, in which case it returns a null.
+     *
+     * @param system The code system.
+     * @param code   The code.
+     * @return The newly created Concept or null.
+     */
+    public static Concept create(
+            String system,
+            String code) {
+        return create(system, code, null);
+    }
+
+    /**
+     * Creates a new Concept from a system and code, unless either are null or empty, in which case it returns a null.
+     *
+     * @param system        The code system.
+     * @param code          The code.
+     * @param preferredName The preferred name.
+     * @return The newly created Concept or null.
+     */
+    public static Concept create(
+            String system,
+            String code,
+            String preferredName) {
+        return StringUtils.isEmpty(system) || StringUtils.isEmpty(code) ? null : new ConceptImpl(system, code, preferredName);
     }
 
     /**
@@ -65,14 +98,14 @@ public class ConceptImpl implements Concept {
             String system,
             String code,
             String preferredName) {
-        this(createCodeSystem(system), code, preferredName);
+        this(CodeSystemImpl.create(system), code, preferredName);
     }
 
     public ConceptImpl(
             URI system,
             String code,
             String preferredName) {
-        this(createCodeSystem(system), code, preferredName);
+        this(CodeSystemImpl.create(system), code, preferredName);
     }
 
     public ConceptImpl(

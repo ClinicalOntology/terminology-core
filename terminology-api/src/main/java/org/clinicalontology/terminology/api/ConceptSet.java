@@ -5,9 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import java.net.URI;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -178,6 +176,34 @@ public interface ConceptSet {
      */
     default boolean contains(Concept target) {
         return getConcepts().stream().anyMatch(concept -> concept.isEqual(target));
+    }
+
+    /**
+     * Returns true if concept reference set contains a concept reference that is equivalent to any of the
+     * specified targets.
+     *
+     * @param conceptSet The concept reference set tested.
+     * @param targets    The concept references we wish to locate in the set.
+     * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
+     */
+    public static boolean contains(
+            ConceptSet conceptSet,
+            List<Concept> targets) {
+        return targets.stream().anyMatch(conceptSet::contains);
+    }
+
+    /**
+     * Returns true if concept reference set contains a concept reference that is equivalent to any of the
+     * specified targets.
+     *
+     * @param conceptSet The concept reference set tested.
+     * @param targets    The concept references we wish to locate in the set.
+     * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
+     */
+    public static boolean contains(
+            ConceptSet conceptSet,
+            Concept... targets) {
+        return contains(conceptSet, Arrays.asList(targets));
     }
 
     /**

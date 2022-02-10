@@ -1,8 +1,8 @@
 package org.clinicalontology.terminology.codesystem.hl7v2;
 
+import org.clinicalontology.terminology.api.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.PseudoEnumDelegate;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
-import org.clinicalontology.terminology.util.PseudoEnumDelegate;
-import org.clinicalontology.terminology.util.TerminologyUtils;
 
 import java.net.URI;
 import java.util.List;
@@ -23,7 +23,7 @@ public final class V2CodeSystems extends CodeSystemImpl {
     private static final PseudoEnumDelegate<V2CodeSystems> delegate = new PseudoEnumDelegate<>(V2CodeSystems.class);
 
     static {
-        TerminologyUtils.registerCodeSystems(delegate.values());
+        CodeSystemRegistry.registerCodeSystems(delegate.values());
     }
 
     public static List<V2CodeSystems> values() {
@@ -48,7 +48,7 @@ public final class V2CodeSystems extends CodeSystemImpl {
             String urn,
             String oid) {
         super(URI.create(V2_CODESYSTEM_PREFIX + urn), null, null, V2_OID_PREFIX + oid);
-        TerminologyUtils.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
+        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }
 
     public int ordinal() {

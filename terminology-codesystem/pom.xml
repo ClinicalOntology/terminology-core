@@ -24,7 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>org.clinicalontology</groupId>
-            <artifactId>terminology-util</artifactId>
+            <artifactId>terminology-impl</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

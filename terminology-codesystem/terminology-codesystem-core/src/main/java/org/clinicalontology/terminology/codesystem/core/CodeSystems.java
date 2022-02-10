@@ -1,13 +1,11 @@
 package org.clinicalontology.terminology.codesystem.core;
 
+import org.clinicalontology.terminology.api.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.PseudoEnumDelegate;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
-import org.clinicalontology.terminology.util.PseudoEnumDelegate;
-import org.clinicalontology.terminology.util.TerminologyUtils;
 
 import java.net.URI;
 import java.util.List;
-
-import static org.clinicalontology.terminology.util.TerminologyUtils.registerCodeSystemNormalization;
 
 /**
  * Derived from VSAC: https://cts.nlm.nih.gov/fhir/
@@ -81,9 +79,9 @@ public final class CodeSystems extends CodeSystemImpl {
     private static final PseudoEnumDelegate<CodeSystems> delegate = new PseudoEnumDelegate<>(CodeSystems.class);
 
     static {
-        TerminologyUtils.registerCodeSystems(delegate.values());
-        registerCodeSystemNormalization(ICD9_CM_DIAGNOSIS, ICD9_CM);
-        registerCodeSystemNormalization(ICD10_CM_DIAGNOSIS, ICD10_CM);
+        CodeSystemRegistry.registerCodeSystems(delegate.values());
+        CodeSystemRegistry.registerCodeSystemNormalization(ICD9_CM_DIAGNOSIS, ICD9_CM);
+        CodeSystemRegistry.registerCodeSystemNormalization(ICD10_CM_DIAGNOSIS, ICD10_CM);
     }
 
     public static List<CodeSystems> values() {

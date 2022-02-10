@@ -1,8 +1,8 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
+import org.clinicalontology.terminology.api.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.PseudoEnumDelegate;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
-import org.clinicalontology.terminology.util.PseudoEnumDelegate;
-import org.clinicalontology.terminology.util.TerminologyUtils;
 
 import java.net.URI;
 import java.util.List;
@@ -47,7 +47,7 @@ public final class FhirExtensions extends CodeSystemImpl {
     private static final PseudoEnumDelegate<FhirExtensions> delegate = new PseudoEnumDelegate<>(FhirExtensions.class);
 
     static {
-        TerminologyUtils.registerCodeSystems(delegate.values());
+        CodeSystemRegistry.registerCodeSystems(delegate.values());
     }
 
     public static List<FhirExtensions> values() {

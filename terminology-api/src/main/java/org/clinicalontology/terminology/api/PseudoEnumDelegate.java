@@ -1,4 +1,4 @@
-package org.clinicalontology.terminology.util;
+package org.clinicalontology.terminology.api;
 
 import org.apache.commons.lang3.Validate;
 
@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
- * Helper class that simulates a Java enum where a native enum is not practical.  It works by scanning the specified
+ * Helper class that emulates a Java enum where a native enum is not practical.  It works by scanning the specified
  * class for public/static/final fields of the specified type and building an index of these.  That index is then
  * used to provide approximate implementations of several of the static methods found in a native enum.
  *

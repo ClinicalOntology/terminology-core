@@ -1,9 +1,9 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.apache.commons.lang3.StringUtils;
+import org.clinicalontology.terminology.api.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.PseudoEnumDelegate;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
-import org.clinicalontology.terminology.util.PseudoEnumDelegate;
-import org.clinicalontology.terminology.util.TerminologyUtils;
 
 import java.net.URI;
 import java.util.List;
@@ -1365,7 +1365,7 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     private static final PseudoEnumDelegate<FhirCodeSystems> delegate = new PseudoEnumDelegate<>(FhirCodeSystems.class);
 
     static {
-        TerminologyUtils.registerCodeSystems(delegate.values());
+        CodeSystemRegistry.registerCodeSystems(delegate.values());
     }
 
     /**
@@ -1434,7 +1434,7 @@ public final class FhirCodeSystems extends CodeSystemImpl {
             String urn,
             String... oids) {
         super(URI.create(FHIR_CODESYSTEM_PREFIX + urn), null, null, oids);
-        TerminologyUtils.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
+        CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }
 
     public int ordinal() {
