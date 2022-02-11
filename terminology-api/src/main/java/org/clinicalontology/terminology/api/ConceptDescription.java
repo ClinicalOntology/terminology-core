@@ -1,10 +1,10 @@
 package org.clinicalontology.terminology.api;
 
 /**
- * Class representing a concept term such as a name or synonym. A description must apply to a concept and a concept
- * can have multiple description. The description need not be unique as multiple distinct concepts may share the same
+ * Represents a concept term such as a name or synonym. A description must apply to a concept and a concept can have
+ * multiple descriptions. The description need not be unique as multiple distinct concepts may share the same
  * description - e.g., 'Apache' (a people, an open-source community, a helicopter).
- * TODO Flesh out for publisher once requirements are clarified
+ * TODO: Flesh out for publisher once requirements are clarified
  */
 @SuppressWarnings("unused")
 public interface ConceptDescription {
@@ -20,7 +20,7 @@ public interface ConceptDescription {
     String getDescription();
 
     /**
-     * @return The description type
+     * @return The description type.
      */
     Concept getDescriptionType(); // TODO: Turn into enum
 

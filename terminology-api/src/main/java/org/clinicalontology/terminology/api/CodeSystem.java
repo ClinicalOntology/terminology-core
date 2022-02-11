@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * CodeSystem represents a terminology namespace such as the URN assigned
- * to an ontology. Typically code systems represents the namespace that ensure
+ * to an ontology. Typically, code systems represents the namespace that ensure
  * the uniqueness of codes in the terminology.
  */
 @SuppressWarnings("unused")
@@ -62,17 +62,25 @@ public interface CodeSystem extends Serializable {
     }
 
     /**
-     * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate
-     * to this.  Note that the "equals" method of enums implementing this interface is set to final, so calling this
-     * method should be the preferred way when enums are involved.
+     * Returns true if this and the target are equal.  Two code systems are considered equal if their URNs match or they
+     * share a common OID.
+     * <p></p>
+     * <i>Note: </i>Each interface implementation's {@link #equals} method should delegate to this.  Note that the
+     * {@link #equals} method of enums implementing this interface is set to final, so calling this method should
+     * be the preferred way when enums are involved.  If enum behavior is desired without this restriction, consider
+     * using the {@link CodeSystemEnumerator} class.
      *
      * @param target The object to compare.
      * @return True if equal.
      */
     default boolean isEqual(Object target) {
-        if (this == target) return true;
+        if (this == target) {
+            return true;
+        }
 
-        if (!(target instanceof CodeSystem)) return false;
+        if (!(target instanceof CodeSystem)) {
+            return false;
+        }
 
         CodeSystem cs = (CodeSystem) target;
 

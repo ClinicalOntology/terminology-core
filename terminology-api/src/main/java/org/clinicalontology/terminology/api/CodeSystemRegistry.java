@@ -101,7 +101,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Search for code system that contains the specified URN.
+     * Search for a code system that matches the specified URN.
      *
      * @param urn The URN to match.
      * @return The matching code system, or null if not found.
@@ -110,7 +110,7 @@ public class CodeSystemRegistry {
         return codeSystems.stream()
                 .filter(cs -> (cs.getUrn() != null
                         && urn.equalsIgnoreCase(cs.getUrnAsString())))
-                .findFirst()
+                .findAny()
                 .orElse(null);
     }
 
@@ -123,7 +123,7 @@ public class CodeSystemRegistry {
     public static CodeSystem byUrn(URI urn) {
         return codeSystems.stream()
                 .filter(cs -> urn.equals(cs.getUrn()))
-                .findFirst()
+                .findAny()
                 .orElse(null);
     }
 
@@ -150,7 +150,7 @@ public class CodeSystemRegistry {
     public static CodeSystem byOid(Oid oid) {
         return codeSystems.stream()
                 .filter(cs -> cs.getOids().contains(oid))
-                .findFirst()
+                .findAny()
                 .orElse(null);
     }
 
@@ -166,7 +166,7 @@ public class CodeSystemRegistry {
         return system != null ? system : byOid(value);
     }
 
-    protected CodeSystemRegistry() {
+    private CodeSystemRegistry() {
     }
 
 }

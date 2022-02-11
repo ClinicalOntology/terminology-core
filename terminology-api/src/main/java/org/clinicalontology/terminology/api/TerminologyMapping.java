@@ -3,7 +3,7 @@ package org.clinicalontology.terminology.api;
 import java.io.Serializable;
 
 /**
- * Class represents a mapping between two concepts (LHS to RHS) - generally concepts in different terminologies
+ * Represents a mapping between two concepts (LHS to RHS) - generally concepts in different terminologies.
  */
 public interface TerminologyMapping extends Serializable {
 
