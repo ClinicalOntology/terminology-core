@@ -1,8 +1,8 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.apache.commons.lang3.StringUtils;
-import org.clinicalontology.terminology.api.CodeSystemRegistry;
 import org.clinicalontology.terminology.api.CodeSystemEnumerator;
+import org.clinicalontology.terminology.api.CodeSystemRegistry;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
 
 import java.net.URI;
@@ -822,6 +822,8 @@ public final class FhirCodeSystems extends CodeSystemImpl {
 
     public static final FhirCodeSystems MEDICATION_FORM_CODES = new FhirCodeSystems("medication-form-codes");
 
+    public static final FhirCodeSystems MEDICATION_ORDER_STATUS = new FhirCodeSystems("medication-order-status");
+
     public static final FhirCodeSystems MEDICATION_STATEMENT_CATEGORY = new FhirCodeSystems("medication-statement-category");
 
     public static final FhirCodeSystems MEDICATION_STATEMENT_STATUS = new FhirCodeSystems("medication-statement-status");
@@ -841,8 +843,6 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     public static final FhirCodeSystems MEDICATIONKNOWLEDGE_PACKAGE_TYPE = new FhirCodeSystems("medicationknowledge-package-type");
 
     public static final FhirCodeSystems MEDICATIONKNOWLEDGE_STATUS = new FhirCodeSystems("medicationknowledge-status");
-
-    public static final FhirCodeSystems MEDICATIONORDER_STATUS = new FhirCodeSystems("medication-order-status");
 
     public static final FhirCodeSystems MEDICATIONREQUEST_CATEGORY = new FhirCodeSystems("medicationrequest-category");
 
