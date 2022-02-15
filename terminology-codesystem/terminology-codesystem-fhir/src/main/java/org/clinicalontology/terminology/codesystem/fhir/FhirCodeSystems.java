@@ -842,6 +842,8 @@ public final class FhirCodeSystems extends CodeSystemImpl {
 
     public static final FhirCodeSystems MEDICATIONKNOWLEDGE_STATUS = new FhirCodeSystems("medicationknowledge-status");
 
+    public static final FhirCodeSystems MEDICATIONORDER_STATUS = new FhirCodeSystems("medication-order-status");
+
     public static final FhirCodeSystems MEDICATIONREQUEST_CATEGORY = new FhirCodeSystems("medicationrequest-category");
 
     public static final FhirCodeSystems MEDICATIONREQUEST_COURSE_OF_THERAPY = new FhirCodeSystems("medicationrequest-course-of-therapy");
