@@ -1,5 +1,7 @@
 package org.clinicalontology.terminology.api;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.URI;
 import java.util.*;
 
@@ -23,7 +25,7 @@ public class CodeSystemRegistry {
     ) {
         source = getNormalizedCodeSystem(source);
         target = getNormalizedCodeSystem(target);
-        return source.equalsIgnoreCase(target);
+        return StringUtils.equalsIgnoreCase(source, target);
     }
 
     /**
@@ -51,8 +53,11 @@ public class CodeSystemRegistry {
      * @return The URN of the normalized code system.
      */
     public static String getNormalizedCodeSystem(String codeSystem) {
-        codeSystem = Oid.stripPrefix(codeSystem);
-        CodeSystem normalized = normalizedCodeSystemMap.get(codeSystem);
+        CodeSystem normalized = Optional.ofNullable(codeSystem)
+                .filter(StringUtils::isNotBlank)
+                .map(Oid::stripPrefix)
+                .map(normalizedCodeSystemMap::get)
+                .orElse(null);
 
         if (normalized == null) {
             CodeSystem cs = findCodeSystem(codeSystem);
@@ -69,8 +74,10 @@ public class CodeSystemRegistry {
      * @return The normalized code system.
      */
     public static CodeSystem getNormalizedCodeSystem(CodeSystem codeSystem) {
-        CodeSystem normalized = normalizedCodeSystemMap.get(codeSystem.getUrnAsString());
-        return normalized == null ? codeSystem : normalized;
+        return Optional.ofNullable(codeSystem)
+                .map(CodeSystem::getUrnAsString)
+                .map(normalizedCodeSystemMap::get)
+                .orElse(codeSystem);
     }
 
     /**
@@ -108,8 +115,8 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem byUrn(String urn) {
         return codeSystems.stream()
-                .filter(cs -> (cs.getUrn() != null
-                        && urn.equalsIgnoreCase(cs.getUrnAsString())))
+                .filter(cs -> cs.getUrn() != null
+                        && StringUtils.equalsIgnoreCase(urn, cs.getUrnAsString()))
                 .findAny()
                 .orElse(null);
     }
@@ -121,9 +128,11 @@ public class CodeSystemRegistry {
      * @return The matching code system, or null if not found.
      */
     public static CodeSystem byUrn(URI urn) {
-        return codeSystems.stream()
-                .filter(cs -> urn.equals(cs.getUrn()))
-                .findAny()
+        return Optional.ofNullable(urn)
+                .map(URI::toString)
+                .flatMap(u -> codeSystems.stream()
+                        .filter(cs -> urn.equals(cs.getUrn()))
+                        .findAny())
                 .orElse(null);
     }
 

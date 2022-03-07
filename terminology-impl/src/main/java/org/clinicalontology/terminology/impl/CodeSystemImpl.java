@@ -7,7 +7,9 @@ import org.clinicalontology.terminology.api.Oid;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -47,7 +49,17 @@ public class CodeSystemImpl implements CodeSystem {
     public static CodeSystem create(
             String urn,
             String... oids) {
-        return StringUtils.isEmpty(urn) ? null : new CodeSystemImpl(URI.create(urn), null, null, oids);
+        return StringUtils.isBlank(urn) ? null : new CodeSystemImpl(URI.create(urn), null, null, oids);
+    }
+
+    /**
+     * Create a code system.  Returns null if the URN ({@link String}) is null or empty.
+     *
+     * @param urn The URN.
+     * @return The newly created code system.
+     */
+    public static CodeSystem create(String urn) {
+        return StringUtils.isBlank(urn) ? null : new CodeSystemImpl(urn, null, null);
     }
 
     /**
@@ -165,7 +177,8 @@ public class CodeSystemImpl implements CodeSystem {
      */
     @Override
     public Set<Oid> getOids() {
-        return oids;
+        return Optional.ofNullable(oids)
+                .orElseGet(HashSet::new);
     }
 
     @Override

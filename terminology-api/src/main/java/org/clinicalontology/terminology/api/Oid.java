@@ -3,6 +3,7 @@ package org.clinicalontology.terminology.api;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Interface for representing an OID.
@@ -43,7 +44,10 @@ public interface Oid extends Serializable {
      * @return True if equivalent.
      */
     default boolean isEquivalent(String value) {
-        return stripPrefix(value).equals(toString());
+        return Optional.ofNullable(value)
+                .map(Oid::stripPrefix)
+                .map(oid -> oid.equals(toString()))
+                .orElse(false);
     }
 
 }
