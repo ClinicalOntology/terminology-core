@@ -1,13 +1,16 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.apache.commons.lang3.StringUtils;
+import org.clinicalontology.terminology.api.CodeSystem;
 import org.clinicalontology.terminology.api.CodeSystemEnumerator;
 import org.clinicalontology.terminology.api.CodeSystemRegistry;
 import org.clinicalontology.terminology.impl.CodeSystemImpl;
+import org.ietf.jgss.Oid;
 
 import java.net.URI;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public final class FhirCodeSystems extends CodeSystemImpl {
@@ -1391,6 +1394,30 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     }
 
     /**
+     * Converts a {@link CodeSystem} to a pre-R4 legacy {@link CodeSystem}.
+     *
+     * @param codeSystem The {@link CodeSystem} to convert.
+     * @return The converted {@link CodeSystem} (same as original if no conversion is required).
+     */
+    public static CodeSystem toLegacyCodeSystem(CodeSystem codeSystem) {
+        if (codeSystem.getUrnAsString().startsWith(FHIR_CODESYSTEM_PREFIX)) {
+            String codeSystemString = StringUtils.removeStart(codeSystem.getUrnAsString(), FHIR_CODESYSTEM_PREFIX);
+
+            if (VERSION_PREFIX_REGEX.matcher(codeSystemString).matches()) {
+                codeSystemString = codeSystemString.replaceFirst("-", "/");
+            }
+            codeSystem = new FhirCodeSystems(
+                    LEGACY_CODESYSTEM_PREFIX + codeSystemString,
+                    codeSystem.getOids().stream()
+                            .map(Object::toString)
+                            .toArray(String[]::new));
+            CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + codeSystemString, codeSystem);
+        }
+
+        return codeSystem;
+    }
+
+    /**
      * Converts a legacy code system to a post-STU3 code system.
      *
      * @param codeSystem The code system to convert.
@@ -1409,6 +1436,34 @@ public final class FhirCodeSystems extends CodeSystemImpl {
             }
 
             codeSystem = FHIR_CODESYSTEM_PREFIX + newSystem;
+        }
+
+        return codeSystem;
+    }
+
+    /**
+     * Converts a legacy {@link CodeSystem} to a post-STU3 code system.
+     *
+     * @param codeSystem The {@link CodeSystem} to convert.
+     * @return The converted {@link CodeSystem} (same as original if no conversion is required).
+     */
+    public static CodeSystem fromLegacyCodeSystem(CodeSystem codeSystem) {
+        if (codeSystem != null && codeSystem.getUrnAsString().startsWith(LEGACY_CODESYSTEM_PREFIX)) {
+            String newSystem = StringUtils.removeStart(codeSystem.getUrnAsString(), LEGACY_CODESYSTEM_PREFIX);
+
+            if (newSystem.startsWith("sid/")) {
+                return codeSystem;
+            }
+
+            if (VERSION_PREFIX_REGEX.matcher(newSystem).matches()) {
+                newSystem = newSystem.replaceFirst("/", "-");
+            }
+            codeSystem = new FhirCodeSystems(
+                    LEGACY_CODESYSTEM_PREFIX + newSystem,
+                    codeSystem.getOids().stream()
+                            .map(Object::toString)
+                            .toArray(String[]::new));
+            CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + newSystem, codeSystem);
         }
 
         return codeSystem;
