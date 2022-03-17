@@ -16,7 +16,9 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     private static final String DEFAULT_EXTENSION_PREFIX = "http://hl7.org/fhir/StructureDefinition/";
 
-    public static final FhirExtensions EXT_CONDITION_ASSERTED_DATE = defaultExtension("extension-Condition.assertedDate");
+    public static final FhirExtensions EXT_CONDITION_ASSERTED_DATE = defaultExtension("condition-assertedDate");
+
+    public static final FhirExtensions EXT_CONDITION_RANK = defaultExtension("condition-rank");
 
     public static final FhirExtensions EXT_ASSOCIATED_ENCOUNTER = defaultExtension("encounter-associatedEncounter");
 
