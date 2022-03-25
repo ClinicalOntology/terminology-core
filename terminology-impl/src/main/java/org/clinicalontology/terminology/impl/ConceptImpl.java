@@ -19,7 +19,7 @@ public class ConceptImpl implements Concept {
 
     private final String code;
 
-    private final Set<ConceptDescription> descriptions;
+    private final Set<ConceptDescription> conceptDescriptions;
 
     private String preferredName; //Needed to relax this from final to support Phil's specializations.
 
@@ -73,7 +73,7 @@ public class ConceptImpl implements Concept {
         this.code = null;
         this.preferredName = null;
         this.version = null;
-        this.descriptions = null;
+        this.conceptDescriptions = null;
     }
 
     public ConceptImpl(
@@ -120,12 +120,12 @@ public class ConceptImpl implements Concept {
             String code,
             String preferredName,
             String version,
-            Set<ConceptDescription> descriptions) {
+            Set<ConceptDescription> conceptDescriptions) {
         this.codeSystem = system;
         this.code = code;
         this.preferredName = preferredName;
         this.version = version;
-        this.descriptions = descriptions == null ? Collections.emptySet() : descriptions;
+        this.conceptDescriptions = conceptDescriptions == null ? Collections.emptySet() : conceptDescriptions;
         Validate.isTrue(isValidConcept(), "Concept reference must have a code system and code.");
     }
 
@@ -155,7 +155,7 @@ public class ConceptImpl implements Concept {
 
     @Override
     public Set<ConceptDescription> getConceptDescriptions() {
-        return descriptions;
+        return conceptDescriptions;
     }
 
     @Override
