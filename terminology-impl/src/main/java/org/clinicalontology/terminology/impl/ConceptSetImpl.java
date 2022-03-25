@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ConceptSetImpl implements ConceptSet {
 
-    private final Set<Concept> conceptSet = new LinkedHashSet<>();
+    private final Set<Concept> concepts = new LinkedHashSet<>();
 
     private String text;
 
@@ -38,31 +38,31 @@ public class ConceptSetImpl implements ConceptSet {
     }
 
     public ConceptSetImpl(Concept... concepts) {
-        Collections.addAll(conceptSet, concepts);
+        Collections.addAll(this.concepts, concepts);
     }
 
     public ConceptSetImpl(Collection<Concept> concepts) {
-        conceptSet.addAll(concepts);
+        this.concepts.addAll(concepts);
     }
 
     @Override
     public Set<Concept> getConcepts() {
-        return conceptSet;
+        return concepts;
     }
 
     @Override
     public void setConcepts(Set<Concept> concepts) {
-        conceptSet.clear();
+        this.concepts.clear();
 
         if (concepts != null) {
-            conceptSet.addAll(concepts);
+            this.concepts.addAll(concepts);
         }
     }
 
     @Override
     public void addConcept(Concept concept) {
         if (concept != null) {
-            conceptSet.add(concept);
+            concepts.add(concept);
         }
     }
 
@@ -81,12 +81,12 @@ public class ConceptSetImpl implements ConceptSet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ConceptSetImpl that = (ConceptSetImpl) o;
-        return Objects.equals(conceptSet, that.conceptSet);
+        return Objects.equals(concepts, that.concepts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(conceptSet);
+        return Objects.hash(concepts);
     }
 
 }
