@@ -22,4 +22,15 @@ public interface TerminologyMapping extends Serializable {
      */
     Concept getTarget();
 
+    /**
+     * @return The category of the mapping.
+     */
+    Concept getCategory();
+
+    /**
+     * @return True if the mapping has an associated category.
+     */
+    default boolean hasCategory() {
+        return getCategory() != null;
+    }
 }
