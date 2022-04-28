@@ -59,9 +59,16 @@ public interface Concept extends Serializable {
     }
 
     /**
-     * @return The preferred name associated with this concept for this purpose. Usually, the English fully specified name.
+     * @return The preferred name associated with this concept for this purpose. Usually, the fully specified name.
      */
     String getPreferredName();
+
+    /**
+     * Sets the preferred name.
+     *
+     * @param preferredName The preferred name.
+     */
+    void setPreferredName(String preferredName);
 
     /**
      * @return True if the concept is associated with a preferred term.

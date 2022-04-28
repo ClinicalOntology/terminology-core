@@ -6,13 +6,12 @@ package org.clinicalontology.terminology.api;
  * description - e.g., 'Apache' (a people, an open-source community, a helicopter).
  * TODO: Flesh out for publisher once requirements are clarified
  */
-@SuppressWarnings("unused")
 public interface ConceptDescription {
 
     /**
      * @return The language for the description.
      */
-    Concept getLanguage(); //TODO: Turn into enum of ISO country codes.
+    Language getLanguage();
 
     /**
      * @return The description of the concept.
@@ -22,7 +21,7 @@ public interface ConceptDescription {
     /**
      * @return The description type.
      */
-    Concept getDescriptionType(); // TODO: Turn into enum
+    ConceptDescriptionType getDescriptionType();
 
     /**
      * @return The concept this description applies to.
