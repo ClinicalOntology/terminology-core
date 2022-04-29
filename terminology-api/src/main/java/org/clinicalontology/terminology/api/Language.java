@@ -2,6 +2,9 @@ package org.clinicalontology.terminology.api;
 
 import java.util.Locale;
 
+/**
+ * ISO 2 Language Codes
+ */
 public enum Language {
     AA("Afar"),
     AB("Abkhazian"),
@@ -146,19 +149,34 @@ public enum Language {
         this.text = text;
     }
 
+    /**
+     * @return The language code.
+     */
     public String getCode() {
         return name().toLowerCase();
     }
 
+    /**
+     * @return The human-readable language name.
+     */
     @Override
     public String toString() {
         return text;
     }
 
+    /**
+     * @return The language for the default locale.
+     */
     public static Language getDefault() {
         return fromLocale(Locale.getDefault());
     }
 
+    /**
+     * Returns the language for the specified locale.
+     *
+     * @param locale The locale.
+     * @return The language for the locale (possibly null).
+     */
     public static Language fromLocale(Locale locale) {
         try {
             return Language.valueOf(locale.getLanguage().toUpperCase());
