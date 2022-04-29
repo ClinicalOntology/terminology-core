@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum DescriptionType {
 
     FULLY_SPECIFIED_NAME("900000000000003001"),
-    DESCRIPTION("900000000000550004"),
+    DEFINITION("900000000000550004"),
     SYNONYM("900000000000013009");
 
     private final String code;
