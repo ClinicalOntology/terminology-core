@@ -133,13 +133,25 @@ public interface Concept extends Serializable {
     }
 
     /**
-     * Adds a concept description.
+     * Adds a concept description using the default language.
      *
      * @param type The description type.
      * @param description The description.
      * @return The newly created concept description.
      */
-    ConceptDescription addConceptDescription(DescriptionType type, String description);
+    default ConceptDescription addConceptDescription(DescriptionType type, String description) {
+        return addConceptDescription(type, description, Language.getDefault());
+    }
+
+    /**
+     * Adds a concept description.
+     *
+     * @param type The description type.
+     * @param description The description.
+     * @param language The language of the description.
+     * @return The newly created concept description.
+     */
+    ConceptDescription addConceptDescription(DescriptionType type, String description, Language language);
 
     /**
      * Adds concept descriptions.

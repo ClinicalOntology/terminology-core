@@ -2,13 +2,13 @@ package org.clinicalontology.terminology.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.clinicalontology.terminology.api.CodeSystem;
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.ConceptDescription;
-import org.clinicalontology.terminology.api.DescriptionType;
+import org.clinicalontology.terminology.api.*;
 
 import java.net.URI;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class ConceptImpl implements Concept {
 
@@ -18,9 +18,7 @@ public class ConceptImpl implements Concept {
 
     private final String code;
 
-    private final Set<ConceptDescription> _conceptDescriptions = new LinkedHashSet<>();
-
-    private final Set<ConceptDescription> conceptDescriptions = Collections.unmodifiableSet(_conceptDescriptions);
+    private final Set<ConceptDescription> conceptDescriptions = new LinkedHashSet<>();
 
     private String preferredName;
 
@@ -160,18 +158,18 @@ public class ConceptImpl implements Concept {
     }
 
     @Override
-    public ConceptDescription addConceptDescription(DescriptionType type, String description) {
-        ConceptDescription conceptDescription = new ConceptDescriptionImpl(this, description, type);
+    public ConceptDescription addConceptDescription(
+            DescriptionType type,
+            String description,
+            Language language) {
+        ConceptDescription conceptDescription = new ConceptDescriptionImpl(description, type, language, null);
         addConceptDescriptions(conceptDescription);
         return conceptDescription;
     }
 
     @Override
     public void addConceptDescriptions(ConceptDescription... conceptDescriptions) {
-        Arrays.stream(conceptDescriptions).forEach(cd -> {
-            Validate.isTrue(isEqual(cd.getConcept()), "Concept description concept does not match this concept.");
-            this._conceptDescriptions.add(cd);
-        });
+        Collections.addAll(this.conceptDescriptions, conceptDescriptions);
     }
 
     @Override

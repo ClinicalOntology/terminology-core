@@ -24,11 +24,6 @@ public interface ConceptDescription {
     DescriptionType getDescriptionType();
 
     /**
-     * @return The concept this description applies to.
-     */
-    Concept getConcept();
-
-    /**
      * @return The version associated with this description.
      */
     String getVersion();
