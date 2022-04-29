@@ -21,7 +21,7 @@ public interface ConceptDescription {
     /**
      * @return The description type.
      */
-    ConceptDescriptionType getDescriptionType();
+    DescriptionType getDescriptionType();
 
     /**
      * @return The concept this description applies to.

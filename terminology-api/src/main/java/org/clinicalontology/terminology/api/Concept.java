@@ -3,8 +3,11 @@ package org.clinicalontology.terminology.api;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a reference to a concept in a terminology or ontology.
@@ -100,9 +103,50 @@ public interface Concept extends Serializable {
     }
 
     /**
-     * @return The set of concept descriptions associated with the concept.
+     * @return An immutable set of concept descriptions associated with the concept.
      */
     Set<ConceptDescription> getConceptDescriptions();
+
+    /**
+     * Returns all concept descriptions matching the specified type.
+     *
+     * @param type The description type.
+     * @return The matching concept descriptions (never null).
+     */
+    default Set<ConceptDescription> getConceptDescriptions(DescriptionType type) {
+        return getConceptDescriptions().stream()
+                .filter(cd -> cd.getDescriptionType() == type)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns the first concept description matching the specified type.
+     *
+     * @param type The description type.
+     * @return The matching concept description (possibly null).
+     */
+    default ConceptDescription getConceptDescription(DescriptionType type) {
+        return getConceptDescriptions().stream()
+                .filter(cd -> cd.getDescriptionType() == type)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Adds a concept description.
+     *
+     * @param type The description type.
+     * @param description The description.
+     * @return The newly created concept description.
+     */
+    ConceptDescription addConceptDescription(DescriptionType type, String description);
+
+    /**
+     * Adds concept descriptions.
+     *
+     * @param conceptDescriptions The concept descriptions to add.
+     */
+    void addConceptDescriptions(ConceptDescription... conceptDescriptions);
 
     /**
      * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate

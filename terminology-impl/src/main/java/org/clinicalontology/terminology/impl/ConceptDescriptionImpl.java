@@ -2,7 +2,7 @@ package org.clinicalontology.terminology.impl;
 
 import org.clinicalontology.terminology.api.Concept;
 import org.clinicalontology.terminology.api.ConceptDescription;
-import org.clinicalontology.terminology.api.ConceptDescriptionType;
+import org.clinicalontology.terminology.api.DescriptionType;
 import org.clinicalontology.terminology.api.Language;
 
 import java.util.Objects;
@@ -13,7 +13,7 @@ public class ConceptDescriptionImpl implements ConceptDescription {
 
     private final String description;
 
-    private final ConceptDescriptionType descriptionType;
+    private final DescriptionType descriptionType;
 
     private final Concept concept;
 
@@ -22,14 +22,14 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     public ConceptDescriptionImpl(
             Concept concept,
             String description,
-            ConceptDescriptionType descriptionType) {
+            DescriptionType descriptionType) {
         this(concept, description, descriptionType, null, null);
     }
 
     public ConceptDescriptionImpl(
             Concept concept,
             String description,
-            ConceptDescriptionType descriptionType,
+            DescriptionType descriptionType,
             Language language,
             String version) {
         this.concept = concept;
@@ -50,7 +50,7 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     }
 
     @Override
-    public ConceptDescriptionType getDescriptionType() {
+    public DescriptionType getDescriptionType() {
         return descriptionType;
     }
 

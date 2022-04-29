@@ -5,12 +5,10 @@ import org.apache.commons.lang3.Validate;
 import org.clinicalontology.terminology.api.CodeSystem;
 import org.clinicalontology.terminology.api.Concept;
 import org.clinicalontology.terminology.api.ConceptDescription;
-import org.clinicalontology.terminology.api.ConceptDescriptionType;
+import org.clinicalontology.terminology.api.DescriptionType;
 
 import java.net.URI;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ConceptImpl implements Concept {
 
@@ -20,7 +18,11 @@ public class ConceptImpl implements Concept {
 
     private final String code;
 
-    private final Set<ConceptDescription> conceptDescriptions;
+    private final Set<ConceptDescription> _conceptDescriptions = new LinkedHashSet<>();
+
+    private final Set<ConceptDescription> conceptDescriptions = Collections.unmodifiableSet(_conceptDescriptions);
+
+    private String preferredName;
 
     /**
      * Creates a new Concept from a system and code, unless either are null or empty, in which case it returns a null.
@@ -71,7 +73,6 @@ public class ConceptImpl implements Concept {
         this.codeSystem = null;
         this.code = null;
         this.version = null;
-        this.conceptDescriptions = null;
     }
 
     public ConceptImpl(
@@ -117,13 +118,15 @@ public class ConceptImpl implements Concept {
     public ConceptImpl(
             CodeSystem system,
             String code,
+            String preferredName,
             String version,
-            Set<ConceptDescription> conceptDescriptions) {
+            ConceptDescription... conceptDescriptions) {
         this.codeSystem = system;
         this.code = code;
+        this.preferredName = preferredName;
         this.version = version;
-        this.conceptDescriptions = conceptDescriptions == null ? new HashSet<>() : conceptDescriptions;
         Validate.isTrue(isValidConcept(), "Concept reference must have a code system and code.");
+        addConceptDescriptions(conceptDescriptions);
     }
 
     @Override
@@ -143,25 +146,32 @@ public class ConceptImpl implements Concept {
 
     @Override
     public String getPreferredName() {
-        return conceptDescriptions.stream()
-                .filter(cd -> cd.getDescriptionType() == ConceptDescriptionType.FULLY_SPECIFIED_NAME)
-                .findFirst()
-                .map(ConceptDescription::getDescription)
-                .orElse(null);
+        return preferredName;
     }
 
     @Override
     public void setPreferredName(String preferredName) {
-        conceptDescriptions.removeIf(dx -> dx.getDescriptionType() == ConceptDescriptionType.FULLY_SPECIFIED_NAME);
-
-        if (preferredName != null) {
-            conceptDescriptions.add(new ConceptDescriptionImpl(this, preferredName, ConceptDescriptionType.FULLY_SPECIFIED_NAME));
-        }
+        this.preferredName = preferredName;
     }
 
     @Override
     public Set<ConceptDescription> getConceptDescriptions() {
         return conceptDescriptions;
+    }
+
+    @Override
+    public ConceptDescription addConceptDescription(DescriptionType type, String description) {
+        ConceptDescription conceptDescription = new ConceptDescriptionImpl(this, description, type);
+        addConceptDescriptions(conceptDescription);
+        return conceptDescription;
+    }
+
+    @Override
+    public void addConceptDescriptions(ConceptDescription... conceptDescriptions) {
+        Arrays.stream(conceptDescriptions).forEach(cd -> {
+            Validate.isTrue(isEqual(cd.getConcept()), "Concept description concept does not match this concept.");
+            this._conceptDescriptions.add(cd);
+        });
     }
 
     @Override
