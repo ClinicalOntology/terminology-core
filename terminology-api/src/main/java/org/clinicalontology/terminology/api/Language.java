@@ -146,6 +146,10 @@ public enum Language {
         this.text = text;
     }
 
+    public String getCode() {
+        return name().toLowerCase();
+    }
+
     @Override
     public String toString() {
         return text;
