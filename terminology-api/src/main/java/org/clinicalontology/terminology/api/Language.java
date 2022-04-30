@@ -3,7 +3,7 @@ package org.clinicalontology.terminology.api;
 import java.util.Locale;
 
 /**
- * ISO 2 Language Codes
+ * ISO 2 Language Codes.
  */
 public enum Language {
     AA("Afar"),

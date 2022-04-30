@@ -25,10 +25,11 @@ public class TerminologyMappingsImpl implements TerminologyMappings {
     }
 
     @Override
-    public Optional<TerminologyMapping> findFirstMatch(CodeSystem targetCodeSystem) {
+    public TerminologyMapping findFirstMatch(CodeSystem targetCodeSystem) {
         return mappings.stream()
                 .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
-                .findFirst();
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.clinicalontology.terminology.api;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IteratorUtils;
 
 import java.util.Iterator;
@@ -26,15 +27,14 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
      * @return True if any mappings exist.
      */
     default boolean hasMappings() {
-        List<TerminologyMapping> mappings = getMappings();
-        return mappings != null && !mappings.isEmpty();
+        return CollectionUtils.isEmpty(getMappings());
     }
 
     /**
      * @param targetCodeSystem The target code system used to filter the results.
      * @return The first mapping encountered whose target concept reference's code system matches the argument. Order is not guaranteed.
      */
-    Optional<TerminologyMapping> findFirstMatch(CodeSystem targetCodeSystem);
+    TerminologyMapping findFirstMatch(CodeSystem targetCodeSystem);
 
     /**
      * @param targetCodeSystem The target code system used to filter the results.
