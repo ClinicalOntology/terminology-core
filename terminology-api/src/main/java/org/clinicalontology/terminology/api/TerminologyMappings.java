@@ -31,6 +31,13 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
     }
 
     /**
+     * @return The number of mappings.
+     */
+    default int size() {
+        return hasMappings() ? getMappings().size() : 0;
+    }
+
+    /**
      * @param targetCodeSystem The target code system used to filter the results.
      * @return The first mapping encountered whose target concept reference's code system matches the argument. Order is not guaranteed.
      */
