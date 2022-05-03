@@ -51,7 +51,7 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
 
     @Override
     default Iterator<TerminologyMapping> iterator() {
-        return hasMappings() ? getMappings().listIterator() : IteratorUtils.emptyListIterator();
+        return hasMappings() ? IteratorUtils.unmodifiableListIterator(getMappings().listIterator()) : IteratorUtils.emptyListIterator();
     }
 
 }

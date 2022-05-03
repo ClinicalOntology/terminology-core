@@ -1,6 +1,7 @@
 package org.clinicalontology.terminology.api;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
  * concepts use a Set&lt;Concept&gt; instead.
  */
 @SuppressWarnings("unused")
-public interface ConceptSet {
+public interface ConceptSet extends Iterable<Concept> {
 
     /**
      * @return The textual representation of the concept.
@@ -241,6 +242,16 @@ public interface ConceptSet {
      */
     default boolean intersects(ConceptSet other) {
         return !getIntersection(other).isEmpty();
+    }
+
+    /**
+     * Allows iterating over concepts.
+     *
+     * @return A concept iterator.
+     */
+    @Override
+    default Iterator<Concept> iterator() {
+        return hasConcepts() ? IteratorUtils.unmodifiableIterator(getConcepts().iterator()) : IteratorUtils.emptyIterator();
     }
 
 }
