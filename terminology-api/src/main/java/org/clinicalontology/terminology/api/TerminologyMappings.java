@@ -5,7 +5,6 @@ import org.apache.commons.collections4.IteratorUtils;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * A collection of concept mappings.
@@ -27,7 +26,7 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
      * @return True if any mappings exist.
      */
     default boolean hasMappings() {
-        return CollectionUtils.isEmpty(getMappings());
+        return !CollectionUtils.isEmpty(getMappings());
     }
 
     /**
