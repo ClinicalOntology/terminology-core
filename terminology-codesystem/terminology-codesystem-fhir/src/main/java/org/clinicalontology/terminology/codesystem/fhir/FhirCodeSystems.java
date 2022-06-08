@@ -1435,7 +1435,7 @@ public final class FhirCodeSystems extends CodeSystemImpl {
                 newSystem = newSystem.replaceFirst("/", "-");
             }
 
-            codeSystem = FHIR_CODESYSTEM_PREFIX + newSystem;
+            codeSystem = FHIR_CODESYSTEM_PREFIX + StringUtils.removeStart(newSystem, "CodeSystem/");
         }
 
         return codeSystem;
