@@ -27,7 +27,7 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         this.version = version == null ? "1.0.0" : version;
         this.displayName = displayName;
         this.alias = alias;
-        this.versionedId = URI.create(id.toString() + "/" + this.version);
+        this.versionedId = URI.create(id + "/" + this.version);
     }
 
     public ValueSetIdentifierImpl(
