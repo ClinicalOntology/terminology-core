@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
-import org.clinicalontology.terminology.api.ConceptDescription;
-import org.clinicalontology.terminology.api.DescriptionType;
-import org.clinicalontology.terminology.api.Language;
+import org.clinicalontology.terminology.api.model.ConceptDescription;
+import org.clinicalontology.terminology.api.model.DescriptionType;
+import org.clinicalontology.terminology.api.model.Language;
 
 import java.util.Objects;
 

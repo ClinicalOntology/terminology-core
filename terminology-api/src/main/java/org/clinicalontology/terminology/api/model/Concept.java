@@ -1,10 +1,8 @@
-package org.clinicalontology.terminology.api;
+package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;

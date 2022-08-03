@@ -1,4 +1,4 @@
-package org.clinicalontology.terminology.api;
+package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.collections4.CollectionUtils;
 

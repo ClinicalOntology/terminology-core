@@ -1,7 +1,8 @@
 package org.clinicalontology.terminology.impl;
 
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.DescriptionType;
+import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.DescriptionType;
+import org.clinicalontology.terminology.impl.model.ConceptImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

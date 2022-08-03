@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
-import org.clinicalontology.terminology.api.CodeSystem;
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.ConceptSet;
+import org.clinicalontology.terminology.api.model.CodeSystem;
+import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.ConceptSet;
 
 import java.net.URI;
 import java.util.*;

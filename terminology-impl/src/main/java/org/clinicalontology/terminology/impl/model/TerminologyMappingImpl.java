@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.TerminologyMapping;
-import org.clinicalontology.terminology.api.TerminologyMappingType;
+import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.TerminologyMapping;
+import org.clinicalontology.terminology.api.model.TerminologyMappingType;
 
 public class TerminologyMappingImpl implements TerminologyMapping {
 

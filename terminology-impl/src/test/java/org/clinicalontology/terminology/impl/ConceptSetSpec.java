@@ -1,7 +1,9 @@
 package org.clinicalontology.terminology.impl;
 
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.ConceptSet;
+import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.ConceptSet;
+import org.clinicalontology.terminology.impl.model.ConceptImpl;
+import org.clinicalontology.terminology.impl.model.ConceptSetImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

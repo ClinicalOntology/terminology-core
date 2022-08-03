@@ -1,7 +1,7 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
 import org.apache.commons.lang3.Validate;
-import org.clinicalontology.terminology.api.ValueSetIdentifier;
+import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 
 import java.net.URI;
 

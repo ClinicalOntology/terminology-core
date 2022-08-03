@@ -1,8 +1,8 @@
 package org.clinicalontology.terminology.codesystem.core;
 
-import org.clinicalontology.terminology.api.CodeSystem;
-import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.api.Oid;
+import org.clinicalontology.terminology.api.model.CodeSystem;
+import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.model.Oid;
 import org.junit.Test;
 
 import java.net.URI;

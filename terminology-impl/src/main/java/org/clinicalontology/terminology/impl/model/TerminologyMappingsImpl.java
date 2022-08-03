@@ -1,13 +1,12 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
-import org.clinicalontology.terminology.api.CodeSystem;
-import org.clinicalontology.terminology.api.TerminologyMapping;
-import org.clinicalontology.terminology.api.TerminologyMappings;
+import org.clinicalontology.terminology.api.model.CodeSystem;
+import org.clinicalontology.terminology.api.model.TerminologyMapping;
+import org.clinicalontology.terminology.api.model.TerminologyMappings;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TerminologyMappingsImpl implements TerminologyMappings {

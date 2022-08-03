@@ -1,4 +1,4 @@
-package org.clinicalontology.terminology.api;
+package org.clinicalontology.terminology.api.model;
 
 /**
  * Represents a concept term such as a name or synonym. A description must apply to a concept and a concept can have

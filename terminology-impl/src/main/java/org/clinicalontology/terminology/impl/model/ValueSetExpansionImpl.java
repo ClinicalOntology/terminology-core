@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
-import org.clinicalontology.terminology.api.Concept;
-import org.clinicalontology.terminology.api.ValueSetExpansion;
-import org.clinicalontology.terminology.api.ValueSetIdentifier;
+import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.ValueSetExpansion;
+import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 
 import java.net.URI;
 import java.util.HashSet;

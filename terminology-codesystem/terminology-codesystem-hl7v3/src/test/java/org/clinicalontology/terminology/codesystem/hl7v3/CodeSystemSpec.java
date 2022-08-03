@@ -1,6 +1,6 @@
 package org.clinicalontology.terminology.codesystem.hl7v3;
 
-import org.clinicalontology.terminology.api.CodeSystemRegistry;
+import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
 import org.junit.Test;
 
 import java.net.URI;

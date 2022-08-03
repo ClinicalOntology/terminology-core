@@ -1,6 +1,6 @@
 package org.clinicalontology.terminology.util;
 
-import org.clinicalontology.terminology.api.Concept;
+import org.clinicalontology.terminology.api.model.Concept;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

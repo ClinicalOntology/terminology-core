@@ -1,4 +1,4 @@
-package org.clinicalontology.terminology.api;
+package org.clinicalontology.terminology.api.model;
 
 /**
  * Enumeration representing the type of mapping between a source and target concept

@@ -1,16 +1,14 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
 import org.apache.commons.lang3.StringUtils;
-import org.clinicalontology.terminology.api.CodeSystem;
-import org.clinicalontology.terminology.api.CodeSystemEnumerator;
-import org.clinicalontology.terminology.api.CodeSystemRegistry;
-import org.clinicalontology.terminology.impl.CodeSystemImpl;
-import org.ietf.jgss.Oid;
+import org.clinicalontology.terminology.api.model.CodeSystem;
+import org.clinicalontology.terminology.api.model.CodeSystemEnumerator;
+import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
+import org.clinicalontology.terminology.impl.model.CodeSystemImpl;
 
 import java.net.URI;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public final class FhirCodeSystems extends CodeSystemImpl {

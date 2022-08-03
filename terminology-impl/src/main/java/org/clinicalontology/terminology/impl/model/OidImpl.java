@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.clinicalontology.terminology.api.Oid;
+import org.clinicalontology.terminology.api.model.Oid;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;

@@ -1,8 +1,8 @@
-package org.clinicalontology.terminology.impl;
+package org.clinicalontology.terminology.impl.model;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.clinicalontology.terminology.api.*;
+import org.clinicalontology.terminology.api.model.*;
 
 import java.net.URI;
 import java.util.Collections;
