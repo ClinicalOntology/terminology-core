@@ -26,6 +26,12 @@ public final class V2CodeSystems extends CodeSystemImpl {
         CodeSystemRegistry.registerCodeSystems(delegate.values());
     }
 
+    /**
+     * Force instantiation and registration of static class members.
+     */
+    public static void load() {
+    }
+
     public static List<V2CodeSystems> values() {
         return delegate.values();
     }

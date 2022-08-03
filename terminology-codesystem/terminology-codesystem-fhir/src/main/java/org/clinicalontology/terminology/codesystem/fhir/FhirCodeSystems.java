@@ -1372,6 +1372,12 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     }
 
     /**
+     * Force instantiation and registration of static class members.
+     */
+    public static void load() {
+    }
+
+    /**
      * Converts a code system to a pre-R4 legacy code system.
      *
      * @param codeSystem The code system to convert.

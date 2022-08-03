@@ -84,6 +84,12 @@ public final class CodeSystems extends CodeSystemImpl {
         CodeSystemRegistry.registerCodeSystemNormalization(ICD10_CM_DIAGNOSIS, ICD10_CM);
     }
 
+    /**
+     * Force instantiation and registration of static class members.
+     */
+    public static void load() {
+    }
+
     public static List<CodeSystems> values() {
         return delegate.values();
     }

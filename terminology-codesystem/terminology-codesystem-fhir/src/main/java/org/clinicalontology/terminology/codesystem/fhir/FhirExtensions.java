@@ -52,6 +52,12 @@ public final class FhirExtensions extends CodeSystemImpl {
         CodeSystemRegistry.registerCodeSystems(delegate.values());
     }
 
+    /**
+     * Force instantiation and registration of static class members.
+     */
+    public static void load() {
+    }
+
     public static List<FhirExtensions> values() {
         return delegate.values();
     }
