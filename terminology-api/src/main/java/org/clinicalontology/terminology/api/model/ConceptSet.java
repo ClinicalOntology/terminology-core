@@ -37,6 +37,26 @@ public interface ConceptSet extends Iterable<Concept> {
     }
 
     /**
+     * Returns displayable text from a concept set by concatenating the preferred names of all the member concepts.
+     *
+     * @return The displayable text.
+     */
+    default String concatenatedDisplayText() {
+        StringBuilder sb = new StringBuilder();
+
+        if (hasConcepts()) {
+            for (Concept concept : this) {
+                if (StringUtils.isNotBlank(concept.getPreferredName())) {
+                    sb.append(sb.length() > 0 ? "; " : "");
+                    sb.append(concept.getPreferredName());
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * @return The set of synonymous concepts.
      */
     Set<Concept> getConcepts();

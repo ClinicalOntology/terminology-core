@@ -53,7 +53,7 @@ public interface Concept extends Serializable {
 
     /**
      * @return True if this concept was assigned a code. False otherwise.
-     * Note: a concept must have both a system and a code.
+     *         Note: a concept must have both a system and a code.
      */
     default boolean hasCode() {
         return StringUtils.isNotEmpty(getCode());
@@ -133,23 +133,28 @@ public interface Concept extends Serializable {
     /**
      * Adds a concept description using the default language.
      *
-     * @param type The description type.
+     * @param type        The description type.
      * @param description The description.
      * @return The newly created concept description.
      */
-    default ConceptDescription addConceptDescription(DescriptionType type, String description) {
+    default ConceptDescription addConceptDescription(
+            DescriptionType type,
+            String description) {
         return addConceptDescription(type, description, Language.getDefault());
     }
 
     /**
      * Adds a concept description.
      *
-     * @param type The description type.
+     * @param type        The description type.
      * @param description The description.
-     * @param language The language of the description.
+     * @param language    The language of the description.
      * @return The newly created concept description.
      */
-    ConceptDescription addConceptDescription(DescriptionType type, String description, Language language);
+    ConceptDescription addConceptDescription(
+            DescriptionType type,
+            String description,
+            Language language);
 
     /**
      * Adds concept descriptions.
@@ -157,6 +162,15 @@ public interface Concept extends Serializable {
      * @param conceptDescriptions The concept descriptions to add.
      */
     void addConceptDescriptions(ConceptDescription... conceptDescriptions);
+
+    /**
+     * Returns displayable text for the concept.  Returns the preferred name if one exists; otherwise returns the code.
+     *
+     * @return The display text.
+     */
+    default String getDisplayText() {
+        return hasPreferredName() ? getPreferredName() : getCode();
+    }
 
     /**
      * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate
