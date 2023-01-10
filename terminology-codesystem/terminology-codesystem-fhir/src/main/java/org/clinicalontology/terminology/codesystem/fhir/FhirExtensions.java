@@ -232,6 +232,64 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     public static final FhirExtensions EXT_PATIENT_SEX_FOR_CLINICAL_USE = defaultExtension("patient-sexForClinicalUse");
 
+    public static final FhirExtensions EXT_QUESTIONNAIRE_BASE_TYPE = defaultExtension("questionnaire-baseType");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_CHOICE_ORIENTATION = defaultExtension("questionnaire-choiceOrientation");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_CONSTRAINT = defaultExtension("questionnaire-constraint");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_DEFINITION_BASSED = defaultExtension("questionnaire-definitionBased");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_DISPLAY_CATEGORY = defaultExtension("questionnaire-displayCategory");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_FHIR_TYPE = defaultExtension("questionnaire-fhirType");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_HIDDEN = defaultExtension("questionnaire-hidden");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_ITEM_CONTROL = defaultExtension("questionnaire-itemControl");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_MAX_OCCURS = defaultExtension("questionnaire-maxOccurs");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_MIN_OCCURS = defaultExtension("questionnaire-minOccurs");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_OPTION_EXCLUSIVE = defaultExtension("questionnaire-optionExclusive");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_OPTION_PREFIX = defaultExtension("questionnaire-optionPrefix");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_OPTION_RESTRICTION = defaultExtension("questionnaire-optionRestriction");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_REFERENCE_FILTER = defaultExtension("questionnaire-referenceFilter");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_REFERENCE_PROFILE = defaultExtension("questionnaire-referenceProfile");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_REFERENCE_RESOURCE = defaultExtension("questionnaire-referenceResource");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_SIGNATURE_REQUIRED = defaultExtension("questionnaire-signatureRequired");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_SLIDER_STEP_VALUE = defaultExtension("questionnaire-sliderStepValue");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_SUPPORT_LINK = defaultExtension("questionnaire-supportLink");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_UNIT = defaultExtension("questionnaire-unit");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_UNIT_OPTION = defaultExtension("questionnaire-unitOption");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_UNIT_VALUESET = defaultExtension("questionnaire-unitValueSet");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRE_USAGE_MODE = defaultExtension("questionnaire-usageMode");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_ATTESTER = defaultExtension("questionnaireresponse-attester");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRRESPONSEE_AUTHOR = defaultExtension("questionnaireresponse-author");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_COMPLETION_MODE = defaultExtension("questionnaireresponse-completionMode");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_REASON = defaultExtension("questionnaireresponse-reason");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_REVIEWER = defaultExtension("questionnaireresponse-reviewer");
+
+    public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_SIGNATURE = defaultExtension("questionnaireresponse-signature");
+
     public static final FhirExtensions EXT_US_CORE_BIRTH_SEX = defaultExtension("us-core-birth-sex");
 
     public static final FhirExtensions EXT_US_CORE_ETHNICITY = defaultExtension("us-core-ethnicity");
