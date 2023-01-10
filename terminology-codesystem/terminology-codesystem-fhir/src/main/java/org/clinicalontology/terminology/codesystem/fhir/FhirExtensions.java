@@ -16,6 +16,8 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     private static final String DEFAULT_EXTENSION_PREFIX = "http://hl7.org/fhir/StructureDefinition/";
 
+    // -------------------- FHIR Extension Registry --------------------
+
     public static final FhirExtensions EXT_ADDITIONAL_IDENTIFIER = defaultExtension("additionalIdentifier");
 
     public static final FhirExtensions EXT_ALLERGYINTOLERANCE_ABATEMENT = defaultExtension("allergyintolerance-abatement");
@@ -290,11 +292,15 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_SIGNATURE = defaultExtension("questionnaireresponse-signature");
 
+    // -------------------- US Core Profile --------------------
+
     public static final FhirExtensions EXT_US_CORE_BIRTH_SEX = defaultExtension("us-core-birth-sex");
 
     public static final FhirExtensions EXT_US_CORE_ETHNICITY = defaultExtension("us-core-ethnicity");
 
     public static final FhirExtensions EXT_US_CORE_RACE = defaultExtension("us-core-race");
+
+    // -------------------- HSPC Extensions --------------------
 
     private static final String HSPC_EXTENSION_PREFIX = "http://hl7.org/fhir/hspc/StructureDefinition/";
 
