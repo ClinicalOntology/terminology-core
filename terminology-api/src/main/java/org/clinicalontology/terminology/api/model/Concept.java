@@ -187,4 +187,11 @@ public interface Concept extends Serializable {
         return getCodeSystem().isEqual(rhs.getCodeSystem()) && Objects.equals(getCode(), rhs.getCode());
     }
 
+    /**
+     * @return Returns a pipe-delimited string consisting of the code system, code, and preferred name in that order.
+     */
+    default String asString() {
+        return getCodeSystemAsString() + "|" + getCodeAsString() + (hasPreferredName() ? "|" + getPreferredName() : "");
+    }
+
 }
