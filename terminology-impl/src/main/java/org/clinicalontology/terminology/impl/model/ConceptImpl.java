@@ -184,7 +184,7 @@ public class ConceptImpl implements Concept {
 
     @Override
     public String toString() {
-        return "|" + asString() + "|";
+        return asString(true);
     }
 
 }

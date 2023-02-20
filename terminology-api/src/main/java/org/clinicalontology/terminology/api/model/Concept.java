@@ -188,10 +188,21 @@ public interface Concept extends Serializable {
     }
 
     /**
-     * @return Returns a pipe-delimited string consisting of the code system, code, and preferred name in that order.
+     * @return Returns a pipe-delimited string consisting of the code system and code in that order.
      */
     default String asString() {
-        return getCodeSystemAsString() + "|" + getCodeAsString() + (hasPreferredName() ? "|" + getPreferredName() : "");
+        return asString(false);
+    }
+
+    /**
+     * Returns a pipe-delimited string consisting of the code system, code, and optionally the preferred name in that order.
+     *
+     * @param includePreferredName If true, include the preferred name.
+     * @return The pipe-delimited string.
+     */
+    default String asString(boolean includePreferredName) {
+        return getCodeSystemAsString() + "|" + getCodeAsString() + (includePreferredName ? "|" : "")
+                + (includePreferredName && hasPreferredName() ? getPreferredName() : "");
     }
 
 }
