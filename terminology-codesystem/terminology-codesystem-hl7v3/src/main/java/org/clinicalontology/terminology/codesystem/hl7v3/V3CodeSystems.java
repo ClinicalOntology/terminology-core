@@ -1,7 +1,7 @@
 package org.clinicalontology.terminology.codesystem.hl7v3;
 
-import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
 import org.clinicalontology.terminology.api.model.CodeSystemEnumerator;
+import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
 import org.clinicalontology.terminology.impl.model.CodeSystemImpl;
 
 import java.net.URI;

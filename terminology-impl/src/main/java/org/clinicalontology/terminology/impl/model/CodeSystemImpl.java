@@ -6,11 +6,7 @@ import org.clinicalontology.terminology.api.model.CodeSystem;
 import org.clinicalontology.terminology.api.model.Oid;
 
 import java.net.URI;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a terminology namespace such as the URN assigned to an ontology. Typically, code systems represent
@@ -18,6 +14,8 @@ import java.util.Set;
  */
 @SuppressWarnings("unused")
 public class CodeSystemImpl implements CodeSystem {
+
+    public static final CodeSystem UNKNOWN = new CodeSystemImpl();
 
     /**
      * The name assigned to the code system such as SNOMED-CT, RxNorm
@@ -193,7 +191,7 @@ public class CodeSystemImpl implements CodeSystem {
 
     @Override
     public String toString() {
-        return getUrnAsString();
+        return Objects.toString(getUrn())   ;
     }
 
 }

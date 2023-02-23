@@ -39,7 +39,7 @@ public interface CodeSystem extends Serializable {
      * @return The URN as a string value.
      */
     default String getUrnAsString() {
-        return Objects.toString(getUrn());
+        return getUrn() != null ? getUrn().toString() : null;
     }
 
     /**

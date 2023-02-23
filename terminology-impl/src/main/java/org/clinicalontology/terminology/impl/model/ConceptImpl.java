@@ -10,9 +10,9 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class ConceptImpl implements Concept {
+import static org.clinicalontology.terminology.impl.model.CodeSystemImpl.UNKNOWN;
 
-    public static final CodeSystem UNKNOWN = new CodeSystemImpl("");
+public class ConceptImpl implements Concept {
 
     private final CodeSystem codeSystem;
 
