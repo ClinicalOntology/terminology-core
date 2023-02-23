@@ -74,8 +74,6 @@ public final class CodeSystems extends CodeSystemImpl {
 
     public static final CodeSystems UNII = new CodeSystems("http://fdasis.nlm.nih.gov", "2.16.840.1.113883.4.9");
 
-    public static final CodeSystems UNKNOWN = new CodeSystems("");
-
     private static final CodeSystemEnumerator<CodeSystems> delegate = new CodeSystemEnumerator<>(CodeSystems.class);
 
     static {

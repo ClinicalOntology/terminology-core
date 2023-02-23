@@ -12,6 +12,8 @@ import java.util.Set;
 
 public class ConceptImpl implements Concept {
 
+    public static final CodeSystem UNKNOWN = new CodeSystemImpl("");
+
     private final CodeSystem codeSystem;
 
     private final String version;
@@ -119,7 +121,7 @@ public class ConceptImpl implements Concept {
             String preferredName,
             String version,
             ConceptDescription... conceptDescriptions) {
-        this.codeSystem = system;
+        this.codeSystem = system == null ? UNKNOWN : system;
         this.code = code;
         this.preferredName = preferredName;
         this.version = version;
