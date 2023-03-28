@@ -57,4 +57,14 @@ public interface ValueSetExpansion extends Serializable {
                 .anyMatch(element -> element.isEqual(concept));
     }
 
+    /**
+     * Tests whether any member of concept set is included in the value set.
+     *
+     * @param conceptSet The concept set to search.
+     * @return True if any member of the concept set exists in the value set. False otherwise.
+     */
+    default boolean hasConcept(ConceptSet conceptSet) {
+        return conceptSet.getConcepts().stream().anyMatch(this::hasConcept);
+    }
+
 }
