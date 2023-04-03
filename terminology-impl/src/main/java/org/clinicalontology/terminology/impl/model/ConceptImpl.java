@@ -123,7 +123,7 @@ public class ConceptImpl implements Concept {
         this.code = code;
         this.preferredName = preferredName;
         this.version = version;
-        Validate.isTrue(isValidConcept(), "Concept reference must have a code.");
+        Validate.isTrue(isValidConcept(), "Concept must have a code.");
         addConceptDescriptions(conceptDescriptions);
     }
 
