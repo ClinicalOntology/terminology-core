@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.clinicalontology.terminology.api.model.CodeSystem.NULL;
+
 /**
  * Represents a reference to a concept in a terminology or ontology.
  */
@@ -29,7 +31,7 @@ public interface Concept extends Serializable {
      * @return True if the concept has a code system. False otherwise.
      */
     default boolean hasCodeSystem() {
-        return getCodeSystem() != null;
+        return getCodeSystem() != null && getCodeSystem() != NULL;
     }
 
     /**
@@ -97,7 +99,7 @@ public interface Concept extends Serializable {
      * @return True if the concept has both a valid namespace and code (non-null and non-empty).
      */
     default boolean isValidConcept() {
-        return hasCodeSystem() && hasCode();
+        return getCodeSystem() != null && hasCode();
     }
 
     /**

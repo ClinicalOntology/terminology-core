@@ -15,8 +15,6 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class CodeSystemImpl implements CodeSystem {
 
-    public static final CodeSystem UNKNOWN = new CodeSystemImpl();
-
     /**
      * The name assigned to the code system such as SNOMED-CT, RxNorm
      */
@@ -191,7 +189,7 @@ public class CodeSystemImpl implements CodeSystem {
 
     @Override
     public String toString() {
-        return Objects.toString(getUrn())   ;
+        return Objects.toString(getUrn());
     }
 
 }

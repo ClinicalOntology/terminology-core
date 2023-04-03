@@ -4,6 +4,7 @@ import org.apache.commons.lang3.Validate;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +15,30 @@ import java.util.Set;
  */
 @SuppressWarnings("unused")
 public interface CodeSystem extends Serializable {
+
+    CodeSystem NULL = new CodeSystem() {
+        private final URI urn = URI.create("http://clinicalontology.org/CodeSystem/null");
+
+        @Override
+        public String getName() {
+            return "";
+        }
+
+        @Override
+        public String getDescription() {
+            return "";
+        }
+
+        @Override
+        public URI getUrn() {
+            return urn;
+        }
+
+        @Override
+        public Set<Oid> getOids() {
+            return Collections.emptySet();
+        }
+    };
 
     /**
      * @return The name of the code system.

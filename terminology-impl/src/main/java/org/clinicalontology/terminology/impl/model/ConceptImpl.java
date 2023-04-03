@@ -10,7 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static org.clinicalontology.terminology.impl.model.CodeSystemImpl.UNKNOWN;
+import static org.clinicalontology.terminology.impl.model.CodeSystemImpl.NULL;
 
 public class ConceptImpl implements Concept {
 
@@ -121,7 +121,7 @@ public class ConceptImpl implements Concept {
             String preferredName,
             String version,
             ConceptDescription... conceptDescriptions) {
-        this.codeSystem = system == null ? UNKNOWN : system;
+        this.codeSystem = system == null ? NULL : system;
         this.code = code;
         this.preferredName = preferredName;
         this.version = version;
