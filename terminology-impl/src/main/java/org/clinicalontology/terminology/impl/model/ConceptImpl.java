@@ -10,8 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static org.clinicalontology.terminology.impl.model.CodeSystemImpl.NULL;
-
 public class ConceptImpl implements Concept {
 
     private final CodeSystem codeSystem;
@@ -121,11 +119,11 @@ public class ConceptImpl implements Concept {
             String preferredName,
             String version,
             ConceptDescription... conceptDescriptions) {
-        this.codeSystem = system == null ? NULL : system;
+        this.codeSystem = system;
         this.code = code;
         this.preferredName = preferredName;
         this.version = version;
-        Validate.isTrue(isValidConcept(), "Concept reference must have a code system and code.");
+        Validate.isTrue(isValidConcept(), "Concept reference must have a code.");
         addConceptDescriptions(conceptDescriptions);
     }
 
@@ -181,7 +179,7 @@ public class ConceptImpl implements Concept {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeSystem().getUrn(), getCode());
+        return Objects.hash(hasCodeSystem() ? getCodeSystem().getUrn() : null, getCode());
     }
 
     @Override

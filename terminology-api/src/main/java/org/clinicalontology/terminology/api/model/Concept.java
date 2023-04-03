@@ -7,8 +7,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.clinicalontology.terminology.api.model.CodeSystem.NULL;
-
 /**
  * Represents a reference to a concept in a terminology or ontology.
  */
@@ -31,7 +29,7 @@ public interface Concept extends Serializable {
      * @return True if the concept has a code system. False otherwise.
      */
     default boolean hasCodeSystem() {
-        return getCodeSystem() != null && getCodeSystem() != NULL;
+        return getCodeSystem() != null;
     }
 
     /**
@@ -93,13 +91,12 @@ public interface Concept extends Serializable {
     }
 
     /**
-     * A concept must have a code system and a code. The codesystem generally ensures the uniqueness of the code
-     * unless the namespace if further subdivided.
+     * A concept must have a code.
      *
-     * @return True if the concept has both a valid namespace and code (non-null and non-empty).
+     * @return True if the concept has a code (non-null and non-empty).
      */
     default boolean isValidConcept() {
-        return getCodeSystem() != null && hasCode();
+        return hasCode();
     }
 
     /**
@@ -186,7 +183,8 @@ public interface Concept extends Serializable {
         if (this == target) return true;
         if (!(target instanceof Concept)) return false;
         Concept rhs = (Concept) target;
-        return getCodeSystem().isEqual(rhs.getCodeSystem()) && Objects.equals(getCode(), rhs.getCode());
+        boolean sameCodeSystem = (!hasCodeSystem() && !rhs.hasCodeSystem()) || (hasCodeSystem() && getCodeSystem().isEqual(rhs.getCodeSystem()));
+        return sameCodeSystem && Objects.equals(getCode(), rhs.getCode());
     }
 
     /**
