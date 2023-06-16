@@ -18,6 +18,31 @@ public interface TerminologyClient {
 
     Set<Concept> getConcepts(CodeSystem codeSystem, String code, String version);
 
+    /**
+     * Method returns the range of a concept relationship. It is
+     * equivalent to the query:
+     * domain predicate ?x
+     * For instance, 'Beta-blocker class' 'has-ingredient' ?ingredients
+     *
+     * @param domain The concept that is the subject of the triple
+     * @param predicate The concept that is the predicate of the triple
+     * @return The set of concepts that represents the range of the relationship
+     */
+    Set<Concept> getRange(Concept domain, Concept predicate);
+
+    /**
+     * Method returns the domain of a concept relationship. It is
+     * equivalent to the query:
+     * ?x predicate range
+     * For instance:
+     * ?drugClass 'has ingredient' 'Metoprolol succinate'
+     *
+     * @param predicate
+     * @param range
+     * @return
+     */
+    Set<Concept> getDomain(Concept predicate, Concept range);
+
     void setConnectionSupplier(Supplier<Connection> connectionSupplier);
     
     // C translate(C sourceConcept, CodeSystem targetCodeSystem);

@@ -40,4 +40,13 @@ public class NOPTerminologyClientImpl implements TerminologyClient {
         
     }
 
+    @Override
+    public Set<Concept> getRange(Concept domain, Concept predicate) {
+        return Collections.emptySet();
+    }
+
+    @Override
+    public Set<Concept> getDomain(Concept predicate, Concept range) {
+        return Collections.emptySet();
+    }
 }

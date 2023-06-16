@@ -73,4 +73,13 @@ public class TerminologyClientImpl implements TerminologyClient {
         throw new NotImplementedException("setConnectionSupplier not implemented.");
     }
 
+    @Override
+    public Set<Concept> getRange(Concept domain, Concept predicate) {
+        throw new NotImplementedException("setConnectionSupplier not implemented.");
+    }
+
+    @Override
+    public Set<Concept> getDomain(Concept predicate, Concept range) {
+        throw new NotImplementedException("setConnectionSupplier not implemented.");
+    }
 }
