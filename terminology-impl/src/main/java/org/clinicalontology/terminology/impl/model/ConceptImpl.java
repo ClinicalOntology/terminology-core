@@ -1,5 +1,6 @@
 package org.clinicalontology.terminology.impl.model;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.clinicalontology.terminology.api.model.*;
@@ -21,6 +22,23 @@ public class ConceptImpl implements Concept {
     private final Set<ConceptDescription> conceptDescriptions = new LinkedHashSet<>();
 
     private String preferredName;
+
+    /**
+     * Parses a pipe-delimited representation of a concept.  At a minimum, this must include
+     * the code system and the code.
+     *
+     * @param conceptStr A pipe-delimited representation of a concept.
+     * @return The parsed concept.
+     */
+    public static Concept create(String conceptStr) {
+        if (StringUtils.isBlank(conceptStr)) {
+            return null;
+        }
+
+        String[] pcs = conceptStr.split("\\|");
+        Validate.inclusiveBetween(2, 3, pcs.length, "Bad format for concept: %s", conceptStr);
+        return create(ArrayUtils.get(pcs, 0), ArrayUtils.get(pcs, 1), ArrayUtils.get(pcs, 2));
+    }
 
     /**
      * Creates a new Concept from a system and code, unless either are null or empty, in which case it returns a null.

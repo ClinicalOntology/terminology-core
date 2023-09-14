@@ -24,6 +24,8 @@ public class ConceptSpec {
         assertEquals(2, cpt1.getConceptDescriptions(DescriptionType.SYNONYM).size());
         assertEquals("FSN", cpt1.getConceptDescription(DescriptionType.FULLY_SPECIFIED_NAME).getDescription());
         assertEquals("SYN1", cpt1.getConceptDescription(DescriptionType.SYNONYM).getDescription());
+        Concept cpt2 = ConceptImpl.create("http://system1|code1|cpt1");
+        assertEquals(cpt1, cpt2);
     }
 
 }
