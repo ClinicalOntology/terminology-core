@@ -17,7 +17,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+        <javadoc.plugin.version>3.5.0</javadoc.plugin.version>
         <source.plugin.version>3.2.1</source.plugin.version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <failsafe.plugin.version>3.0.0-M5</failsafe.plugin.version>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>3.13.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
