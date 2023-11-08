@@ -43,6 +43,16 @@ public interface TerminologyClient {
      */
     Set<Concept> getDomain(Concept predicate, Concept range);
 
+    /**
+     * Returns all concepts in concept namespace.
+     * If no version is provided, the latest concept namespace will be considered
+     *
+     * @param codeSystem The concept namespace URI
+     * @param version The version
+     * @return
+     */
+    Set<Concept> getConceptsInNamespace(CodeSystem codeSystem, String version);
+
     void setConnectionSupplier(Supplier<Connection> connectionSupplier);
     
     // C translate(C sourceConcept, CodeSystem targetCodeSystem);

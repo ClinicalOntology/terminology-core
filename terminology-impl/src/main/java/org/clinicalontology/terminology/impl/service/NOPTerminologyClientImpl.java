@@ -49,4 +49,9 @@ public class NOPTerminologyClientImpl implements TerminologyClient {
     public Set<Concept> getDomain(Concept predicate, Concept range) {
         return Collections.emptySet();
     }
+
+    @Override
+    public Set<Concept> getConceptsInNamespace(CodeSystem codeSystem, String version) {
+        return Collections.emptySet();
+    }
 }

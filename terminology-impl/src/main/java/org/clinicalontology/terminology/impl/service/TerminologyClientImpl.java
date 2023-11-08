@@ -82,4 +82,9 @@ public class TerminologyClientImpl implements TerminologyClient {
     public Set<Concept> getDomain(Concept predicate, Concept range) {
         throw new NotImplementedException("setConnectionSupplier not implemented.");
     }
+
+    @Override
+    public Set<Concept> getConceptsInNamespace(CodeSystem codeSystem, String version) {
+        throw new NotImplementedException("getConceptsInNamespace not implemented.");
+    }
 }
