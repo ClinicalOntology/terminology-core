@@ -19,6 +19,7 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     /**
      * For serialization.
      */
+    @SuppressWarnings("unused")
     private ConceptDescriptionImpl() {
         this.language = null;
         this.description = null;
@@ -65,8 +66,7 @@ public class ConceptDescriptionImpl implements ConceptDescription {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ConceptDescription) {
-            ConceptDescription other = (ConceptDescription) obj;
+        if (obj instanceof ConceptDescription other) {
             return getLanguage() == other.getLanguage()
                     && getDescriptionType() == other.getDescriptionType()
                     && Objects.equals(other.getDescription(), getDescription());
