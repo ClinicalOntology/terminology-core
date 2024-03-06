@@ -15,11 +15,11 @@ public interface TerminologyLocalizer<T> extends TerminologyTransformer<T> {
      * If a resource does not contain a logical code, a list containing the original resource should be returned.
      *
      * @param resource The resource to transform.
-     * @param siteId The id for the site.
+     * @param siteInfo The information for the site.
      * @return A list of normalized resources (never null, possibly empty).
      */
     List<T> localize(
             T resource,
-            String siteId);
+            SiteInfo siteInfo);
 
 }
