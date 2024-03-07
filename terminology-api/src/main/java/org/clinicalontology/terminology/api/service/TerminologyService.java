@@ -42,6 +42,18 @@ public interface TerminologyService {
             Concept category);
 
     /**
+     * Method returns all concept mappings from the source concept and target concepts within the specified
+     * code system.
+     *
+     * @param source           The concept that is at the source of the mapping (RHS).
+     * @param targetCodeSystem The code system of the target concepts.
+     * @return The set of mappings having the concept at the source of the mapping.
+     */
+    TerminologyMappings getMappingsForConcept(
+            Concept source,
+            String targetCodeSystem);
+
+    /**
      * @param concept The concept whose existence in the terminology repository we are determining.
      * @return True if the concept exists in the given terminology repository. False otherwise.
      */

@@ -44,6 +44,15 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
         return filtered;
     }
 
+    @Override
+    public TerminologyMappings getMappingsForConcept(Concept source, String targetCodeSystem) {
+        TerminologyMappings filtered = new TerminologyMappingsImpl();
+        getMappingsForConcept(source).getMappings().stream()
+                .filter(m -> targetCodeSystem.equals(m.getTarget().getCodeAsString()))
+                .forEach(filtered::add);
+        return filtered;
+    }
+
     public void addTerminologyMapping(
             Concept source,
             Concept target,
