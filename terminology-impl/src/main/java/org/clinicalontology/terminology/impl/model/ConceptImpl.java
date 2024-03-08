@@ -145,6 +145,14 @@ public class ConceptImpl implements Concept {
         addConceptDescriptions(conceptDescriptions);
     }
 
+    public ConceptImpl(Concept concept) {
+        this.codeSystem = concept.getCodeSystem();
+        this.code = concept.getCode();
+        this.preferredName = concept.getPreferredName();
+        this.version = concept.getVersion();
+        conceptDescriptions.addAll(concept.getConceptDescriptions());
+    }
+
     @Override
     public CodeSystem getCodeSystem() {
         return codeSystem;
