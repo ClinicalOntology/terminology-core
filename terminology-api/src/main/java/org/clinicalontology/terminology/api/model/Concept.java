@@ -53,7 +53,7 @@ public interface Concept extends Serializable {
 
     /**
      * @return True if this concept was assigned a code. False otherwise.
-     *         Note: a concept must have both a system and a code.
+     * Note: a concept must have both a system and a code.
      */
     default boolean hasCode() {
         return StringUtils.isNotEmpty(getCode());
@@ -130,6 +130,27 @@ public interface Concept extends Serializable {
     }
 
     /**
+     * Returns the text description of the first concept description matching the specified type.
+     *
+     * @param type The description type.
+     * @return The description text (possibly null).
+     */
+    default String getConceptDescriptionText(DescriptionType type) {
+        ConceptDescription conceptDescription = getConceptDescription(type);
+        return conceptDescription == null ? null : conceptDescription.getDescription();
+    }
+
+    /**
+     * Returns true if a concept description of the specified type exists.
+     *
+     * @param type The description type.
+     * @return True if a concept description of the specified type exists.
+     */
+    default boolean hasConceptDescription(DescriptionType type) {
+        return getConceptDescription(type) != null;
+    }
+
+    /**
      * Adds a concept description using the default language.
      *
      * @param type        The description type.
@@ -163,14 +184,15 @@ public interface Concept extends Serializable {
     void addConceptDescriptions(ConceptDescription... conceptDescriptions);
 
     /**
-     * Returns displayable text for the concept.  Returns the preferred name if one exists; otherwise returns the code.
+     * Returns displayable text for the concept.  Searches for a non-blank value from, in order, the
+     * preferred name, a concept definition, a concept synonym, the concept code.
      *
      * @return The display text.
      */
     default String getDisplayText() {
-        return hasPreferredName() ? getPreferredName() : getCode();
+        return StringUtils.firstNonBlank(getPreferredName(), getConceptDescriptionText(DescriptionType.DEFINITION),
+                getConceptDescriptionText(DescriptionType.SYNONYM), getCode());
     }
-
     /**
      * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate
      * to this.  Note that the "equals" method of enums implementing this interface is set to final, so calling this

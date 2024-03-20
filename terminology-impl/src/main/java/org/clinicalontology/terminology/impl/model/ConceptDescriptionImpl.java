@@ -75,4 +75,8 @@ public class ConceptDescriptionImpl implements ConceptDescription {
         }
     }
 
+    @Override
+    public String toString() {
+        return description;
+    }
 }
