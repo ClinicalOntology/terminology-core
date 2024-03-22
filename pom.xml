@@ -6,7 +6,7 @@
 
     <groupId>org.clinicalontology</groupId>
     <artifactId>terminology-core</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.0</version>
     <packaging>pom</packaging>
     <description>Aggregator for terminology modules.</description>
 
@@ -181,12 +181,6 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id/>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-    </repositories>
 
     <distributionManagement>
         <repository>
