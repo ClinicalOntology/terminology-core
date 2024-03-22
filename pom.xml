@@ -6,7 +6,7 @@
 
     <groupId>org.clinicalontology</groupId>
     <artifactId>terminology-core</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Aggregator for terminology modules.</description>
 
