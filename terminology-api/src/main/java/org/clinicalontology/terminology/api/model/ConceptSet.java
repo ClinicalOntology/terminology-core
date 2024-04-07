@@ -230,12 +230,24 @@ public interface ConceptSet extends Iterable<Concept> {
      * @return The display text (empty string if none available).
      */
     default String getDisplayText() {
+        return getDisplayText(true);
+    }
+
+    /**
+     * Returns displayable text from a concept set.  First tries the text attribute.
+     * If the text attribute is blank, it tries the preferred name of each of the member concepts
+     * until it finds a non-blank value.
+     *
+     * @param excludeCodes If true, don't consider concept codes when searching for display text;
+     * @return The display text (empty string if none available).
+     */
+    private String getDisplayText(boolean excludeCodes) {
         return hasText() ? getText() :
                 getConcepts().stream()
-                        .map(cpt -> cpt.getDisplayText(true))
+                        .map(cpt -> cpt.getDisplayText(excludeCodes))
                         .filter(StringUtils::isNotEmpty)
                         .findFirst()
-                        .orElse("");
+                        .orElse(excludeCodes ? "" : getDisplayText(false));
     }
 
     /**
