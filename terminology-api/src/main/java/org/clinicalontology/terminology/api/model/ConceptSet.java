@@ -247,7 +247,7 @@ public interface ConceptSet extends Iterable<Concept> {
                         .map(cpt -> cpt.getDisplayText(excludeCodes))
                         .filter(StringUtils::isNotEmpty)
                         .findFirst()
-                        .orElse(excludeCodes ? "" : getDisplayText(false));
+                        .orElse(excludeCodes ? getDisplayText(false) : "");
     }
 
     /**
