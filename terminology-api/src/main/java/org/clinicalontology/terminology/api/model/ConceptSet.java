@@ -47,7 +47,7 @@ public interface ConceptSet extends Iterable<Concept> {
         if (hasConcepts()) {
             for (Concept concept : this) {
                 if (StringUtils.isNotBlank(concept.getPreferredName())) {
-                    sb.append(sb.length() > 0 ? "; " : "");
+                    sb.append(!sb.isEmpty() ? "; " : "");
                     sb.append(concept.getPreferredName());
                 }
             }
@@ -232,7 +232,7 @@ public interface ConceptSet extends Iterable<Concept> {
     default String getDisplayText() {
         return hasText() ? getText() :
                 getConcepts().stream()
-                        .map(Concept::getPreferredName)
+                        .map(Concept::getDisplayText)
                         .filter(StringUtils::isNotEmpty)
                         .findFirst()
                         .orElse("");
