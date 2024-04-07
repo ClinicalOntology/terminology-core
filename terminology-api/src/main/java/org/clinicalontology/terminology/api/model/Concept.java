@@ -190,9 +190,22 @@ public interface Concept extends Serializable {
      * @return The display text.
      */
     default String getDisplayText() {
-        return StringUtils.firstNonBlank(getPreferredName(), getConceptDescriptionText(DescriptionType.DEFINITION),
-                getConceptDescriptionText(DescriptionType.SYNONYM), getCode());
+        return getDisplayText(false);
     }
+
+    /**
+     * Returns displayable text for the concept.  Searches for a non-blank value from, in order, the
+     * preferred name, a concept definition, a concept synonym, the concept code.
+     *
+     * @param excludeCode If true, don't consider the concept's code as a last resort.
+     * @return The display text.
+     */
+    default String getDisplayText(boolean excludeCode) {
+        String text = StringUtils.firstNonBlank(getPreferredName(), getConceptDescriptionText(DescriptionType.DEFINITION),
+                getConceptDescriptionText(DescriptionType.SYNONYM), excludeCode ? null : getCode());
+        return text == null ? "" : text;
+    }
+
     /**
      * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate
      * to this.  Note that the "equals" method of enums implementing this interface is set to final, so calling this

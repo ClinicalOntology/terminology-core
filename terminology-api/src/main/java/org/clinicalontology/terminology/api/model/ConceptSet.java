@@ -232,7 +232,7 @@ public interface ConceptSet extends Iterable<Concept> {
     default String getDisplayText() {
         return hasText() ? getText() :
                 getConcepts().stream()
-                        .map(Concept::getDisplayText)
+                        .map(cpt -> cpt.getDisplayText(true))
                         .filter(StringUtils::isNotEmpty)
                         .findFirst()
                         .orElse("");
