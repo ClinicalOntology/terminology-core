@@ -167,4 +167,12 @@ public interface TerminologyService {
             Concept concept,
             Language language);
 
+    /**
+     * Method supports registration of user-defined value sets
+     *
+     * @param valueSetExpansion The value set expansion to register manually.
+     * @param allowOverrides If true, value set with override existing entry with the same value set identifier.
+     */
+    void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides);
+
 }

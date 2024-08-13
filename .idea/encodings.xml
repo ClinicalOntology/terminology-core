@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-fhir/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-fhir/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-hl7v2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-hl7v2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-hl7v3/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-codesystem/terminology-codesystem-hl7v3/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-impl/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/terminology-util/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

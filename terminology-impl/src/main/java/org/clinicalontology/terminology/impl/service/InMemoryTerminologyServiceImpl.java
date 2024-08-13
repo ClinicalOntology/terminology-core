@@ -193,4 +193,20 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
         return Collections.emptyList();
     }
 
+    @Override
+    public void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides) {
+        if(valueSetExpansion == null || valueSetExpansion.getValueSetIdentifier() == null || valueSetExpansion.getExpansion() == null) {
+            return;
+        } else if(expansionIndex.containsKey(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString()) && !allowOverrides) {
+            throw new RuntimeException("Value set " + valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier() + " already exists");
+        } else {
+            Map<String, Concept> indexedConceptsById = new HashMap<>();
+            if (valueSetExpansion.getExpansion() != null) {
+                for (Concept concept : valueSetExpansion.getExpansion()) {
+                    indexedConceptsById.put(getConceptIndexKey(concept), concept);
+                }
+            }
+            expansionIndex.put(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString(), indexedConceptsById);
+        }
+    }
 }
