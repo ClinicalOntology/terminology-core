@@ -7,6 +7,7 @@ import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 import org.clinicalontology.terminology.api.service.TerminologyService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -39,7 +40,7 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      * The value sets considered for the key membership test - e.g., a group of disjoint medication class value sets and
      * a list of prescriptions keyed by medication code with the aim of grouping prescriptions by drug class.
      */
-    private final List<ValueSetIdentifier> defaultValueSets;
+    private final List<ValueSetIdentifier> defaultValueSets = new ArrayList<>();
 
     /**
      * A list of all relevant items contained in this bundle.
@@ -52,12 +53,28 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      * @param defaultValueSets    Optional default value sets that will form the subgroups of items.
      */
     public KeyInValueSetGrouper(
-            TerminologyService terminologyService,
-            List<T> semanticKeyItemList,
-            List<ValueSetIdentifier> defaultValueSets) {
+        TerminologyService terminologyService,
+        List<T> semanticKeyItemList,
+        List<ValueSetIdentifier> defaultValueSets) {
         this.terminologyService = terminologyService;
-        this.defaultValueSets = defaultValueSets == null ? new ArrayList<>() : defaultValueSets;
+
+        if (defaultValueSets != null) {
+            this.defaultValueSets.addAll(defaultValueSets);
+        }
+
         setSemanticKeyItemList(semanticKeyItemList);
+    }
+
+    /**
+     * @param terminologyService  Terminology service for value set membership testing.
+     * @param semanticKeyItemList A list of resources to group based on focal concept membership in a value set.,
+     * @param defaultValueSets    Optional default value sets that will form the subgroups of items.
+     */
+    public KeyInValueSetGrouper(
+        TerminologyService terminologyService,
+        List<T> semanticKeyItemList,
+        ValueSetIdentifier... defaultValueSets) {
+        this(terminologyService, semanticKeyItemList, Arrays.asList(defaultValueSets));
     }
 
     /**
@@ -123,7 +140,7 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
 
     /**
      * @return All items that are associated with the default value set (which is the first value set
-     *         in the defaultValueSets list.
+     *     in the defaultValueSets list.
      */
     public List<T> getResourcesInDefaultValueSet() {
         return getResourcesInValueSet(defaultValueSets.isEmpty() ? null : defaultValueSets.get(0));
@@ -140,9 +157,9 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      * @param valueSet     The value set's identifier.
      * @return True if the resource's focal concept is a member of the valueset.
      */
-    private boolean findInValueSet(
-            SemanticKey keyedElement,
-            ValueSetIdentifier valueSet) {
+    protected boolean findInValueSet(
+        SemanticKey keyedElement,
+        ValueSetIdentifier valueSet) {
         try {
             ConceptSet semanticKey = valueSet == null ? null : keyedElement.getSemanticKey();
 
@@ -180,9 +197,9 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
     private List<T> getFilteredResources(ValueSetIdentifier valueSet) {
         if (this.semanticKeyItemList != null && !this.semanticKeyItemList.isEmpty()) {
             return this.semanticKeyItemList
-                    .stream()
-                    .filter(getResourceInValueSetPredicate(valueSet))
-                    .collect(Collectors.toList());
+                .stream()
+                .filter(getResourceInValueSetPredicate(valueSet))
+                .collect(Collectors.toList());
         } else {
             return Collections.emptyList();
         }
