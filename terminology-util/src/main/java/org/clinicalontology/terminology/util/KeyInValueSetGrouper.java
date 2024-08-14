@@ -39,7 +39,7 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      * The value sets considered for the key membership test - e.g., a group of disjoint medication class value sets and
      * a list of prescriptions keyed by medication code with the aim of grouping prescriptions by drug class.
      */
-    private final ValueSetIdentifier[] defaultValueSets;
+    private final List<ValueSetIdentifier> defaultValueSets;
 
     /**
      * A list of all relevant items contained in this bundle.
@@ -54,9 +54,9 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
     public KeyInValueSetGrouper(
             TerminologyService terminologyService,
             List<T> semanticKeyItemList,
-            ValueSetIdentifier... defaultValueSets) {
+            List<ValueSetIdentifier> defaultValueSets) {
         this.terminologyService = terminologyService;
-        this.defaultValueSets = defaultValueSets == null ? EMPTY_ARRAY : defaultValueSets;
+        this.defaultValueSets = defaultValueSets == null ? new ArrayList<>() : defaultValueSets;
         setSemanticKeyItemList(semanticKeyItemList);
     }
 
@@ -123,10 +123,10 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
 
     /**
      * @return All items that are associated with the default value set (which is the first value set
-     *         in the defaultValueSets array.
+     *         in the defaultValueSets list.
      */
     public List<T> getResourcesInDefaultValueSet() {
-        return getResourcesInValueSet(defaultValueSets.length == 0 ? null : defaultValueSets[0]);
+        return getResourcesInValueSet(defaultValueSets.isEmpty() ? null : defaultValueSets.get(0));
     }
 
     /**
