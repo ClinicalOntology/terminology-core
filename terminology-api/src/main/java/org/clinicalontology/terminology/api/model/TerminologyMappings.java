@@ -3,6 +3,7 @@ package org.clinicalontology.terminology.api.model;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IteratorUtils;
 
+import java.beans.Transient;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
     /**
      * @return True if any mappings exist.
      */
+    @Transient
     default boolean hasMappings() {
         return !CollectionUtils.isEmpty(getMappings());
     }
@@ -32,6 +34,7 @@ public interface TerminologyMappings extends Iterable<TerminologyMapping> {
     /**
      * @return The number of mappings.
      */
+    @Transient
     default int size() {
         return hasMappings() ? getMappings().size() : 0;
     }

@@ -2,6 +2,7 @@ package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -95,6 +96,7 @@ public interface Concept extends Serializable {
      *
      * @return True if the concept has a code (non-null and non-empty).
      */
+    @Transient
     default boolean isValidConcept() {
         return hasCode();
     }

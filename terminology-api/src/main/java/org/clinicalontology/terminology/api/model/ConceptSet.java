@@ -5,6 +5,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import java.beans.Transient;
 import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public interface ConceptSet extends Iterable<Concept> {
     /**
      * @return True if this set has a textual representation.
      */
+    @Transient
     default boolean hasText() {
         return StringUtils.isNotEmpty(getText());
     }
@@ -71,6 +73,7 @@ public interface ConceptSet extends Iterable<Concept> {
     /**
      * @return True if not the empty set.
      */
+    @Transient
     default boolean hasConcepts() {
         return CollectionUtils.isNotEmpty(getConcepts());
     }
@@ -160,6 +163,7 @@ public interface ConceptSet extends Iterable<Concept> {
     /**
      * @return Returns the first concept in the set. Order is not guaranteed.
      */
+    @Transient
     default Concept getFirstConcept() {
         return getConcepts().stream().findFirst().orElse(null);
     }
@@ -183,6 +187,7 @@ public interface ConceptSet extends Iterable<Concept> {
      * @return Returns the singleton element or throws an error if set contains more than one element.
      *         Returns null if set contains no concept.
      */
+    @Transient
     default Concept getSoleConcept() {
         Validate.isTrue(getConcepts().size() < 2,
                 "There is more than one concept in this set potentially resulting in a non-deterministic outcome");

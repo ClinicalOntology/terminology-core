@@ -2,6 +2,7 @@ package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.Optional;
@@ -25,6 +26,7 @@ public interface ValueSetExpansion extends Serializable {
     /**
      * @return True if the value set has been evaluated and there is an expansion.
      */
+    @Transient
     default boolean hasExpansion() {
         return CollectionUtils.isNotEmpty(getExpansion());
     }
@@ -52,6 +54,7 @@ public interface ValueSetExpansion extends Serializable {
      * @param concept The concept to search in value set.
      * @return True if the concept exists in the value set. False otherwise.
      */
+    @Transient
     default boolean hasConcept(Concept concept) {
         return this.getExpansion().stream()
                 .anyMatch(element -> element.isEqual(concept));

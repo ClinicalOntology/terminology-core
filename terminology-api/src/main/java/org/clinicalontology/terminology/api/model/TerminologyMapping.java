@@ -1,5 +1,6 @@
 package org.clinicalontology.terminology.api.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 /**
@@ -30,6 +31,7 @@ public interface TerminologyMapping extends Serializable {
     /**
      * @return True if the mapping has an associated category.
      */
+    @Transient
     default boolean hasCategory() {
         return getCategory() != null;
     }

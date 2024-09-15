@@ -2,6 +2,7 @@ package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.Objects;
@@ -64,6 +65,7 @@ public interface ValueSetIdentifier extends Comparable<ValueSetIdentifier>, Seri
     /**
      * @return True if identifier has both an ID and a version.
      */
+    @Transient
     default boolean isValid() {
         return getId() != null && StringUtils.isNotEmpty(getVersion());
     }

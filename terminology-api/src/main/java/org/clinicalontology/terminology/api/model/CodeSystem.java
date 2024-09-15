@@ -2,6 +2,7 @@ package org.clinicalontology.terminology.api.model;
 
 import org.apache.commons.lang3.Validate;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public interface CodeSystem extends Serializable {
     /**
      * @return The URN as a string value.
      */
+    @Transient
     default String getUrnAsString() {
         return getUrn() != null ? getUrn().toString() : null;
     }
@@ -45,6 +47,7 @@ public interface CodeSystem extends Serializable {
     /**
      * @return Returns the first OID in the set. Order is not guaranteed.
      */
+    @Transient
     default Oid getFirstOid() {
         return getOids().stream()
                 .findFirst()
@@ -55,6 +58,7 @@ public interface CodeSystem extends Serializable {
      * @return Returns the sole OID or throws an error if set contains more than one element. Returns null if set
      * contains no concept.
      */
+    @Transient
     default Oid getSoleOid() {
         Validate.isTrue(getOids().size() < 2,
                 "There is more than one OID in this set potentially resulting in a non-deterministic outcome");
