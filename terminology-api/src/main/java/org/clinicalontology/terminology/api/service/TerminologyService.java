@@ -14,12 +14,12 @@ public interface TerminologyService {
      * Method tests whether a concept reference is an element of a value set.
      *
      * @param valueSetIdentifier A value set identifier.
-     * @param conceptReference   The concept whose inclusion in a value set we are verifying.
+     * @param concept   The concept whose inclusion in a value set we are verifying.
      * @return True if the concept is part of the value set. False otherwise.
      */
     boolean isMemberOfConceptSetExpansion(
             ValueSetIdentifier valueSetIdentifier,
-            Concept conceptReference);
+            Concept concept);
 
     /**
      * Method returns all concept mappings that involve this concept as the source of the mapping.
