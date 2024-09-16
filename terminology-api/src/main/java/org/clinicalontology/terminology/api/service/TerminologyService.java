@@ -176,8 +176,8 @@ public interface TerminologyService {
     void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides);
 
     /**
-     * A terminology service may optionally support this method, typically to reset any caches.
+     * A terminology service may optionally implement this method, typically to refresh any caches.
      */
-    default void reset() {
+    default void refresh() {
     }
 }
