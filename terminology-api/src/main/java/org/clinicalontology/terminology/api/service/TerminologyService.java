@@ -11,15 +11,10 @@ import java.util.Set;
 public interface TerminologyService {
 
     /**
-     * Method tests whether a concept reference is an element of a value set.
-     *
-     * @param valueSetIdentifier A value set identifier.
-     * @param concept            The concept whose inclusion in a value set we are verifying.
-     * @return True if the concept is part of the value set. False otherwise.
+     * @param concept The concept whose existence in the terminology repository we are determining.
+     * @return True if the concept exists in the given terminology repository. False otherwise.
      */
-    boolean isMemberOfConceptSetExpansion(
-        ValueSetIdentifier valueSetIdentifier,
-        Concept concept);
+    boolean isValidConcept(Concept concept);
 
     /**
      * Method returns all concept mappings that involve this concept as the source of the mapping.
@@ -54,28 +49,33 @@ public interface TerminologyService {
         String targetCodeSystem);
 
     /**
-     * @param concept The concept whose existence in the terminology repository we are determining.
-     * @return True if the concept exists in the given terminology repository. False otherwise.
-     */
-    boolean isValidConcept(Concept concept);
-
-    /**
      * @param valueSetIdentifier The value set whose existence in the terminology repository we are determining.
      * @return True if the value set exists in the given terminology repository. False otherwise.
      */
-    boolean isValidConceptSet(ValueSetIdentifier valueSetIdentifier);
+    boolean isValidValueSet(ValueSetIdentifier valueSetIdentifier);
+
+    /**
+     * Method tests whether a concept reference is an element of a value set.
+     *
+     * @param valueSetIdentifier A value set identifier.
+     * @param concept            The concept whose inclusion in a value set we are verifying.
+     * @return True if the concept is part of the value set. False otherwise.
+     */
+    boolean isMemberOfValueSet(
+        ValueSetIdentifier valueSetIdentifier,
+        Concept concept);
 
     /**
      * @param valueSetIdentifier The identifier of the value set whose expansion we are requesting.
      * @return The expansion for the given value set.
      */
-    ValueSetExpansion getConceptSetExpansion(ValueSetIdentifier valueSetIdentifier);
+    ValueSetExpansion getValueSetExpansion(ValueSetIdentifier valueSetIdentifier);
 
     /**
      * @param valueSetIdentifier The identifier of the value set whose expansion we are requesting.
      * @return A list of concepts in the form codeSystem|code(,codeSystem|code)*
      */
-    String getConceptSetExpansionAsString(ValueSetIdentifier valueSetIdentifier);
+    String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier);
 
     /**
      * @param concept The concept whose descriptions are sought.

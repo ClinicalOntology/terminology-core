@@ -165,7 +165,7 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
 
             if (semanticKey != null) {
                 for (Concept code : semanticKey.getConcepts()) {
-                    if (getTerminologyService().isMemberOfConceptSetExpansion(valueSet, code)) {
+                    if (getTerminologyService().isMemberOfValueSet(valueSet, code)) {
                         return true;
                     }
                 }

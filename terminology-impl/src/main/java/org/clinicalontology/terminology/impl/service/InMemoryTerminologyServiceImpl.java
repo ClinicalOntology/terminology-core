@@ -20,7 +20,7 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     private final Map<String, TerminologyMappings> mappingIndex = new HashMap<>();
 
     @Override
-    public boolean isMemberOfConceptSetExpansion(
+    public boolean isMemberOfValueSet(
             ValueSetIdentifier valueSetIdentifier,
             Concept concept) {
         String valueSetId = valueSetIdentifier.getVersionedIdentifier().toString();
@@ -104,7 +104,7 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     @Override
-    public boolean isValidConceptSet(ValueSetIdentifier valueSetIdentifier) {
+    public boolean isValidValueSet(ValueSetIdentifier valueSetIdentifier) {
         throw new RuntimeException("Not implemented yet");
     }
 
@@ -167,14 +167,14 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     @Override
-    public ValueSetExpansion getConceptSetExpansion(ValueSetIdentifier valueSetIdentifier) {
+    public ValueSetExpansion getValueSetExpansion(ValueSetIdentifier valueSetIdentifier) {
         Map<String, Concept> conceptMap = expansionIndex.get(valueSetIdentifier.getVersionedIdentifier().toString());
         Set<Concept> expansion = conceptMap == null ? null : new HashSet<>(conceptMap.values());
         return new ValueSetExpansionImpl(valueSetIdentifier, expansion);
     }
 
     @Override
-    public String getConceptSetExpansionAsString(ValueSetIdentifier valueSetIdentifier) {
+    public String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier) {
         throw new RuntimeException("Not yet implemented");
     }
 
