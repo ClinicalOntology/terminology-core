@@ -14,12 +14,12 @@ public interface TerminologyService {
      * Method tests whether a concept reference is an element of a value set.
      *
      * @param valueSetIdentifier A value set identifier.
-     * @param concept   The concept whose inclusion in a value set we are verifying.
+     * @param concept            The concept whose inclusion in a value set we are verifying.
      * @return True if the concept is part of the value set. False otherwise.
      */
     boolean isMemberOfConceptSetExpansion(
-            ValueSetIdentifier valueSetIdentifier,
-            Concept concept);
+        ValueSetIdentifier valueSetIdentifier,
+        Concept concept);
 
     /**
      * Method returns all concept mappings that involve this concept as the source of the mapping.
@@ -38,8 +38,8 @@ public interface TerminologyService {
      * @return The set of mappings having the concept at the source of the mapping.
      */
     TerminologyMappings getMappingsForConcept(
-            Concept source,
-            Concept category);
+        Concept source,
+        Concept category);
 
     /**
      * Method returns all concept mappings from the source concept and target concepts within the specified
@@ -50,8 +50,8 @@ public interface TerminologyService {
      * @return The set of mappings having the concept at the source of the mapping.
      */
     TerminologyMappings getMappingsForConcept(
-            Concept source,
-            String targetCodeSystem);
+        Concept source,
+        String targetCodeSystem);
 
     /**
      * @param concept The concept whose existence in the terminology repository we are determining.
@@ -91,8 +91,8 @@ public interface TerminologyService {
      * @return The set of descriptions associated with the concept in the specified language.
      */
     Set<ConceptDescription> getDescriptions(
-            Concept concept,
-            Language language);
+        Concept concept,
+        Language language);
 
     /**
      * @param concept         The concept.
@@ -100,8 +100,8 @@ public interface TerminologyService {
      * @return All descriptions of the given type.
      */
     default List<String> getConceptDescriptions(
-            Concept concept,
-            DescriptionType descriptionType) {
+        Concept concept,
+        DescriptionType descriptionType) {
         return getConceptDescriptions(concept, descriptionType, Language.getDefault());
     }
 
@@ -112,9 +112,9 @@ public interface TerminologyService {
      * @return All descriptions of the given type.
      */
     List<String> getConceptDescriptions(
-            Concept concept,
-            DescriptionType descriptionType,
-            Language language);
+        Concept concept,
+        DescriptionType descriptionType,
+        Language language);
 
     /**
      * @param concept The concept whose fully specified name is desired.
@@ -130,8 +130,8 @@ public interface TerminologyService {
      * @return The fully specified name for the concept.
      */
     String getConceptFSN(
-            Concept concept,
-            Language language);
+        Concept concept,
+        Language language);
 
     /**
      * @param concept The concept whose fully specified name is desired.
@@ -147,8 +147,8 @@ public interface TerminologyService {
      * @return The definition for the concept.
      */
     String getConceptDefinition(
-            Concept concept,
-            Language language);
+        Concept concept,
+        Language language);
 
     /**
      * @param concept The concept whose fully specified name is desired.
@@ -164,15 +164,20 @@ public interface TerminologyService {
      * @return The synonyms for the concept.
      */
     List<String> getConceptSynonyms(
-            Concept concept,
-            Language language);
+        Concept concept,
+        Language language);
 
     /**
      * Method supports registration of user-defined value sets
      *
      * @param valueSetExpansion The value set expansion to register manually.
-     * @param allowOverrides If true, value set with override existing entry with the same value set identifier.
+     * @param allowOverrides    If true, value set with override existing entry with the same value set identifier.
      */
     void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides);
 
+    /**
+     * A terminology service may optionally support this method, typically to reset any caches.
+     */
+    default void reset() {
+    }
 }
