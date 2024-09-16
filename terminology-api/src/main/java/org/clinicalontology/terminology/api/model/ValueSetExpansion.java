@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A value set expansion is generated after evaluating a value set expression (whether intentional or extensional).
@@ -70,4 +71,9 @@ public interface ValueSetExpansion extends Serializable {
         return conceptSet.getConcepts().stream().anyMatch(this::hasConcept);
     }
 
+    default String asString() {
+        return getExpansion().stream()
+            .map(Concept::getSystemAndCode)
+            .collect(Collectors.joining(","));
+    }
 }
