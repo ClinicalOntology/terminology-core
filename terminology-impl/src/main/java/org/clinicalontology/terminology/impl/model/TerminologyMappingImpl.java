@@ -15,6 +15,17 @@ public class TerminologyMappingImpl implements TerminologyMapping {
     private final Concept category;
 
     /**
+     * For deserialization.
+     */
+    @SuppressWarnings("unused")
+    private TerminologyMappingImpl() {
+        this.type = null;
+        this.source = null;
+        this.target = null;
+        this.category = null;
+    }
+
+    /**
      * Builds a mapping with the specified source and target with a mapping type of equivalent and no category.
      *
      * @param source The source concept.

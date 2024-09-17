@@ -13,7 +13,11 @@ public class ConceptSetImpl implements ConceptSet {
 
     private String text;
 
-    public ConceptSetImpl() {
+    /**
+     * For deserialization.
+     */
+    @SuppressWarnings("unused")
+    private ConceptSetImpl() {
     }
 
     public ConceptSetImpl(

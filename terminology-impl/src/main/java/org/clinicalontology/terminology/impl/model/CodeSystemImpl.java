@@ -71,6 +71,7 @@ public class CodeSystemImpl implements CodeSystem {
     /**
      * For deserialization.
      */
+    @SuppressWarnings("unused")
     private CodeSystemImpl() {
         urn = null;
         name = null;

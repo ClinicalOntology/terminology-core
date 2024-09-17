@@ -18,10 +18,19 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
 
     private final Set<Concept> expansion;
 
+    /**
+     * For deserialization.
+     */
+    @SuppressWarnings("unused")
+    private ValueSetExpansionImpl() {
+        this.valueSetIdentifier = null;
+        this.expansion = new HashSet<>();
+    }
+
     public ValueSetExpansionImpl(
         ValueSetIdentifier valueSetIdentifier,
-        Set<Concept> expansion) {
-        super();
+        Set<Concept> expansion
+    ) {
         this.valueSetIdentifier = valueSetIdentifier;
         this.expansion = getOrDefault(expansion, HashSet::new);
     }
@@ -30,7 +39,8 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
         URI id,
         String version,
         String displayName,
-        Set<Concept> expansion) {
+        Set<Concept> expansion
+    ) {
         this(new ValueSetIdentifierImpl(id, version, displayName), expansion);
     }
 
@@ -38,7 +48,8 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
         String id,
         String version,
         String displayName,
-        Set<Concept> expansion) {
+        Set<Concept> expansion
+    ) {
         this(URI.create(id), version, displayName, expansion);
     }
 

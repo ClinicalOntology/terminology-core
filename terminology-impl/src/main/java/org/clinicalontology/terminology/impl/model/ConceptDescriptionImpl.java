@@ -17,7 +17,7 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     private final String version;
 
     /**
-     * For serialization.
+     * For deserialization.
      */
     @SuppressWarnings("unused")
     private ConceptDescriptionImpl() {
