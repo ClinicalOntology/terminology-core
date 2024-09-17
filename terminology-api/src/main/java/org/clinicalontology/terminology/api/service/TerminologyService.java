@@ -164,8 +164,7 @@ public interface TerminologyService {
      * @return The fully specified name for the concept.
      */
     default String getConceptFSN(Concept concept) {
-        List<String> dxs = getConceptDescriptionText(concept, DescriptionType.FULLY_SPECIFIED_NAME, null);
-        return dxs.isEmpty() ? null : dxs.get(0);
+        return getFirst(getConceptDescriptionText(concept, DescriptionType.FULLY_SPECIFIED_NAME, null));
     }
 
     /**
@@ -201,9 +200,12 @@ public interface TerminologyService {
      * @param language The language.
      * @return The definition for the concept.
      */
-    String getConceptDefinition(
+    default String getConceptDefinition(
         Concept concept,
-        Language language);
+        Language language
+    ) {
+        return getFirst(getConceptDescriptionText(concept, DescriptionType.DEFINITION, language));
+    }
 
     /**
      * Method supports registration of user-defined value sets
@@ -223,5 +225,9 @@ public interface TerminologyService {
         return descriptions.stream()
             .map(ConceptDescription::getDescription)
             .toList();
+    }
+
+    private static <T> T getFirst(List<T> list) {
+        return list == null || list.isEmpty() ? null : list.get(0);
     }
 }
