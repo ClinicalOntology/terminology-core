@@ -5,7 +5,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.beans.Transient;
 import java.io.Serializable;
 import java.net.URI;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public interface ValueSetExpansion extends Serializable {
     /**
      * @return A concept that represents the meaning of the set (e.g., concepts for Diabetes Mellitus).
      */
-    Optional<Concept> getSemanticIdentifier();
+    Concept getSemanticIdentifier();
 
     /**
      * @return The semantic identifier for the value set.
@@ -58,7 +57,7 @@ public interface ValueSetExpansion extends Serializable {
     @Transient
     default boolean hasConcept(Concept concept) {
         return this.getExpansion().stream()
-                .anyMatch(element -> element.isEqual(concept));
+            .anyMatch(element -> element.isEqual(concept));
     }
 
     /**

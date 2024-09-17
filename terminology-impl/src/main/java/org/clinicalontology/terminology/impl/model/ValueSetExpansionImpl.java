@@ -6,7 +6,6 @@ import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 
 import java.net.URI;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -20,32 +19,32 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
     private final Set<Concept> expansion;
 
     public ValueSetExpansionImpl(
-            ValueSetIdentifier valueSetIdentifier,
-            Set<Concept> expansion) {
+        ValueSetIdentifier valueSetIdentifier,
+        Set<Concept> expansion) {
         super();
         this.valueSetIdentifier = valueSetIdentifier;
         this.expansion = getOrDefault(expansion, HashSet::new);
     }
 
     public ValueSetExpansionImpl(
-            URI id,
-            String version,
-            String displayName,
-            Set<Concept> expansion) {
+        URI id,
+        String version,
+        String displayName,
+        Set<Concept> expansion) {
         this(new ValueSetIdentifierImpl(id, version, displayName), expansion);
     }
 
     public ValueSetExpansionImpl(
-            String id,
-            String version,
-            String displayName,
-            Set<Concept> expansion) {
+        String id,
+        String version,
+        String displayName,
+        Set<Concept> expansion) {
         this(URI.create(id), version, displayName, expansion);
     }
 
     private Set<Concept> getOrDefault(
-            Set<Concept> expansion,
-            Supplier<Set<Concept>> supplier) {
+        Set<Concept> expansion,
+        Supplier<Set<Concept>> supplier) {
         return expansion == null ? supplier.get() : new HashSet<>(expansion);
     }
 
@@ -65,8 +64,8 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
      * @return The semantic identifier.
      */
     @Override
-    public Optional<Concept> getSemanticIdentifier() {
-        return Optional.empty();
+    public Concept getSemanticIdentifier() {
+        return null;
     }
 
 }
