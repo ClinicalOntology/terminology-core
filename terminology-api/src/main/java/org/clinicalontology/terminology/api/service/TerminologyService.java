@@ -135,23 +135,6 @@ public interface TerminologyService {
 
     /**
      * @param concept The concept whose fully specified name is desired.
-     * @return The definition for the concept.
-     */
-    default String getConceptDefinition(Concept concept) {
-        return getConceptDefinition(concept, Language.getDefault());
-    }
-
-    /**
-     * @param concept  The concept whose fully specified name is desired.
-     * @param language The language.
-     * @return The definition for the concept.
-     */
-    String getConceptDefinition(
-        Concept concept,
-        Language language);
-
-    /**
-     * @param concept The concept whose fully specified name is desired.
      * @return The synonyms for the concept.
      */
     default List<String> getConceptSynonyms(Concept concept) {

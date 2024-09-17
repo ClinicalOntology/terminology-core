@@ -21,8 +21,8 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
 
     @Override
     public boolean isMemberOfValueSet(
-            ValueSetIdentifier valueSetIdentifier,
-            Concept concept) {
+        ValueSetIdentifier valueSetIdentifier,
+        Concept concept) {
         String valueSetId = valueSetIdentifier.getVersionedIdentifier().toString();
         Map<String, Concept> expansion = expansionIndex.get(valueSetId);
         return expansion != null && expansion.containsKey(getConceptIndexKey(concept));
@@ -35,12 +35,12 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
 
     @Override
     public TerminologyMappings getMappingsForConcept(
-            Concept source,
-            Concept category) {
+        Concept source,
+        Concept category) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
         getMappingsForConcept(source).getMappings().stream()
-                .filter(m -> category.isEqual(m.getCategory()))
-                .forEach(filtered::add);
+            .filter(m -> category.isEqual(m.getCategory()))
+            .forEach(filtered::add);
         return filtered;
     }
 
@@ -48,15 +48,15 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     public TerminologyMappings getMappingsForConcept(Concept source, String targetCodeSystem) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
         getMappingsForConcept(source).getMappings().stream()
-                .filter(m -> targetCodeSystem.equals(m.getTarget().getCodeAsString()))
-                .forEach(filtered::add);
+            .filter(m -> targetCodeSystem.equals(m.getTarget().getCodeAsString()))
+            .forEach(filtered::add);
         return filtered;
     }
 
     public void addTerminologyMapping(
-            Concept source,
-            Concept target,
-            TerminologyMappingType type) {
+        Concept source,
+        Concept target,
+        TerminologyMappingType type) {
         if (type == null) {
             type = TerminologyMappingType.TARGET_EQUIVALENT;
         }
@@ -78,28 +78,16 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     @Override
-    public String getConceptFSN(Concept concept) {
-        throw new RuntimeException("Not implemented yet");
-    }
-
-    @Override
-    public String getConceptFSN(
-            Concept concept,
-            Language language) {
-        return null;
-    }
-
-    @Override
     public String getConceptDefinition(
-            Concept concept,
-            Language language) {
+        Concept concept,
+        Language language) {
         return null;
     }
 
     @Override
     public List<String> getConceptSynonyms(
-            Concept concept,
-            Language language) {
+        Concept concept,
+        Language language) {
         return null;
     }
 
@@ -109,14 +97,14 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     public void registerValueSet(
-            ValueSetExpansion valueSet,
-            List<Concept> concepts) {
+        ValueSetExpansion valueSet,
+        List<Concept> concepts) {
         registerValueSet(valueSet.getVersionedIdentifier().toString(), concepts);
     }
 
     public void registerValueSet(
-            String valueSetVersionedIdentifier,
-            List<Concept> concepts) {
+        String valueSetVersionedIdentifier,
+        List<Concept> concepts) {
         Map<String, Concept> expansion = expansionIndex.computeIfAbsent(valueSetVersionedIdentifier, k -> new HashMap<>());
 
         if (concepts != null) {
@@ -127,20 +115,20 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     public void addConceptToValueSet(
-            ValueSetExpansion valueSet,
-            Concept concept) {
+        ValueSetExpansion valueSet,
+        Concept concept) {
         addConceptToValueSet(valueSet.getVersionedIdentifier().toString(), concept);
     }
 
     public void addConceptToValueSet(
-            String valueSetVersionedIdentifier,
-            Concept concept) {
+        String valueSetVersionedIdentifier,
+        Concept concept) {
         Map<String, Concept> expansion = expansionIndex.computeIfAbsent(valueSetVersionedIdentifier, k -> new HashMap<>());
         expansion.put(getConceptIndexKey(concept), concept);
     }
 
     public String getConceptIndexKey(Concept concept) {
-        return concept.getCodeSystem() + "--" + concept.getCode();
+        return concept.getSystemAndCode();
     }
 
     /**
@@ -150,8 +138,8 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
      * @param serializedConceptList The serialized concept list.
      */
     public void parseAndRegisterValueSet(
-            ValueSetIdentifier valueSetIdentifier,
-            String serializedConceptList) { //TODO add regex to validate serializedConceptList format.
+        ValueSetIdentifier valueSetIdentifier,
+        String serializedConceptList) { //TODO add regex to validate serializedConceptList format.
         if (StringUtils.isNotBlank(serializedConceptList)) {
             List<Concept> conceptList = new ArrayList<>();
             String[] serializedConcepts = serializedConceptList.split("\\|");
@@ -174,30 +162,17 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     @Override
-    public String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier) {
-        throw new RuntimeException("Not yet implemented");
-    }
-
-    @Override
-    public Set<ConceptDescription> getDescriptions(
-            Concept concept,
-            Language language) {
+    public Set<ConceptDescription> getConceptDescriptions(
+        Concept concept,
+        Language language) {
         return Collections.emptySet();
     }
 
     @Override
-    public List<String> getConceptDescriptions(
-            Concept concept,
-            DescriptionType descriptionType,
-            Language language) {
-        return Collections.emptyList();
-    }
-
-    @Override
     public void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides) {
-        if(valueSetExpansion == null || valueSetExpansion.getValueSetIdentifier() == null || valueSetExpansion.getExpansion() == null) {
+        if (valueSetExpansion == null || valueSetExpansion.getValueSetIdentifier() == null || valueSetExpansion.getExpansion() == null) {
             return;
-        } else if(expansionIndex.containsKey(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString()) && !allowOverrides) {
+        } else if (expansionIndex.containsKey(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString()) && !allowOverrides) {
             throw new RuntimeException("Value set " + valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier() + " already exists");
         } else {
             Map<String, Concept> indexedConceptsById = new HashMap<>();
