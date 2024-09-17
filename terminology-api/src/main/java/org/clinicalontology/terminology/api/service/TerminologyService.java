@@ -120,6 +120,7 @@ public interface TerminologyService {
 
     /**
      * @param concept  The concept whose descriptions are sought.
+     * @param descriptionType The description type.
      * @param language The desired language.
      * @return The set of descriptions associated with the concept in the specified language.
      */
@@ -129,7 +130,7 @@ public interface TerminologyService {
         Language language
     ) {
         return getConceptDescriptions(concept, language).stream()
-            .filter(dx -> dx.getDescriptionType() == descriptionType)
+            .filter(dx -> descriptionType == null || dx.getDescriptionType() == descriptionType)
             .collect(Collectors.toSet());
     }
 
