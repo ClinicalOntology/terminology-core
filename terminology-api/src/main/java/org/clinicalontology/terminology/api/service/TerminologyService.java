@@ -2,19 +2,25 @@ package org.clinicalontology.terminology.api.service;
 
 import org.clinicalontology.terminology.api.model.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Logical interface exposed by a terminology service.
  */
 public interface TerminologyService {
 
+    //--------------- Concepts ---------------
+
     /**
      * @param concept The concept whose existence in the terminology repository we are determining.
      * @return True if the concept exists in the given terminology repository. False otherwise.
      */
     boolean isValidConcept(Concept concept);
+
+    //--------------- Terminology Mappings ---------------
 
     /**
      * Method returns all concept mappings that involve this concept as the source of the mapping.
@@ -48,6 +54,8 @@ public interface TerminologyService {
         Concept source,
         String targetCodeSystem);
 
+    //--------------- Value Sets ---------------
+
     /**
      * @param valueSetIdentifier The value set whose existence in the terminology repository we are determining.
      * @return True if the value set exists in the given terminology repository. False otherwise.
@@ -75,14 +83,18 @@ public interface TerminologyService {
      * @param valueSetIdentifier The identifier of the value set whose expansion we are requesting.
      * @return A list of concepts in the form codeSystem|code(,codeSystem|code)*
      */
-    String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier);
+    default String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier) {
+        return getValueSetExpansion(valueSetIdentifier).asString();
+    }
+
+    //--------------- Concept Descriptions ---------------
 
     /**
      * @param concept The concept whose descriptions are sought.
      * @return The set of descriptions associated with the concept in the default language.
      */
-    default Set<ConceptDescription> getDescriptions(Concept concept) {
-        return getDescriptions(concept, Language.getDefault());
+    default Set<ConceptDescription> getConceptDescriptions(Concept concept) {
+        return getConceptDescriptions(concept, Language.getDefault());
     }
 
     /**
@@ -90,19 +102,47 @@ public interface TerminologyService {
      * @param language The desired language.
      * @return The set of descriptions associated with the concept in the specified language.
      */
-    Set<ConceptDescription> getDescriptions(
+    Set<ConceptDescription> getConceptDescriptions(
         Concept concept,
         Language language);
+
+    /**
+     * @param concept         The concept whose descriptions are sought.
+     * @param descriptionType The description type.
+     * @return The set of descriptions associated with the concept in the specified language.
+     */
+    default Set<ConceptDescription> getConceptDescriptions(
+        Concept concept,
+        DescriptionType descriptionType
+    ) {
+        return getConceptDescriptions(concept, descriptionType, Language.getDefault());
+    }
+
+    /**
+     * @param concept  The concept whose descriptions are sought.
+     * @param language The desired language.
+     * @return The set of descriptions associated with the concept in the specified language.
+     */
+    default Set<ConceptDescription> getConceptDescriptions(
+        Concept concept,
+        DescriptionType descriptionType,
+        Language language
+    ) {
+        return getConceptDescriptions(concept, language).stream()
+            .filter(dx -> dx.getDescriptionType() == descriptionType)
+            .collect(Collectors.toSet());
+    }
 
     /**
      * @param concept         The concept.
      * @param descriptionType The description type.
      * @return All descriptions of the given type.
      */
-    default List<String> getConceptDescriptions(
+    default List<String> getConceptDescriptionText(
         Concept concept,
-        DescriptionType descriptionType) {
-        return getConceptDescriptions(concept, descriptionType, Language.getDefault());
+        DescriptionType descriptionType
+    ) {
+        return getConceptDescriptionText(concept, descriptionType, Language.getDefault());
     }
 
     /**
@@ -111,27 +151,22 @@ public interface TerminologyService {
      * @param language        The language
      * @return All descriptions of the given type.
      */
-    List<String> getConceptDescriptions(
+    default List<String> getConceptDescriptionText(
         Concept concept,
         DescriptionType descriptionType,
-        Language language);
+        Language language
+    ) {
+        return descriptionsAsText(getConceptDescriptions(concept, descriptionType, language));
+    }
 
     /**
      * @param concept The concept whose fully specified name is desired.
      * @return The fully specified name for the concept.
      */
     default String getConceptFSN(Concept concept) {
-        return getConceptFSN(concept, Language.getDefault());
+        List<String> dxs = getConceptDescriptionText(concept, DescriptionType.FULLY_SPECIFIED_NAME, null);
+        return dxs.isEmpty() ? null : dxs.get(0);
     }
-
-    /**
-     * @param concept  The concept whose fully specified name is desired.
-     * @param language The language.
-     * @return The fully specified name for the concept.
-     */
-    String getConceptFSN(
-        Concept concept,
-        Language language);
 
     /**
      * @param concept The concept whose fully specified name is desired.
@@ -146,7 +181,27 @@ public interface TerminologyService {
      * @param language The language.
      * @return The synonyms for the concept.
      */
-    List<String> getConceptSynonyms(
+    default List<String> getConceptSynonyms(
+        Concept concept,
+        Language language
+    ) {
+        return getConceptDescriptionText(concept, DescriptionType.SYNONYM, language);
+    }
+
+    /**
+     * @param concept The concept whose fully specified name is desired.
+     * @return The definition for the concept.
+     */
+    default String getConceptDefinition(Concept concept) {
+        return getConceptDefinition(concept, Language.getDefault());
+    }
+
+    /**
+     * @param concept  The concept whose fully specified name is desired.
+     * @param language The language.
+     * @return The definition for the concept.
+     */
+    String getConceptDefinition(
         Concept concept,
         Language language);
 
@@ -162,5 +217,11 @@ public interface TerminologyService {
      * A terminology service may optionally implement this method, typically to refresh any caches.
      */
     default void refresh() {
+    }
+
+    private static List<String> descriptionsAsText(Collection<ConceptDescription> descriptions) {
+        return descriptions.stream()
+            .map(ConceptDescription::getDescription)
+            .toList();
     }
 }
