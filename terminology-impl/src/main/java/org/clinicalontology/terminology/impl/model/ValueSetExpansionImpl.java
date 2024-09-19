@@ -23,8 +23,11 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
      */
     @SuppressWarnings("unused")
     private ValueSetExpansionImpl() {
-        this.valueSetIdentifier = null;
-        this.expansion = new HashSet<>();
+        this(null, null);
+    }
+
+    public ValueSetExpansionImpl(ValueSetIdentifier valueSetIdentifier) {
+        this(valueSetIdentifier, null);
     }
 
     public ValueSetExpansionImpl(
