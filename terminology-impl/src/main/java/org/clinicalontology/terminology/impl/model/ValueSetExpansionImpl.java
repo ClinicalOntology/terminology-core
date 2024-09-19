@@ -7,7 +7,6 @@ import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class ValueSetExpansionImpl implements ValueSetExpansion {
 
@@ -16,18 +15,18 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
 
     private final ValueSetIdentifier valueSetIdentifier;
 
-    private final Set<Concept> expansion;
+    private final Set<Concept> expansion = new HashSet<>();
 
     /**
      * For deserialization.
      */
     @SuppressWarnings("unused")
     private ValueSetExpansionImpl() {
-        this(null, null);
+        this(null);
     }
 
     public ValueSetExpansionImpl(ValueSetIdentifier valueSetIdentifier) {
-        this(valueSetIdentifier, null);
+        this.valueSetIdentifier = valueSetIdentifier;
     }
 
     public ValueSetExpansionImpl(
@@ -35,7 +34,10 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
         Set<Concept> expansion
     ) {
         this.valueSetIdentifier = valueSetIdentifier;
-        this.expansion = getOrDefault(expansion, HashSet::new);
+
+        if (expansion != null) {
+            this.expansion.addAll(expansion);
+        }
     }
 
     public ValueSetExpansionImpl(
@@ -54,12 +56,6 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
         Set<Concept> expansion
     ) {
         this(URI.create(id), version, displayName, expansion);
-    }
-
-    private Set<Concept> getOrDefault(
-        Set<Concept> expansion,
-        Supplier<Set<Concept>> supplier) {
-        return expansion == null ? supplier.get() : new HashSet<>(expansion);
     }
 
     @Override
