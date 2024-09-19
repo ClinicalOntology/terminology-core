@@ -73,6 +73,7 @@ public interface ValueSetExpansion extends Serializable {
     default String asString() {
         return getExpansion().stream()
             .map(Concept::getSystemAndCode)
+            .sorted()
             .collect(Collectors.joining(","));
     }
 }
