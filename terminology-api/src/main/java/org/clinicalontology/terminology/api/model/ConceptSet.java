@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import java.beans.Transient;
+import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
  * concepts use a Set&lt;Concept&gt; instead.
  */
 @SuppressWarnings("unused")
-public interface ConceptSet extends Iterable<Concept> {
+public interface ConceptSet extends Serializable, Iterable<Concept> {
 
     /**
      * @return The textual representation of the concept.

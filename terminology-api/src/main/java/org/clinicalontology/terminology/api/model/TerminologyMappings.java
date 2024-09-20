@@ -4,6 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IteratorUtils;
 
 import java.beans.Transient;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * A collection of concept mappings.
  */
 @SuppressWarnings("unused")
-public interface TerminologyMappings extends Iterable<TerminologyMapping> {
+public interface TerminologyMappings extends Serializable, Iterable<TerminologyMapping> {
 
     /**
      * @param mapping The concept mapping to add to the collection.
