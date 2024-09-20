@@ -87,7 +87,28 @@ public interface TerminologyService {
         return getValueSetExpansion(valueSetIdentifier).asString();
     }
 
-    //--------------- Concept Descriptions ---------------
+    //--------------- Concepts ---------------
+
+    /**
+     * Returns a fully hydrated concept from the concept store.  If one is not available,
+     * should return a minimal concept with the given code system and code.
+     *
+     * @param codeSystem The code system.
+     * @param code The concept code.
+     * @return The concept.
+     */
+    Concept getConcept(String codeSystem, String code);
+
+    /**
+     * Returns a fully hydrated concept from the concept store.  If one is not available, should
+     * return the original concept.
+     *
+     * @param concept The concept.
+     * @return The concept.
+     */
+    default Concept getConcept(Concept concept) {
+        return getConcept(concept.getCodeSystemAsString(), concept.getCode());
+    }
 
     /**
      * @param concept The concept whose descriptions are sought.
@@ -102,9 +123,14 @@ public interface TerminologyService {
      * @param language The desired language.
      * @return The set of descriptions associated with the concept in the specified language.
      */
-    Set<ConceptDescription> getConceptDescriptions(
+    default Set<ConceptDescription> getConceptDescriptions(
         Concept concept,
-        Language language);
+        Language language
+    ) {
+        return getConcept(concept).getConceptDescriptions().stream()
+            .filter(dx -> language == null || language.equals(dx.getLanguage()))
+            .collect(Collectors.toSet());
+    }
 
     /**
      * @param concept         The concept whose descriptions are sought.

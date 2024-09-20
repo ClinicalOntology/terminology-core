@@ -1,6 +1,7 @@
 package org.clinicalontology.terminology.impl.service;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.clinicalontology.terminology.api.model.*;
 import org.clinicalontology.terminology.api.service.TerminologyService;
 import org.clinicalontology.terminology.impl.model.ConceptImpl;
@@ -15,28 +16,88 @@ import java.util.*;
  */
 public class InMemoryTerminologyServiceImpl implements TerminologyService {
 
-    private final Map<String, Map<String, Concept>> expansionIndex = new HashMap<>();
+    private static class ConceptIndex extends HashMap<String, Concept> {
+        void put(Concept concept) {
+            put(concept.getSystemAndCode(), concept);
+        }
 
-    private final Map<String, TerminologyMappings> mappingIndex = new HashMap<>();
+        Concept computeIfAbsent(String codeSystem, String code) {
+            return computeIfAbsent(codeSystem + "|" + code, k -> new ConceptImpl(codeSystem, code));
+        }
+
+        boolean contains(Concept concept) {
+            return containsKey(concept.getSystemAndCode());
+        }
+
+        void putAll(Collection<Concept> concepts) {
+            if (concepts != null) {
+                concepts.forEach(this::put);
+            }
+        }
+    }
+
+    private static class ExpansionIndex extends HashMap<String, ConceptIndex> {
+        ConceptIndex get(ValueSetIdentifier valueSetIdentifier) {
+            return get(valueSetIdentifier.getVersionedIdentifier().toString());
+        }
+
+        boolean contains(ValueSetIdentifier valueSetIdentifier) {
+            return containsKey(valueSetIdentifier.getVersionedIdentifier().toString());
+        }
+
+        void put(ValueSetIdentifier valueSetIdentifier, ConceptIndex conceptIndex) {
+            put(valueSetIdentifier.getVersionedIdentifier().toString(), conceptIndex);
+        }
+
+        ConceptIndex computeIfAbsent(ValueSetIdentifier valueSetIdentifier) {
+            return computeIfAbsent(valueSetIdentifier.getVersionedIdentifier().toString(), k -> new ConceptIndex());
+        }
+    }
+
+    private static class MappingsIndex extends HashMap<String, TerminologyMappings> {
+        TerminologyMappings get(Concept concept) {
+            return get(concept.getSystemAndCode());
+        }
+
+        void put(Concept concept, TerminologyMappings mappings) {
+            put(concept.getSystemAndCode(), mappings);
+        }
+
+        TerminologyMappings computeIfAbsent(Concept concept) {
+            return computeIfAbsent(concept.getSystemAndCode(), k -> new TerminologyMappingsImpl());
+        }
+    }
+
+    private final ConceptIndex conceptIndex = new ConceptIndex();
+
+    private final ExpansionIndex expansionIndex = new ExpansionIndex();
+
+    private final MappingsIndex mappingIndex = new MappingsIndex();
+
+    public void addConcept(Concept concept) {
+        conceptIndex.put(concept);
+    }
 
     @Override
-    public boolean isMemberOfValueSet(
-        ValueSetIdentifier valueSetIdentifier,
-        Concept concept) {
-        String valueSetId = valueSetIdentifier.getVersionedIdentifier().toString();
-        Map<String, Concept> expansion = expansionIndex.get(valueSetId);
-        return expansion != null && expansion.containsKey(getConceptIndexKey(concept));
+    public Concept getConcept(String codeSystem, String code) {
+        return conceptIndex.computeIfAbsent(codeSystem, code);
+    }
+
+    @Override
+    public boolean isValidConcept(Concept concept) {
+        return conceptIndex.contains(concept);
     }
 
     @Override
     public TerminologyMappings getMappingsForConcept(Concept source) {
-        return mappingIndex.get(source.getSystemAndCode());
+        return mappingIndex.get(source);
     }
 
     @Override
     public TerminologyMappings getMappingsForConcept(
         Concept source,
-        Concept category) {
+        Concept category
+    ) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
         getMappingsForConcept(source).getMappings().stream()
             .filter(m -> category.isEqual(m.getCategory()))
@@ -45,7 +106,10 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     @Override
-    public TerminologyMappings getMappingsForConcept(Concept source, String targetCodeSystem) {
+    public TerminologyMappings getMappingsForConcept(
+        Concept source,
+        String targetCodeSystem
+    ) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
         getMappingsForConcept(source).getMappings().stream()
             .filter(m -> targetCodeSystem.equals(m.getTarget().getCodeAsString()))
@@ -56,132 +120,89 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     public void addTerminologyMapping(
         Concept source,
         Concept target,
-        TerminologyMappingType type) {
+        TerminologyMappingType type
+    ) {
         if (type == null) {
             type = TerminologyMappingType.TARGET_EQUIVALENT;
         }
 
         TerminologyMapping terminologyMapping = new TerminologyMappingImpl(type, source, target);
-        TerminologyMappings mappings = mappingIndex.get(source.getSystemAndCode());
-
-        if (mappings == null) {
-            mappings = new TerminologyMappingsImpl();
-            mappingIndex.put(source.getSystemAndCode(), mappings);
-        }
-
-        mappings.add(terminologyMapping);
-    }
-
-    @Override
-    public boolean isValidConcept(Concept concept) {
-        throw new RuntimeException("Not implemented yet");
-    }
-
-    @Override
-    public String getConceptDefinition(
-        Concept concept,
-        Language language) {
-        return null;
-    }
-
-    @Override
-    public List<String> getConceptSynonyms(
-        Concept concept,
-        Language language) {
-        return null;
+         mappingIndex.computeIfAbsent(source).add(terminologyMapping);
     }
 
     @Override
     public boolean isValidValueSet(ValueSetIdentifier valueSetIdentifier) {
-        throw new RuntimeException("Not implemented yet");
+        return expansionIndex.contains(valueSetIdentifier);
+    }
+
+    @Override
+    public boolean isMemberOfValueSet(
+        ValueSetIdentifier valueSetIdentifier,
+        Concept concept
+    ) {
+        ConceptIndex expansion = expansionIndex.get(valueSetIdentifier);
+        return expansion != null && expansion.contains(concept);
     }
 
     public void registerValueSet(
-        ValueSetExpansion valueSet,
-        List<Concept> concepts) {
-        registerValueSet(valueSet.getVersionedIdentifier().toString(), concepts);
-    }
-
-    public void registerValueSet(
-        String valueSetVersionedIdentifier,
-        List<Concept> concepts) {
-        Map<String, Concept> expansion = expansionIndex.computeIfAbsent(valueSetVersionedIdentifier, k -> new HashMap<>());
-
-        if (concepts != null) {
-            for (Concept concept : concepts) {
-                expansion.put(getConceptIndexKey(concept), concept);
-            }
-        }
+        ValueSetIdentifier valueSetIdentifier,
+        List<Concept> concepts
+    ) {
+        expansionIndex.computeIfAbsent(valueSetIdentifier).putAll(concepts);
     }
 
     public void addConceptToValueSet(
-        ValueSetExpansion valueSet,
-        Concept concept) {
-        addConceptToValueSet(valueSet.getVersionedIdentifier().toString(), concept);
-    }
-
-    public void addConceptToValueSet(
-        String valueSetVersionedIdentifier,
-        Concept concept) {
-        Map<String, Concept> expansion = expansionIndex.computeIfAbsent(valueSetVersionedIdentifier, k -> new HashMap<>());
-        expansion.put(getConceptIndexKey(concept), concept);
-    }
-
-    public String getConceptIndexKey(Concept concept) {
-        return concept.getSystemAndCode();
+        ValueSetIdentifier valueSetIdentifier,
+        Concept concept
+    ) {
+        expansionIndex.computeIfAbsent(valueSetIdentifier).put(concept);
     }
 
     /**
-     * Format: (codesystem,code,display|)+
+     * Format: (codesystem|code|display,...)
      *
      * @param valueSetIdentifier    A value set identifier.
      * @param serializedConceptList The serialized concept list.
      */
     public void parseAndRegisterValueSet(
         ValueSetIdentifier valueSetIdentifier,
-        String serializedConceptList) { //TODO add regex to validate serializedConceptList format.
+        String serializedConceptList
+    ) {
         if (StringUtils.isNotBlank(serializedConceptList)) {
             List<Concept> conceptList = new ArrayList<>();
-            String[] serializedConcepts = serializedConceptList.split("\\|");
+            String[] serializedConcepts = serializedConceptList.split(",");
 
             for (String serializedConcept : serializedConcepts) {
-                String[] conceptComponents = serializedConcept.split(",");
-                Concept concept = new ConceptImpl(conceptComponents[0], conceptComponents[1], conceptComponents[2]);
+                String[] pcs = serializedConcept.split("\\|");
+                int len = pcs.length;
+                Validate.isTrue(len > 1 && len < 4, "Invalid concept format: %s", serializedConcept);
+                Concept concept = new ConceptImpl(pcs[0], pcs[1], len == 3 ? pcs[2] : null);
                 conceptList.add(concept);
             }
 
-            registerValueSet(valueSetIdentifier.getVersionedIdentifier().toString(), conceptList);
+            registerValueSet(valueSetIdentifier, conceptList);
         }
     }
 
     @Override
     public ValueSetExpansion getValueSetExpansion(ValueSetIdentifier valueSetIdentifier) {
-        Map<String, Concept> conceptMap = expansionIndex.get(valueSetIdentifier.getVersionedIdentifier().toString());
-        Set<Concept> expansion = conceptMap == null ? null : new HashSet<>(conceptMap.values());
-        return new ValueSetExpansionImpl(valueSetIdentifier, expansion);
+        ConceptIndex conceptMap = expansionIndex.computeIfAbsent(valueSetIdentifier);
+        return new ValueSetExpansionImpl(valueSetIdentifier, new HashSet<>(conceptMap.values()));
     }
 
     @Override
-    public Set<ConceptDescription> getConceptDescriptions(
-        Concept concept,
-        Language language) {
-        return Collections.emptySet();
-    }
-
-    @Override
-    public void registerExternalValueSet(ValueSetExpansion valueSetExpansion, boolean allowOverrides) {
+    public void registerExternalValueSet(
+        ValueSetExpansion valueSetExpansion,
+        boolean allowOverrides
+    ) {
         if (valueSetExpansion == null || valueSetExpansion.getValueSetIdentifier() == null || valueSetExpansion.getExpansion() == null) {
             return;
-        } else if (expansionIndex.containsKey(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString()) && !allowOverrides) {
+        } else if (!allowOverrides && expansionIndex.contains(valueSetExpansion.getValueSetIdentifier())) {
             throw new RuntimeException("Value set " + valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier() + " already exists");
         } else {
-            Map<String, Concept> indexedConceptsById = new HashMap<>();
-            if (valueSetExpansion.getExpansion() != null) {
-                for (Concept concept : valueSetExpansion.getExpansion()) {
-                    indexedConceptsById.put(getConceptIndexKey(concept), concept);
-                }
-            }
-            expansionIndex.put(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString(), indexedConceptsById);
+            ConceptIndex conceptMap = new ConceptIndex();
+            conceptMap.putAll(valueSetExpansion.getExpansion());
+            expansionIndex.put(valueSetExpansion.getValueSetIdentifier(), conceptMap);
         }
     }
 }
