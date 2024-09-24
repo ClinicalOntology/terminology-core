@@ -22,6 +22,7 @@ public interface Concept extends Serializable {
     /**
      * @return The code system as a string URN.
      */
+    @Transient
     default String getCodeSystemAsString() {
         return hasCodeSystem() ? getCodeSystem().getUrn().toString() : "";
     }
@@ -29,6 +30,7 @@ public interface Concept extends Serializable {
     /**
      * @return True if the concept has a code system. False otherwise.
      */
+    @Transient
     default boolean hasCodeSystem() {
         return getCodeSystem() != null;
     }
@@ -41,6 +43,7 @@ public interface Concept extends Serializable {
     /**
      * @return The code for this concept or the empty string if null.
      */
+    @Transient
     default String getCodeAsString() {
         return hasCode() ? getCode() : "";
     }
@@ -48,6 +51,7 @@ public interface Concept extends Serializable {
     /**
      * @return Returns the code system and code separated by a pipe character.
      */
+    @Transient
     default String getSystemAndCode() {
         return getCodeSystemAsString() + "|" + getCodeAsString();
     }
@@ -56,6 +60,7 @@ public interface Concept extends Serializable {
      * @return True if this concept was assigned a code. False otherwise.
      * Note: a concept must have both a system and a code.
      */
+    @Transient
     default boolean hasCode() {
         return StringUtils.isNotEmpty(getCode());
     }
@@ -75,6 +80,7 @@ public interface Concept extends Serializable {
     /**
      * @return True if the concept is associated with a preferred term.
      */
+    @Transient
     default boolean hasPreferredName() {
         return StringUtils.isNotEmpty(getPreferredName());
     }
@@ -87,6 +93,7 @@ public interface Concept extends Serializable {
     /**
      * @return True if this concept has a version. False otherwise.
      */
+    @Transient
     default boolean hasVersion() {
         return StringUtils.isNotEmpty(getVersion());
     }
@@ -191,6 +198,7 @@ public interface Concept extends Serializable {
      *
      * @return The display text.
      */
+    @Transient
     default String getDisplayText() {
         return getDisplayText(false);
     }
@@ -227,6 +235,7 @@ public interface Concept extends Serializable {
     /**
      * @return Returns a pipe-delimited string consisting of the code system and code in that order.
      */
+    @Transient
     default String asString() {
         return asString(false);
     }
