@@ -50,18 +50,18 @@ public interface CodeSystem extends Serializable {
     @Transient
     default Oid getFirstOid() {
         return getOids().stream()
-                .findFirst()
-                .orElse(null);
+            .findFirst()
+            .orElse(null);
     }
 
     /**
      * @return Returns the sole OID or throws an error if set contains more than one element. Returns null if set
-     * contains no concept.
+     *     contains no concept.
      */
     @Transient
     default Oid getSoleOid() {
         Validate.isTrue(getOids().size() < 2,
-                "There is more than one OID in this set potentially resulting in a non-deterministic outcome");
+            "There is more than one OID in this set potentially resulting in a non-deterministic outcome");
         return getFirstOid();
     }
 

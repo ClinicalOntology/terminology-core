@@ -45,14 +45,16 @@ public final class V2CodeSystems extends CodeSystemImpl {
     }
 
     public static V2CodeSystems valueOf(
-            String name,
-            boolean exceptionIfNotFound) {
+        String name,
+        boolean exceptionIfNotFound
+    ) {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
     private V2CodeSystems(
-            String urn,
-            String oid) {
+        String urn,
+        String oid
+    ) {
         super(URI.create(V2_CODESYSTEM_PREFIX + urn), null, null, V2_OID_PREFIX + oid);
         CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }

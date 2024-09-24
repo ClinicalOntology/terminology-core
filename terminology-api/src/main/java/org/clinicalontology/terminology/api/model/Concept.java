@@ -58,7 +58,7 @@ public interface Concept extends Serializable {
 
     /**
      * @return True if this concept was assigned a code. False otherwise.
-     * Note: a concept must have both a system and a code.
+     *     Note: a concept must have both a system and a code.
      */
     @Transient
     default boolean hasCode() {
@@ -121,8 +121,8 @@ public interface Concept extends Serializable {
      */
     default Set<ConceptDescription> getConceptDescriptions(DescriptionType type) {
         return getConceptDescriptions().stream()
-                .filter(cd -> cd.getDescriptionType() == type)
-                .collect(Collectors.toSet());
+            .filter(cd -> cd.getDescriptionType() == type)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -133,9 +133,9 @@ public interface Concept extends Serializable {
      */
     default ConceptDescription getConceptDescription(DescriptionType type) {
         return getConceptDescriptions().stream()
-                .filter(cd -> cd.getDescriptionType() == type)
-                .findFirst()
-                .orElse(null);
+            .filter(cd -> cd.getDescriptionType() == type)
+            .findFirst()
+            .orElse(null);
     }
 
     /**
@@ -167,8 +167,9 @@ public interface Concept extends Serializable {
      * @return The newly created concept description.
      */
     default ConceptDescription addConceptDescription(
-            DescriptionType type,
-            String description) {
+        DescriptionType type,
+        String description
+    ) {
         return addConceptDescription(type, description, Language.getDefault());
     }
 
@@ -181,9 +182,10 @@ public interface Concept extends Serializable {
      * @return The newly created concept description.
      */
     ConceptDescription addConceptDescription(
-            DescriptionType type,
-            String description,
-            Language language);
+        DescriptionType type,
+        String description,
+        Language language
+    );
 
     /**
      * Adds concept descriptions.
@@ -212,7 +214,7 @@ public interface Concept extends Serializable {
      */
     default String getDisplayText(boolean excludeCode) {
         String text = StringUtils.firstNonBlank(getPreferredName(), getConceptDescriptionText(DescriptionType.DEFINITION),
-                getConceptDescriptionText(DescriptionType.SYNONYM), excludeCode ? null : getCode());
+            getConceptDescriptionText(DescriptionType.SYNONYM), excludeCode ? null : getCode());
         return text == null ? "" : text;
     }
 
@@ -225,8 +227,12 @@ public interface Concept extends Serializable {
      * @return True if equal.
      */
     default boolean isEqual(Object target) {
-        if (this == target) return true;
-        if (!(target instanceof Concept)) return false;
+        if (this == target) {
+            return true;
+        }
+        if (!(target instanceof Concept)) {
+            return false;
+        }
         Concept rhs = (Concept) target;
         boolean sameCodeSystem = (!hasCodeSystem() && !rhs.hasCodeSystem()) || (hasCodeSystem() && getCodeSystem().isEqual(rhs.getCodeSystem()));
         return sameCodeSystem && Objects.equals(getCode(), rhs.getCode());
@@ -248,7 +254,7 @@ public interface Concept extends Serializable {
      */
     default String asString(boolean includePreferredName) {
         return getCodeSystemAsString() + "|" + getCodeAsString() + (includePreferredName ? "|" : "")
-                + (includePreferredName && hasPreferredName() ? getPreferredName() : "");
+            + (includePreferredName && hasPreferredName() ? getPreferredName() : "");
     }
 
 }

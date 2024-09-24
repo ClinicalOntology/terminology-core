@@ -18,23 +18,26 @@ public class ConceptSetImpl implements ConceptSet {
     }
 
     public ConceptSetImpl(
-            String system,
-            String code,
-            String preferredName) {
+        String system,
+        String code,
+        String preferredName
+    ) {
         this(system == null ? null : URI.create(system), code, preferredName);
     }
 
     public ConceptSetImpl(
-            URI system,
-            String code,
-            String preferredName) {
+        URI system,
+        String code,
+        String preferredName
+    ) {
         this(new ConceptImpl(system, code, preferredName));
     }
 
     public ConceptSetImpl(
-            CodeSystem system,
-            String code,
-            String preferredName) {
+        CodeSystem system,
+        String code,
+        String preferredName
+    ) {
         this(new ConceptImpl(system, code, preferredName));
     }
 
@@ -79,8 +82,12 @@ public class ConceptSetImpl implements ConceptSet {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ConceptSetImpl that = (ConceptSetImpl) o;
         return Objects.equals(concepts, that.concepts);
     }

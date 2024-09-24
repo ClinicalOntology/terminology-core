@@ -32,8 +32,8 @@ public enum DescriptionType {
      */
     public static DescriptionType getByCode(String code) {
         return Arrays.stream(values())
-                .filter(v -> v.code.equals(code))
-                .findFirst()
-                .orElse(null);
+            .filter(v -> v.code.equals(code))
+            .findFirst()
+            .orElse(null);
     }
 }

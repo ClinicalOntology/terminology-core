@@ -8,8 +8,8 @@ public interface ValueSetSource {
 
     static Set<ValueSetSource> resolve(CodeSystem codeSystem, ValueSetSource... sources) {
         return Arrays.stream(sources)
-                .filter(vss -> vss.getSupportedSources().contains(codeSystem))
-                .collect(Collectors.toSet());
+            .filter(vss -> vss.getSupportedSources().contains(codeSystem))
+            .collect(Collectors.toSet());
     }
 
     Set<CodeSystem> getSupportedSources();

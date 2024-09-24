@@ -339,8 +339,9 @@ public final class FhirExtensions extends CodeSystemImpl {
     }
 
     public static FhirExtensions valueOf(
-            String name,
-            boolean exceptionIfNotFound) {
+        String name,
+        boolean exceptionIfNotFound
+    ) {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 

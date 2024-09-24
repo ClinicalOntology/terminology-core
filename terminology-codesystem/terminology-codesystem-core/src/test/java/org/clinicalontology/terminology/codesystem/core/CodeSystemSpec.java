@@ -53,8 +53,8 @@ public class CodeSystemSpec {
     public void listCodeSystems() {
         for (CodeSystem system : CodeSystems.values()) {
             System.out.println(
-                    system.getUrnAsString() + ", " +
-                            system.getOids().stream().map(Oid::toURNString).collect(Collectors.joining(", ")));
+                system.getUrnAsString() + ", " +
+                    system.getOids().stream().map(Oid::toURNString).collect(Collectors.joining(", ")));
         }
     }
 

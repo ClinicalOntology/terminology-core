@@ -26,16 +26,16 @@ public class TerminologyMappingsImpl implements TerminologyMappings {
     @Override
     public TerminologyMapping findFirstMatch(CodeSystem targetCodeSystem) {
         return mappings.stream()
-                .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
-                .findFirst()
-                .orElse(null);
+            .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
+            .findFirst()
+            .orElse(null);
     }
 
     @Override
     public List<TerminologyMapping> findMatches(CodeSystem targetCodeSystem) {
         return mappings.stream()
-                .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
-                .collect(Collectors.toList());
+            .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
+            .collect(Collectors.toList());
     }
 
 }

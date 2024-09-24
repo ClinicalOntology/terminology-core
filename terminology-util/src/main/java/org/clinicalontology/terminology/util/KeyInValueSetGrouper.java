@@ -55,7 +55,8 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
     public KeyInValueSetGrouper(
         TerminologyService terminologyService,
         List<T> semanticKeyItemList,
-        List<ValueSetIdentifier> defaultValueSets) {
+        List<ValueSetIdentifier> defaultValueSets
+    ) {
         this.terminologyService = terminologyService;
 
         if (defaultValueSets != null) {
@@ -73,7 +74,8 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
     public KeyInValueSetGrouper(
         TerminologyService terminologyService,
         List<T> semanticKeyItemList,
-        ValueSetIdentifier... defaultValueSets) {
+        ValueSetIdentifier... defaultValueSets
+    ) {
         this(terminologyService, semanticKeyItemList, Arrays.asList(defaultValueSets));
     }
 
@@ -159,7 +161,8 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      */
     protected boolean findInValueSet(
         SemanticKey keyedElement,
-        ValueSetIdentifier valueSet) {
+        ValueSetIdentifier valueSet
+    ) {
         try {
             ConceptSet semanticKey = valueSet == null ? null : keyedElement.getSemanticKey();
 

@@ -15,10 +15,10 @@
     <packaging>pom</packaging>
 
     <modules>
-		<module>terminology-codesystem-core</module>
-		<module>terminology-codesystem-fhir</module>
-		<module>terminology-codesystem-hl7v2</module>
-		<module>terminology-codesystem-hl7v3</module>
+        <module>terminology-codesystem-core</module>
+        <module>terminology-codesystem-fhir</module>
+        <module>terminology-codesystem-hl7v2</module>
+        <module>terminology-codesystem-hl7v3</module>
     </modules>
 
     <dependencies>

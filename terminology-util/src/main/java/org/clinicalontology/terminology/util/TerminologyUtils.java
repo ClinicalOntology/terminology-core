@@ -20,9 +20,9 @@ public class TerminologyUtils {
      */
     public static String conceptsToQueryParam(Collection<Concept> concepts) {
         return concepts == null ? null : concepts.stream()
-                .map(Concept::getSystemAndCode)
-                .sorted()
-                .collect(Collectors.joining(","));
+            .map(Concept::getSystemAndCode)
+            .sorted()
+            .collect(Collectors.joining(","));
     }
 
     /**
@@ -30,7 +30,7 @@ public class TerminologyUtils {
      * in a query string. Ensures that the codes are enumerated in a deterministic order to facilitate caching.
      *
      * @param codeSystem The code system.
-     * @param codes The codes belonging to the above code system.
+     * @param codes      The codes belonging to the above code system.
      * @return A string consisting of comma-delimited code system|code pairs.
      */
     public static String codesToQueryParam(CodeSystem codeSystem, String... codes) {
@@ -42,7 +42,7 @@ public class TerminologyUtils {
      * in a query string. Ensures that the codes are enumerated in a deterministic order to facilitate caching.
      *
      * @param codeSystem The code system.
-     * @param codes The codes belonging to the above code system.
+     * @param codes      The codes belonging to the above code system.
      * @return A string consisting of comma-delimited code system|code pairs.
      */
     public static String codesToQueryParam(String codeSystem, String... codes) {

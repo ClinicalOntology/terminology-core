@@ -48,8 +48,9 @@ public class ConceptImpl implements Concept {
      * @return The newly created Concept or null.
      */
     public static Concept create(
-            CodeSystem system,
-            String code) {
+        CodeSystem system,
+        String code
+    ) {
         return create(system == null ? null : system.getUrnAsString(), code, null);
     }
 
@@ -61,8 +62,9 @@ public class ConceptImpl implements Concept {
      * @return The newly created Concept or null.
      */
     public static Concept create(
-            String system,
-            String code) {
+        String system,
+        String code
+    ) {
         return create(system, code, null);
     }
 
@@ -75,9 +77,10 @@ public class ConceptImpl implements Concept {
      * @return The newly created Concept or null.
      */
     public static Concept create(
-            String system,
-            String code,
-            String preferredName) {
+        String system,
+        String code,
+        String preferredName
+    ) {
         return StringUtils.isEmpty(system) || StringUtils.isEmpty(code) ? null : new ConceptImpl(system, code, preferredName);
     }
 
@@ -92,51 +95,58 @@ public class ConceptImpl implements Concept {
     }
 
     public ConceptImpl(
-            String system,
-            String code) {
+        String system,
+        String code
+    ) {
         this(system, code, null);
     }
 
     public ConceptImpl(
-            URI system,
-            String code) {
+        URI system,
+        String code
+    ) {
         this(system, code, null);
     }
 
     public ConceptImpl(
-            CodeSystem system,
-            String code) {
+        CodeSystem system,
+        String code
+    ) {
         this(system, code, null);
     }
 
     public ConceptImpl(
-            String system,
-            String code,
-            String preferredName) {
+        String system,
+        String code,
+        String preferredName
+    ) {
         this(CodeSystemImpl.create(system), code, preferredName);
     }
 
     public ConceptImpl(
-            URI system,
-            String code,
-            String preferredName) {
+        URI system,
+        String code,
+        String preferredName
+    ) {
         this(CodeSystemImpl.create(system), code, preferredName);
     }
 
     public ConceptImpl(
-            CodeSystem system,
-            String code,
-            String preferredName) {
+        CodeSystem system,
+        String code,
+        String preferredName
+    ) {
         this(system, code, null, null);
         setPreferredName(preferredName);
     }
 
     public ConceptImpl(
-            CodeSystem system,
-            String code,
-            String preferredName,
-            String version,
-            ConceptDescription... conceptDescriptions) {
+        CodeSystem system,
+        String code,
+        String preferredName,
+        String version,
+        ConceptDescription... conceptDescriptions
+    ) {
         this.codeSystem = system;
         this.code = code;
         this.preferredName = preferredName;
@@ -185,9 +195,10 @@ public class ConceptImpl implements Concept {
 
     @Override
     public ConceptDescription addConceptDescription(
-            DescriptionType type,
-            String description,
-            Language language) {
+        DescriptionType type,
+        String description,
+        Language language
+    ) {
         ConceptDescription conceptDescription = new ConceptDescriptionImpl(description, type, language, null);
         addConceptDescriptions(conceptDescription);
         return conceptDescription;

@@ -44,8 +44,9 @@ public class ItemGroupByValueSetMembershipIndex<T extends SemanticKey> {
      * @param items    The group of items associated with the value set identifier.
      */
     public void put(
-            ValueSetIdentifier valueSet,
-            List<T> items) {
+        ValueSetIdentifier valueSet,
+        List<T> items
+    ) {
         map.put(valueSet, items);
     }
 
@@ -56,8 +57,9 @@ public class ItemGroupByValueSetMembershipIndex<T extends SemanticKey> {
      * @param item     The item to add.
      */
     public void put(
-            ValueSetIdentifier valueSet,
-            T item) {
+        ValueSetIdentifier valueSet,
+        T item
+    ) {
         map.computeIfAbsent(valueSet, k -> new ArrayList<>()).add(item);
     }
 

@@ -105,14 +105,16 @@ public final class V3CodeSystems extends CodeSystemImpl {
     }
 
     public static V3CodeSystems valueOf(
-            String name,
-            boolean exceptionIfNotFound) {
+        String name,
+        boolean exceptionIfNotFound
+    ) {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
     private V3CodeSystems(
-            String urn,
-            String oid) {
+        String urn,
+        String oid
+    ) {
         super(URI.create(V3_CODESYSTEM_PREFIX + urn), null, null, V3_OID_PREFIX + oid);
         CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }

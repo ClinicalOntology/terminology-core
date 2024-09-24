@@ -94,8 +94,8 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      */
     default Stream<Concept> getStreamByCodeSystem(URI system) {
         return getConcepts().stream()
-                .filter(concept -> concept.hasCodeSystem() && (
-                        system.equals(concept.getCodeSystem().getUrn())));
+            .filter(concept -> concept.hasCodeSystem() && (
+                system.equals(concept.getCodeSystem().getUrn())));
     }
 
     /**
@@ -156,9 +156,9 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      */
     default Concept getFirstByCodeSystem(CodeSystem system) {
         return getConcepts().stream()
-                .filter(concept -> concept.getCodeSystem().equals(system))
-                .findFirst()
-                .orElse(null);
+            .filter(concept -> concept.getCodeSystem().equals(system))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
@@ -186,12 +186,12 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
 
     /**
      * @return Returns the singleton element or throws an error if set contains more than one element.
-     *         Returns null if set contains no concept.
+     *     Returns null if set contains no concept.
      */
     @Transient
     default Concept getSoleConcept() {
         Validate.isTrue(getConcepts().size() < 2,
-                "There is more than one concept in this set potentially resulting in a non-deterministic outcome");
+            "There is more than one concept in this set potentially resulting in a non-deterministic outcome");
         return getFirstConcept();
     }
 
@@ -210,7 +210,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      * Returns true if concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
-     * @param targets    The concept references we wish to locate in the set.
+     * @param targets The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
     default boolean contains(List<Concept> targets) {
@@ -221,7 +221,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      * Returns true if concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
-     * @param targets    The concept references we wish to locate in the set.
+     * @param targets The concept references we wish to locate in the set.
      * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
     default boolean contains(Concept... targets) {
@@ -249,11 +249,11 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      */
     private String getDisplayText(boolean excludeCodes) {
         return hasText() ? getText() :
-                getConcepts().stream()
-                        .map(cpt -> cpt.getDisplayText(excludeCodes))
-                        .filter(StringUtils::isNotEmpty)
-                        .findFirst()
-                        .orElse(excludeCodes ? getDisplayText(false) : "");
+            getConcepts().stream()
+                .map(cpt -> cpt.getDisplayText(excludeCodes))
+                .filter(StringUtils::isNotEmpty)
+                .findFirst()
+                .orElse(excludeCodes ? getDisplayText(false) : "");
     }
 
     /**

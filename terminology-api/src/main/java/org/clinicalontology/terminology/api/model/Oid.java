@@ -45,9 +45,9 @@ public interface Oid extends Serializable {
      */
     default boolean isEquivalent(String value) {
         return Optional.ofNullable(value)
-                .map(Oid::stripPrefix)
-                .map(oid -> oid.equals(toString()))
-                .orElse(false);
+            .map(Oid::stripPrefix)
+            .map(oid -> oid.equals(toString()))
+            .orElse(false);
     }
 
 }

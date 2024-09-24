@@ -19,7 +19,8 @@ public interface TerminologyLocalizer<T> extends TerminologyTransformer<T> {
      * @return A list of normalized resources (never null, possibly empty).
      */
     List<T> localize(
-            T resource,
-            SiteInfo siteInfo);
+        T resource,
+        SiteInfo siteInfo
+    );
 
 }

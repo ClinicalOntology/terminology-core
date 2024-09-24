@@ -33,7 +33,8 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         URI id,
         String version,
         String displayName,
-        String alias) {
+        String alias
+    ) {
         Validate.isTrue(id != null, "You must specify an id.");
         this.id = id;
         this.version = version == null ? "1.0.0" : version;
@@ -45,26 +46,30 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
     public ValueSetIdentifierImpl(
         URI id,
         String version,
-        String displayName) {
+        String displayName
+    ) {
         this(id, version, displayName, null);
     }
 
     public ValueSetIdentifierImpl(
         String id,
         String version,
-        String displayName) {
+        String displayName
+    ) {
         this(URI.create(id), version, displayName);
     }
 
     public ValueSetIdentifierImpl(
         URI id,
-        String version) {
+        String version
+    ) {
         this(id, version, null);
     }
 
     public ValueSetIdentifierImpl(
         String id,
-        String version) {
+        String version
+    ) {
         this(URI.create(id), version);
     }
 

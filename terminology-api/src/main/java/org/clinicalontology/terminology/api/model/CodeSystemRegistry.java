@@ -20,8 +20,8 @@ public class CodeSystemRegistry {
      * @return True if the normalized forms of the two code systems are equivalent.
      */
     public static boolean areSystemsEquivalent(
-            String source,
-            String target
+        String source,
+        String target
     ) {
         source = getNormalizedCodeSystem(source);
         target = getNormalizedCodeSystem(target);
@@ -54,10 +54,10 @@ public class CodeSystemRegistry {
      */
     public static String getNormalizedCodeSystem(String codeSystem) {
         CodeSystem normalized = Optional.ofNullable(codeSystem)
-                .filter(StringUtils::isNotBlank)
-                .map(Oid::stripPrefix)
-                .map(normalizedCodeSystemMap::get)
-                .orElse(null);
+            .filter(StringUtils::isNotBlank)
+            .map(Oid::stripPrefix)
+            .map(normalizedCodeSystemMap::get)
+            .orElse(null);
 
         if (normalized == null) {
             CodeSystem cs = findCodeSystem(codeSystem);
@@ -75,9 +75,9 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem getNormalizedCodeSystem(CodeSystem codeSystem) {
         return Optional.ofNullable(codeSystem)
-                .map(CodeSystem::getUrnAsString)
-                .map(normalizedCodeSystemMap::get)
-                .orElse(codeSystem);
+            .map(CodeSystem::getUrnAsString)
+            .map(normalizedCodeSystemMap::get)
+            .orElse(codeSystem);
     }
 
     /**
@@ -88,8 +88,9 @@ public class CodeSystemRegistry {
      * @param toSystem   The normalized code system.
      */
     public static void registerCodeSystemNormalization(
-            CodeSystem fromSystem,
-            CodeSystem toSystem) {
+        CodeSystem fromSystem,
+        CodeSystem toSystem
+    ) {
         registerCodeSystemNormalization(fromSystem.getUrnAsString(), toSystem);
         fromSystem.getOids().forEach(oid -> registerCodeSystemNormalization(oid.toString(), toSystem));
     }
@@ -102,8 +103,9 @@ public class CodeSystemRegistry {
      * @param toSystem   The normalized code system.
      */
     public static void registerCodeSystemNormalization(
-            String fromSystem,
-            CodeSystem toSystem) {
+        String fromSystem,
+        CodeSystem toSystem
+    ) {
         normalizedCodeSystemMap.put(fromSystem, toSystem);
     }
 
@@ -115,10 +117,10 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem byUrn(String urn) {
         return codeSystems.stream()
-                .filter(cs -> cs.getUrn() != null
-                        && StringUtils.equalsIgnoreCase(urn, cs.getUrnAsString()))
-                .findAny()
-                .orElse(null);
+            .filter(cs -> cs.getUrn() != null
+                && StringUtils.equalsIgnoreCase(urn, cs.getUrnAsString()))
+            .findAny()
+            .orElse(null);
     }
 
     /**
@@ -129,11 +131,11 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem byUrn(URI urn) {
         return Optional.ofNullable(urn)
-                .map(URI::toString)
-                .flatMap(u -> codeSystems.stream()
-                        .filter(cs -> urn.equals(cs.getUrn()))
-                        .findAny())
-                .orElse(null);
+            .map(URI::toString)
+            .flatMap(u -> codeSystems.stream()
+                .filter(cs -> urn.equals(cs.getUrn()))
+                .findAny())
+            .orElse(null);
     }
 
     /**
@@ -144,10 +146,10 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem byOid(String oid) {
         return codeSystems.stream()
-                .filter(cs -> cs.getOids().stream()
-                        .anyMatch(value -> value.isEquivalent(oid)))
-                .findAny()
-                .orElse(null);
+            .filter(cs -> cs.getOids().stream()
+                .anyMatch(value -> value.isEquivalent(oid)))
+            .findAny()
+            .orElse(null);
     }
 
     /**
@@ -158,9 +160,9 @@ public class CodeSystemRegistry {
      */
     public static CodeSystem byOid(Oid oid) {
         return codeSystems.stream()
-                .filter(cs -> cs.getOids().contains(oid))
-                .findAny()
-                .orElse(null);
+            .filter(cs -> cs.getOids().contains(oid))
+            .findAny()
+            .orElse(null);
     }
 
     /**

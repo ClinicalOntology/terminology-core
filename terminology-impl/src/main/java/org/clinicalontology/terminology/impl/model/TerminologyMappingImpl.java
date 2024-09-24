@@ -32,8 +32,9 @@ public class TerminologyMappingImpl implements TerminologyMapping {
      * @param target The target concept.
      */
     public TerminologyMappingImpl(
-            Concept source,
-            Concept target) {
+        Concept source,
+        Concept target
+    ) {
         this(TerminologyMappingType.TARGET_EQUIVALENT, source, target, null);
     }
 
@@ -45,9 +46,10 @@ public class TerminologyMappingImpl implements TerminologyMapping {
      * @param target The target concept.
      */
     public TerminologyMappingImpl(
-            TerminologyMappingType type,
-            Concept source,
-            Concept target) {
+        TerminologyMappingType type,
+        Concept source,
+        Concept target
+    ) {
         this(type, source, target, null);
     }
 
@@ -60,10 +62,11 @@ public class TerminologyMappingImpl implements TerminologyMapping {
      * @param category The category of the mapping.
      */
     public TerminologyMappingImpl(
-            TerminologyMappingType type,
-            Concept source,
-            Concept target,
-            Concept category) {
+        TerminologyMappingType type,
+        Concept source,
+        Concept target,
+        Concept category
+    ) {
         this.type = type;
         this.source = source;
         this.target = target;

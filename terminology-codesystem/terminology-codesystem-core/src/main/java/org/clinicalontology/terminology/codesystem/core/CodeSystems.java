@@ -101,8 +101,9 @@ public final class CodeSystems extends CodeSystemImpl {
     }
 
     public static CodeSystems valueOf(
-            String name,
-            boolean exceptionIfNotFound) {
+        String name,
+        boolean exceptionIfNotFound
+    ) {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 

@@ -40,7 +40,8 @@ public interface TerminologyService {
      */
     TerminologyMappings getMappingsForConcept(
         Concept source,
-        Concept category);
+        Concept category
+    );
 
     /**
      * Method returns all concept mappings from the source concept and target concepts within the specified
@@ -52,7 +53,8 @@ public interface TerminologyService {
      */
     TerminologyMappings getMappingsForConcept(
         Concept source,
-        String targetCodeSystem);
+        String targetCodeSystem
+    );
 
     //--------------- Value Sets ---------------
 
@@ -71,7 +73,8 @@ public interface TerminologyService {
      */
     boolean isMemberOfValueSet(
         ValueSetIdentifier valueSetIdentifier,
-        Concept concept);
+        Concept concept
+    );
 
     /**
      * @param valueSetIdentifier The identifier of the value set whose expansion we are requesting.
@@ -94,7 +97,7 @@ public interface TerminologyService {
      * should return a minimal concept with the given code system and code.
      *
      * @param codeSystem The code system.
-     * @param code The concept code.
+     * @param code       The concept code.
      * @return The concept.
      */
     Concept getConcept(String codeSystem, String code);
@@ -145,9 +148,9 @@ public interface TerminologyService {
     }
 
     /**
-     * @param concept  The concept whose descriptions are sought.
+     * @param concept         The concept whose descriptions are sought.
      * @param descriptionType The description type.
-     * @param language The desired language.
+     * @param language        The desired language.
      * @return The set of descriptions associated with the concept in the specified language.
      */
     default Set<ConceptDescription> getConceptDescriptions(

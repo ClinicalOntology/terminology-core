@@ -28,16 +28,18 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     }
 
     public ConceptDescriptionImpl(
-            String description,
-            DescriptionType descriptionType) {
+        String description,
+        DescriptionType descriptionType
+    ) {
         this(description, descriptionType, null, null);
     }
 
     public ConceptDescriptionImpl(
-            String description,
-            DescriptionType descriptionType,
-            Language language,
-            String version) {
+        String description,
+        DescriptionType descriptionType,
+        Language language,
+        String version
+    ) {
         this.description = description;
         this.descriptionType = descriptionType;
         this.language = language;
@@ -68,8 +70,8 @@ public class ConceptDescriptionImpl implements ConceptDescription {
     public boolean equals(Object obj) {
         if (obj instanceof ConceptDescription other) {
             return getLanguage() == other.getLanguage()
-                    && getDescriptionType() == other.getDescriptionType()
-                    && Objects.equals(other.getDescription(), getDescription());
+                && getDescriptionType() == other.getDescriptionType()
+                && Objects.equals(other.getDescription(), getDescription());
         } else {
             return false;
         }

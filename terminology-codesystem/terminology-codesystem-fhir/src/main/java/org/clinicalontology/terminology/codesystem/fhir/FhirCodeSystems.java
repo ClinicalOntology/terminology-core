@@ -1411,10 +1411,10 @@ public final class FhirCodeSystems extends CodeSystemImpl {
                 codeSystemString = codeSystemString.replaceFirst("-", "/");
             }
             codeSystem = new FhirCodeSystems(
-                    LEGACY_CODESYSTEM_PREFIX + codeSystemString,
-                    codeSystem.getOids().stream()
-                            .map(Object::toString)
-                            .toArray(String[]::new));
+                LEGACY_CODESYSTEM_PREFIX + codeSystemString,
+                codeSystem.getOids().stream()
+                    .map(Object::toString)
+                    .toArray(String[]::new));
             CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + codeSystemString, codeSystem);
         }
 
@@ -1463,10 +1463,10 @@ public final class FhirCodeSystems extends CodeSystemImpl {
                 newSystem = newSystem.replaceFirst("/", "-");
             }
             codeSystem = new FhirCodeSystems(
-                    LEGACY_CODESYSTEM_PREFIX + newSystem,
-                    codeSystem.getOids().stream()
-                            .map(Object::toString)
-                            .toArray(String[]::new));
+                LEGACY_CODESYSTEM_PREFIX + newSystem,
+                codeSystem.getOids().stream()
+                    .map(Object::toString)
+                    .toArray(String[]::new));
             CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + newSystem, codeSystem);
         }
 
@@ -1486,14 +1486,16 @@ public final class FhirCodeSystems extends CodeSystemImpl {
     }
 
     public static FhirCodeSystems valueOf(
-            String name,
-            boolean exceptionIfNotFound) {
+        String name,
+        boolean exceptionIfNotFound
+    ) {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
     private FhirCodeSystems(
-            String urn,
-            String... oids) {
+        String urn,
+        String... oids
+    ) {
         super(URI.create(FHIR_CODESYSTEM_PREFIX + urn), null, null, oids);
         CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }

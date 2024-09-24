@@ -27,8 +27,8 @@ public class OidImpl implements Oid {
      */
     public static Set<Oid> toOrderedSet(String... values) {
         return Arrays.stream(values)
-                .map(OidImpl::new)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+            .map(OidImpl::new)
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
