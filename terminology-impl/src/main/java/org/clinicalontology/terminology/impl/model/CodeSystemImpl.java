@@ -6,7 +6,9 @@ import org.clinicalontology.terminology.api.model.CodeSystem;
 import org.clinicalontology.terminology.api.model.Oid;
 
 import java.net.URI;
-import java.util.*;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents a terminology namespace such as the URN assigned to an ontology. Typically, code systems represent
@@ -43,8 +45,9 @@ public class CodeSystemImpl implements CodeSystem {
      * @return The newly created code system.
      */
     public static CodeSystem create(
-            String urn,
-            String... oids) {
+        String urn,
+        String... oids
+    ) {
         return StringUtils.isBlank(urn) ? null : new CodeSystemImpl(URI.create(urn), null, null, oids);
     }
 
@@ -98,8 +101,9 @@ public class CodeSystemImpl implements CodeSystem {
      * @param name The name associated to this code system.
      */
     public CodeSystemImpl(
-            URI urn,
-            String name) {
+        URI urn,
+        String name
+    ) {
         this(urn, name, null);
     }
 
@@ -108,8 +112,9 @@ public class CodeSystemImpl implements CodeSystem {
      * @param name The name associated to this code system.
      */
     public CodeSystemImpl(
-            String urn,
-            String name) {
+        String urn,
+        String name
+    ) {
         this(urn, name, null);
     }
 
@@ -120,10 +125,11 @@ public class CodeSystemImpl implements CodeSystem {
      * @param oids        OIDs associated with this code system.
      */
     public CodeSystemImpl(
-            URI urn,
-            String name,
-            String description,
-            String... oids) {
+        URI urn,
+        String name,
+        String description,
+        String... oids
+    ) {
         Validate.notNull(urn, "URN must not be null.");
         this.urn = urn;
         this.name = name;
@@ -138,10 +144,11 @@ public class CodeSystemImpl implements CodeSystem {
      * @param oids        OIDs associated with this code system.
      */
     public CodeSystemImpl(
-            String urn,
-            String name,
-            String description,
-            String... oids) {
+        String urn,
+        String name,
+        String description,
+        String... oids
+    ) {
         this(URI.create(urn), name, description, oids);
     }
 
@@ -174,8 +181,7 @@ public class CodeSystemImpl implements CodeSystem {
      */
     @Override
     public Set<Oid> getOids() {
-        return Optional.ofNullable(oids)
-                .orElseGet(HashSet::new);
+        return oids == null ? Collections.emptySet() : oids;
     }
 
     @Override
