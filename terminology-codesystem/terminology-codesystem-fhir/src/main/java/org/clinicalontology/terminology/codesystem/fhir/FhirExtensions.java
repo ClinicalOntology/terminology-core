@@ -292,6 +292,8 @@ public final class FhirExtensions extends CodeSystemImpl {
 
     public static final FhirExtensions EXT_QUESTIONNAIRERESPONSE_SIGNATURE = defaultExtension("questionnaireresponse-signature");
 
+    public static final FhirExtensions EXT_TIMING_EXACT = defaultExtension("timing-exact");
+
     // -------------------- US Core Profile --------------------
 
     public static final FhirExtensions EXT_US_CORE_BIRTH_SEX = defaultExtension("us-core-birth-sex");
