@@ -95,4 +95,9 @@ public interface CodeSystem extends Serializable {
         return getOids().stream().anyMatch(oid -> cs.getOids().contains(oid));
     }
 
+    default Concept newConcept(String code) {
+        return newConcept(code, null);
+    }
+
+    Concept newConcept(String code, String preferredName);
 }

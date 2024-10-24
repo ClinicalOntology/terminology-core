@@ -3,6 +3,7 @@ package org.clinicalontology.terminology.impl.model;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.clinicalontology.terminology.api.model.CodeSystem;
+import org.clinicalontology.terminology.api.model.Concept;
 import org.clinicalontology.terminology.api.model.Oid;
 
 import java.net.URI;
@@ -182,6 +183,11 @@ public class CodeSystemImpl implements CodeSystem {
     @Override
     public Set<Oid> getOids() {
         return oids == null ? Collections.emptySet() : oids;
+    }
+
+    @Override
+    public Concept newConcept(String code, String preferredName) {
+        return new ConceptImpl(code, preferredName);
     }
 
     @Override
