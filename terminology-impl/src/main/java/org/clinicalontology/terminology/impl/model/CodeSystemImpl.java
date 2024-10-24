@@ -187,7 +187,7 @@ public class CodeSystemImpl implements CodeSystem {
 
     @Override
     public Concept newConcept(String code, String preferredName) {
-        return new ConceptImpl(code, preferredName);
+        return new ConceptImpl(this, code, preferredName);
     }
 
     @Override
