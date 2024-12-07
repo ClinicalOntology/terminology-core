@@ -15,7 +15,11 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         }
 
         String[] pcs = vsid.split("\\|");
-        return new ValueSetIdentifierImpl(ArrayUtils.get(pcs, 0), ArrayUtils.get(pcs, 1), ArrayUtils.get(pcs, 2));
+        return new ValueSetIdentifierImpl(
+            ArrayUtils.get(pcs, 0),
+            ArrayUtils.get(pcs, 1),
+            ArrayUtils.get(pcs, 2),
+            ArrayUtils.get(pcs, 3));
     }
 
     private final URI id;
@@ -67,7 +71,16 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         String version,
         String displayName
     ) {
-        this(URI.create(id), version, displayName);
+        this(id, version, displayName, null);
+    }
+
+    public ValueSetIdentifierImpl(
+        String id,
+        String version,
+        String displayName,
+        String alias
+    ) {
+        this(URI.create(id), version, displayName, alias);
     }
 
     public ValueSetIdentifierImpl(
