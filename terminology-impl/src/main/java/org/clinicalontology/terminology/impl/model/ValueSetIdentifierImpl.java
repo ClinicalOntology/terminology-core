@@ -1,11 +1,22 @@
 package org.clinicalontology.terminology.impl.model;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 
 import java.net.URI;
 
 public class ValueSetIdentifierImpl implements ValueSetIdentifier {
+
+    public static ValueSetIdentifier create(String vsid) {
+        if (StringUtils.isBlank(vsid)) {
+            return null;
+        }
+
+        String[] pcs = vsid.split("\\|");
+        return new ValueSetIdentifierImpl(ArrayUtils.get(pcs, 0), ArrayUtils.get(pcs, 1), ArrayUtils.get(pcs, 2));
+    }
 
     private final URI id;
 
