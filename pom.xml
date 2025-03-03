@@ -16,12 +16,12 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <javadoc.plugin.version>3.5.0</javadoc.plugin.version>
-        <source.plugin.version>3.2.1</source.plugin.version>
-        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <failsafe.plugin.version>3.0.0-M5</failsafe.plugin.version>
-        <enforcer.plugin.version>3.0.0-M3</enforcer.plugin.version>
+        <compiler.plugin.version>3.14.0</compiler.plugin.version>
+        <javadoc.plugin.version>3.11.2</javadoc.plugin.version>
+        <source.plugin.version>3.3.1</source.plugin.version>
+        <surefire.plugin.version>3.5.2</surefire.plugin.version>
+        <failsafe.plugin.version>3.5.2</failsafe.plugin.version>
+        <enforcer.plugin.version>3.5.0</enforcer.plugin.version>
     </properties>
 
     <modules>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version>
+            <version>3.17.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
+            <version>3.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
