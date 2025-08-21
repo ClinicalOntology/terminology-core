@@ -19,6 +19,8 @@ public class ConceptImpl implements Concept {
 
     private final String code;
 
+    private String alias = null;
+
     private final Set<ConceptDescription> conceptDescriptions = new LinkedHashSet<>();
 
     private String preferredName;
@@ -207,6 +209,16 @@ public class ConceptImpl implements Concept {
     @Override
     public void addConceptDescriptions(ConceptDescription... conceptDescriptions) {
         Collections.addAll(this.conceptDescriptions, conceptDescriptions);
+    }
+
+    @Override
+    public String getAlias() {
+        return this.alias;
+    }
+
+    @Override
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     @Override

@@ -219,6 +219,19 @@ public interface Concept extends Serializable {
     }
 
     /**
+     * An alias associated with this concept
+     *
+     * @return The concept alias
+     */
+    String getAlias();
+
+    /**
+     *
+     * @param alias An alias to associate with this concept
+     */
+    void setAlias(String alias);
+
+    /**
      * Returns true if this and the target are equal.  Each interface implementation's "equals" method should delegate
      * to this.  Note that the "equals" method of enums implementing this interface is set to final, so calling this
      * method should be the preferred way when enums are involved.
