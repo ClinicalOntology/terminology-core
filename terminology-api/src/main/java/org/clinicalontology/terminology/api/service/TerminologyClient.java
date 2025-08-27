@@ -31,6 +31,30 @@ public interface TerminologyClient {
     Set<Concept> getRange(Concept domain, Concept predicate);
 
     /**
+     *
+     * @param domain ValueSetIdentifier for the domain constraint of the relationship
+     * @param predicate The predicate constraint of the relationship
+     * @return The set of concepts at the object position of the relationships that match the constraint pattern
+     */
+    Set<Concept> getRangeUnion(ValueSetIdentifier domain, Concept predicate);
+
+    /**
+     *
+     * @param domain ValueSetIdentifier for the domain constraint of the relationship
+     * @param predicates ValueSetIdentifier for the predicate constraints of the relationship
+     * @return The set of concepts at the object position of the relationships that match the constraint pattern
+     */
+    Set<Concept> getRangeUnion(ValueSetIdentifier domain, ValueSetIdentifier predicates);
+
+    /**
+     *
+     * @param domain A value set expansion for the domain constraint of the relationship
+     * @param predicates A value set expansion for the predicate constraints of the relationship
+     * @return The set of concepts at the object position of the relationships that match the constraint pattern
+     */
+    Set<Concept> getRangeUnion(ValueSetExpansion domain, ValueSetExpansion predicates);
+
+    /**
      * Method returns the domain of a concept relationship. It is
      * equivalent to the query:
      * ?x predicate range
