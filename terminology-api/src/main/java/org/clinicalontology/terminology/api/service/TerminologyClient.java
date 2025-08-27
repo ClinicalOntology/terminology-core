@@ -31,28 +31,19 @@ public interface TerminologyClient {
     Set<Concept> getRange(Concept domain, Concept predicate);
 
     /**
+     * Returns the range of a concept relationship. It is equivalent to the query:
+     * domain predicate ?x
+     * For instance, 'Beta-blocker class' 'has-ingredient' ?ingredients
      *
-     * @param domain ValueSetIdentifier for the domain constraint of the relationship
-     * @param predicate The predicate constraint of the relationship
-     * @return The set of concepts at the object position of the relationships that match the constraint pattern
-     */
-    Set<Concept> getRangeUnion(ValueSetIdentifier domain, Concept predicate);
-
-    /**
+     * If the expansion contains a set of concepts, that set of concepts will be used in
+     * the pattern matching. If the expansion is empty, the expansion shall be fetched for
+     * the value set identifier. If no expansion is found, an error will be thrown.
      *
-     * @param domain ValueSetIdentifier for the domain constraint of the relationship
-     * @param predicates ValueSetIdentifier for the predicate constraints of the relationship
-     * @return The set of concepts at the object position of the relationships that match the constraint pattern
+     * @param domain A set of concepts allowed at the domain of the relationship (not null)
+     * @param predicate A set of concepts allowed at the predicate of the relationship (not null)
+     * @return The set of concepts that represents the range of the relationship
      */
-    Set<Concept> getRangeUnion(ValueSetIdentifier domain, ValueSetIdentifier predicates);
-
-    /**
-     *
-     * @param domain A value set expansion for the domain constraint of the relationship
-     * @param predicates A value set expansion for the predicate constraints of the relationship
-     * @return The set of concepts at the object position of the relationships that match the constraint pattern
-     */
-    Set<Concept> getRangeUnion(ValueSetExpansion domain, ValueSetExpansion predicates);
+    Set<Concept> getRangeUnion(ValueSetExpansion domain, ValueSetExpansion predicate);
 
     /**
      * Method returns the domain of a concept relationship. It is
