@@ -3,6 +3,8 @@ package org.clinicalontology.terminology.api.service;
 import org.clinicalontology.terminology.api.model.*;
 
 import java.sql.Connection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -160,20 +162,42 @@ public interface TerminologyClient {
     /**
      * Returns all concepts whose code is in the codes set.
      *
-     * @param codeSystem The concept namespace URI
-     * @param codes      The concept codes to search by
-     * @return A collection of concepts whose code is in the codes set.
+     * @param concepts The concepts to resolve.
+     * @param isStrict If true, an unresolved concept will generate an error. If false, an unresolved concept will be ignored.
+     * @return A collection of concepts that have been successfully resolved. The difference between the input concepts and the returned concepts consists of all unresolved concepts when strict mode is false.
      */
-    Set<Concept> findConceptsByCode(CodeSystem codeSystem, Set<String> codes);
+    Set<Concept> resolveConcepts(Set<Concept> concepts, boolean isStrict);
 
-    /**
-     * Returns all concepts that have a description containing a string in the search term set.
+   /**
+     * Returns all concepts in any namespace that have a description containing a string in the search term set.
      *
-     * @param codeSystem  The concept namespace URI
      * @param searchTerms The search terms used to retrieve the concept(s)
      * @return A set of concepts with descriptions containing the search term(s)
      */
-    Set<Concept> findConceptsByName(CodeSystem codeSystem, Set<String> searchTerms);
+    default Set<Concept> findConceptsByName(Set<String> searchTerms) {
+        Set<CodeSystem> codeSystems = new HashSet<>();
+        return findConceptsByName((Set<CodeSystem>) null, searchTerms);
+    }
+
+    /**
+     * Returns all concepts in the given namespace that have a description containing a string in the search term set.
+     *
+     * @param codeSystem  The concept namespace URI
+     * @param searchTerms The search terms used to retrieve the concept(s)
+     * @return A set of concepts in the given namespace with descriptions containing the search term(s)
+     */
+    default Set<Concept> findConceptsByName(CodeSystem codeSystem, Set<String> searchTerms) {
+        return findConceptsByName(codeSystem == null ? null : Set.of(codeSystem), searchTerms);
+    }
+
+    /**
+     * Returns all concepts in the provided namespaces, that have a description containing a string in the search term set.
+     *
+     * @param codeSystems The namespaces to search.
+     * @param searchTerms The search terms used to retrieve the concept(s)
+     * @return A set of concepts in the given namespaces with descriptions containing the search term(s)
+     */
+    Set<Concept> findConceptsByName(Set<CodeSystem> codeSystems, Set<String> searchTerms);
 
     /**
      * Sets the connection supplier.
