@@ -2,7 +2,10 @@ package org.clinicalontology.terminology.util;
 
 import org.clinicalontology.terminology.api.model.CodeSystem;
 import org.clinicalontology.terminology.api.model.Concept;
+import org.clinicalontology.terminology.api.model.ConceptSet;
 import org.clinicalontology.terminology.api.model.ValueSetExpansion;
+import org.clinicalontology.terminology.impl.model.ConceptImpl;
+import org.clinicalontology.terminology.impl.model.ConceptSetImpl;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -71,6 +74,19 @@ public class TerminologyUtils {
      */
     public static String getDisplayText(Concept concept) {
         return concept == null ? "" : concept.getDisplayText();
+    }
+
+    /**
+     * Creates a new concept set containing one or more codes, each with the same code system.
+     *
+     * @param system The code system.
+     * @param codes  The codes.
+     * @return The concept set.
+     */
+    public static ConceptSet newConceptSet(CodeSystem system, String... codes) {
+        return new ConceptSetImpl(Arrays.stream(codes)
+            .map(code -> ConceptImpl.create(system, code))
+            .toList());
     }
 
     private TerminologyUtils() {
