@@ -42,6 +42,8 @@ public final class V3CodeSystems extends CodeSystemImpl {
 
     public static final V3CodeSystems EntityNameUse = new V3CodeSystems("EntityNameUse", "45");
 
+    public static final V3CodeSystems GtsAbbreviation = new V3CodeSystems("GTSAbbreviation", "1022");
+
     public static final V3CodeSystems LanguageAbilityMode = new V3CodeSystems("LanguageAbilityMode", "60");
 
     public static final V3CodeSystems LanguageAbilityProficiency = new V3CodeSystems("LanguageAbilityProficiency", "61");
