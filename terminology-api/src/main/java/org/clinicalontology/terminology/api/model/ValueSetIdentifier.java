@@ -6,7 +6,7 @@ import java.io.Serializable;
  * An identifier of a value set. A value set is a collection of unique concept references.
  */
 @SuppressWarnings("unused")
-public interface ValueSetIdentifier extends VersionedNamespace, Serializable {
+public interface ValueSetIdentifier extends VersionedNamespace, Serializable, Comparable<ValueSetIdentifier> {
 
     /**
      * Returns the value set display name.
@@ -16,8 +16,10 @@ public interface ValueSetIdentifier extends VersionedNamespace, Serializable {
     String getDisplayName();
 
     /**
+     * Returns the result of the comparison.
+     *
      * @param other The value set identifier to compare.
-     * @return True if both identifiers point to the same value set.
+     * @return The result of the comparison.
      */
     default int compareTo(ValueSetIdentifier other) {
         return getVersionedId().compareTo(other.getVersionedId());

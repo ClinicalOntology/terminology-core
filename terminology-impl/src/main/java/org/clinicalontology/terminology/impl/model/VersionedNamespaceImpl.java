@@ -13,6 +13,14 @@ public class VersionedNamespaceImpl extends NamespaceImpl implements VersionedNa
 
     private final URI versionedId;
 
+    /**
+     * For deserialization.
+     */
+    protected VersionedNamespaceImpl() {
+        this.version = null;
+        this.versionedId = null;
+    }
+
     public VersionedNamespaceImpl(
         URI id,
         String version,

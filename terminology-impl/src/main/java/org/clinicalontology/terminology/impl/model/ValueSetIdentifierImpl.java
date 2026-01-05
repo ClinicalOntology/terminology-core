@@ -30,10 +30,8 @@ public class ValueSetIdentifierImpl extends VersionedNamespaceImpl implements Va
     /**
      * For deserialization.
      */
-    @SuppressWarnings("unused")
-    private ValueSetIdentifierImpl() {
-        super((URI) null, null, null);
-        this.displayName = null;
+    protected ValueSetIdentifierImpl() {
+         this.displayName = null;
     }
 
     public ValueSetIdentifierImpl(
@@ -95,11 +93,6 @@ public class ValueSetIdentifierImpl extends VersionedNamespaceImpl implements Va
     public boolean equals(Object object) {
         return object instanceof ValueSetIdentifierImpl valueSetIdentifier
             && valueSetIdentifier.getVersionedId().equals(getVersionedId());
-    }
-
-    @Override
-    public int compareTo(ValueSetIdentifier other) {
-        return getVersionedId().compareTo(other.getVersionedId());
     }
 
     @Override

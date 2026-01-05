@@ -14,6 +14,14 @@ public class NamespaceImpl implements Namespace {
 
     private final URI id;
 
+    /**
+     * For deserialization.
+     */
+    protected NamespaceImpl() {
+        this.alias = null;
+        this.id = null;
+    }
+
     public NamespaceImpl(
         String alias,
         URI id
