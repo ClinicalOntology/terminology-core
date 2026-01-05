@@ -15,16 +15,14 @@ import java.util.stream.Collectors;
 
 /**
  * Class supporting terminological operations on items that contain semantic keys.
- * By semantic key we mean a concept that is important to conveying the semantics of the class (e.g., Condition.code)
- * or the main focus of the class (e.g., MedicationRequest.code).
+ * By semantic key we mean a concept that is important to conveying the semantics of the class (e.g., "Condition.code")
+ * or the main focus of the class (e.g., "MedicationRequest.code").
  * <p>
  * Predicate and Function factory methods are also provided for stream use cases.
  *
  * @param <T> The classifier type.
  */
 public class KeyInValueSetGrouper<T extends SemanticKey> {
-
-    private static final ValueSetIdentifier[] EMPTY_ARRAY = {};
 
     /**
      * Terminology service for item key value set membership determination.
@@ -142,22 +140,22 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
 
     /**
      * @return All items that are associated with the default value set (which is the first value set
-     *     in the defaultValueSets list.
+     *     in the defaultValueSets list).
      */
     public List<T> getResourcesInDefaultValueSet() {
         return getResourcesInValueSet(defaultValueSets.isEmpty() ? null : defaultValueSets.get(0));
     }
 
     /**
-     * Tests whether an item with the specified semantic key (e.g., Observation.code, Condition.code,
-     * MedicationOrder.medication.code, ...) is a member of the specified value set. For instance, one may
+     * Tests whether an item with the specified semantic key (e.g., "Observation.code", "Condition.code",
+     * "MedicationOrder.medication.code", ...) is a member of the specified value set. For instance, one may
      * wish to get all MedicationOrder resources for smoking cessation medications.
      * <p>
      * Note: The specified value set is not limited to those in the defaultValueSets array.
      *
      * @param keyedElement Resource to test.
      * @param valueSet     The value set's identifier.
-     * @return True if the resource's focal concept is a member of the valueset.
+     * @return True if the resource's focal concept is a member of the value set.
      */
     protected boolean findInValueSet(
         SemanticKey keyedElement,
@@ -184,7 +182,7 @@ public class KeyInValueSetGrouper<T extends SemanticKey> {
      * Returns a predicate that tests whether the item's semantic key is a member of
      * the associated value set.
      *
-     * @param valueSet A valueset identifier.
+     * @param valueSet A value set identifier.
      * @return A predicate.
      */
     public Predicate<T> getResourceInValueSetPredicate(ValueSetIdentifier valueSet) {

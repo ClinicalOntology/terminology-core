@@ -15,17 +15,23 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Only use for demos and tests. Do not use for actual terminology services as all value set expansions are kept in memory.
+ * Only use for demos and tests. Not intended for use for actual terminology services as all value set expansions
+ * are kept in memory.
  */
 public class InMemoryTerminologyServiceImpl implements TerminologyService {
 
+    /**
+     * Indexes concepts by code system and code.
+     */
     private static class ConceptIndex extends HashMap<String, Concept> {
 
         void put(Concept concept) {
             put(concept.getSystemAndCode(), concept);
         }
 
-        Concept computeIfAbsent(String codeSystem, String code) {
+        Concept computeIfAbsent(
+            String codeSystem,
+            String code) {
             return computeIfAbsent(codeSystem + "|" + code, k -> new ConceptImpl(codeSystem, code));
         }
 
@@ -35,26 +41,32 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
 
     }
 
+    /**
+     * Indexes value set expansions by versioned id.
+     */
     private static class ExpansionIndex extends HashMap<String, ValueSetExpansion> {
 
         ValueSetExpansion get(ValueSetIdentifier valueSetIdentifier) {
-            return get(valueSetIdentifier.getVersionedIdentifier().toString());
+            return get(valueSetIdentifier.getVersionedIdAsString());
         }
 
         boolean contains(ValueSetIdentifier valueSetIdentifier) {
-            return containsKey(valueSetIdentifier.getVersionedIdentifier().toString());
+            return containsKey(valueSetIdentifier.getVersionedIdAsString());
         }
 
         void put(ValueSetExpansion valueSetExpansion) {
-            put(valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier().toString(), valueSetExpansion);
+            put(valueSetExpansion.getValueSetIdentifier().getVersionedIdAsString(), valueSetExpansion);
         }
 
         ValueSetExpansion computeIfAbsent(ValueSetIdentifier valueSetIdentifier) {
-            return computeIfAbsent(valueSetIdentifier.getVersionedIdentifier().toString(),
+            return computeIfAbsent(valueSetIdentifier.getVersionedIdAsString(),
                 k -> new ValueSetExpansionImpl(valueSetIdentifier));
         }
     }
 
+    /**
+     * Indexes terminology mappings by source concept.
+     */
     private static class MappingsIndex extends HashMap<String, TerminologyMappings> {
 
         TerminologyMappings get(Concept concept) {
@@ -158,7 +170,7 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     }
 
     /**
-     * Format: (codesystem|code|display,...)
+     * Format: (code system|code|display,...)
      *
      * @param valueSetIdentifier    A value set identifier.
      * @param serializedConceptList The serialized concept list.
@@ -195,8 +207,10 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
     ) {
         if (valueSetExpansion == null || valueSetExpansion.getValueSetIdentifier() == null || valueSetExpansion.getExpansion() == null) {
             return;
-        } else if (!allowOverrides && expansionIndex.contains(valueSetExpansion.getValueSetIdentifier())) {
-            throw new RuntimeException("Value set " + valueSetExpansion.getValueSetIdentifier().getVersionedIdentifier() + " already exists");
+        }
+
+        if (!allowOverrides && expansionIndex.contains(valueSetExpansion.getValueSetIdentifier())) {
+            throw new RuntimeException("Value set " + valueSetExpansion.getValueSetIdentifier().getVersionedIdAsString() + " already exists");
         } else {
             expansionIndex.put(valueSetExpansion);
         }

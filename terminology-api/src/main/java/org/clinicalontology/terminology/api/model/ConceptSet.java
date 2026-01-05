@@ -13,13 +13,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * A set of synonymous concepts (across terminologies). For collection of non-synonymous
+ * A set of synonymous concepts (across terminologies). For a collection of non-synonymous
  * concepts use a Set&lt;Concept&gt; instead.
  */
 @SuppressWarnings("unused")
 public interface ConceptSet extends Serializable, Iterable<Concept> {
 
     /**
+     * Returns the textual representation of the concept.
+     *
      * @return The textual representation of the concept.
      */
     String getText();
@@ -32,6 +34,8 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     void setText(String text);
 
     /**
+     * Returns true if this set has a textual representation.
+     *
      * @return True if this set has a textual representation.
      */
     @Transient
@@ -60,6 +64,8 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     }
 
     /**
+     * Returns the set of synonymous concepts.
+     *
      * @return The set of synonymous concepts.
      */
     Set<Concept> getConcepts();
@@ -72,6 +78,8 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     void setConcepts(Set<Concept> concepts);
 
     /**
+     * Returns true if the set contains any concepts.
+     *
      * @return True if not the empty set.
      */
     @Transient
@@ -162,11 +170,15 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     }
 
     /**
-     * @return Returns the first concept in the set. Order is not guaranteed.
+     * Returns the first concept in the set. Order is not guaranteed.
+     *
+     * @return The first concept in the set.
      */
     @Transient
     default Concept getFirstConcept() {
-        return getConcepts().stream().findFirst().orElse(null);
+        return getConcepts().stream()
+            .findFirst()
+            .orElse(null);
     }
 
     /**
@@ -176,17 +188,17 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      * @return The first concept with the specified code system, or null if there is none.
      */
     default Concept getFirstConcept(String system) {
-        for (Concept element : getConcepts()) {
-            if (system.equals(element.getCodeSystemAsString())) {
-                return element;
-            }
-        }
-        return null;
+        return getConcepts().stream()
+            .filter(concept -> system.equals(concept.getCodeSystemAsString()))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
-     * @return Returns the singleton element or throws an error if set contains more than one element.
-     *     Returns null if set contains no concept.
+     * Returns the sole element of the set or null if the set is empty or throws an error if the set contains
+     * more than one element.
+     *
+     * @return The singleton element or null if the set is empty or throws an error if the set contains more than one element.
      */
     @Transient
     default Concept getSoleConcept() {
@@ -196,8 +208,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     }
 
     /**
-     * Method returns true if this concept set contains a concept that is equivalent to the target
-     * concept.
+     * Returns true if this concept set contains a concept that is equivalent to the target concept.
      *
      * @param target The concept to be matched.
      * @return True if this concept set contains a concept that is equivalent to the target concept.
@@ -207,22 +218,22 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     }
 
     /**
-     * Returns true if concept reference set contains a concept reference that is equivalent to any of the
+     * Returns true if the concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
      * @param targets The concept references we wish to locate in the set.
-     * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
+     * @return True if the concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
     default boolean contains(List<Concept> targets) {
         return targets.stream().anyMatch(this::contains);
     }
 
     /**
-     * Returns true if concept reference set contains a concept reference that is equivalent to any of the
+     * Returns true if the concept reference set contains a concept reference that is equivalent to any of the
      * specified targets.
      *
      * @param targets The concept references we wish to locate in the set.
-     * @return True if concept reference set contains a concept reference that is equivalent to any of the specified targets.
+     * @return True if the concept reference set contains a concept reference that is equivalent to any of the specified targets.
      */
     default boolean contains(Concept... targets) {
         return contains(Arrays.asList(targets));
@@ -259,7 +270,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     /**
      * Returns the concepts common to both sets.
      *
-     * @param other The other set whose intersection we are interested in
+     * @param other The other set whose intersection we are interested in.
      * @return The concepts common to both sets.
      */
     default Set<Concept> getIntersection(ConceptSet other) {

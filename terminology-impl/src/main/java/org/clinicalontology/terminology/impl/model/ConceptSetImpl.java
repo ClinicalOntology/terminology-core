@@ -7,6 +7,9 @@ import org.clinicalontology.terminology.api.model.ConceptSet;
 import java.net.URI;
 import java.util.*;
 
+/**
+ * Implementation of {@link ConceptSet}.
+ */
 public class ConceptSetImpl implements ConceptSet {
 
     private final Set<Concept> concepts = new LinkedHashSet<>();

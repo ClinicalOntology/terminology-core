@@ -18,6 +18,8 @@ public enum DescriptionType {
     }
 
     /**
+     * Returns the SNOMED-CT code for this description.
+     *
      * @return The SNOMED-CT code for this description.
      */
     public String getCode() {

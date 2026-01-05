@@ -4,6 +4,9 @@ import org.clinicalontology.terminology.api.model.Concept;
 import org.clinicalontology.terminology.api.model.TerminologyMapping;
 import org.clinicalontology.terminology.api.model.TerminologyMappingType;
 
+/**
+ * Implementation of {@link TerminologyMapping}.
+ */
 public class TerminologyMappingImpl implements TerminologyMapping {
 
     private final TerminologyMappingType type;

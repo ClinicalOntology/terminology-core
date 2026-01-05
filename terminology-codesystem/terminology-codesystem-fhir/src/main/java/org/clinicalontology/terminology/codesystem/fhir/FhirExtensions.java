@@ -7,6 +7,9 @@ import org.clinicalontology.terminology.impl.model.CodeSystemImpl;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Recognized FHIR extensions.
+ */
 @SuppressWarnings("unused")
 public final class FhirExtensions extends CodeSystemImpl {
 
@@ -328,18 +331,30 @@ public final class FhirExtensions extends CodeSystemImpl {
     public static void load() {
     }
 
+    /**
+     * @see CodeSystemEnumerator#values()
+     */
     public static List<FhirExtensions> values() {
         return delegate.values();
     }
 
+    /**
+     * @see CodeSystemEnumerator#names()
+     */
     public static List<String> names() {
         return delegate.names();
     }
 
+    /**
+     * @see CodeSystemEnumerator#valueOf(String)
+     */
     public static FhirExtensions valueOf(String name) {
         return delegate.valueOf(name);
     }
 
+    /**
+     * @see CodeSystemEnumerator#valueOf(String, boolean)
+     */
     public static FhirExtensions valueOf(
         String name,
         boolean exceptionIfNotFound
@@ -347,10 +362,22 @@ public final class FhirExtensions extends CodeSystemImpl {
         return delegate.valueOf(name, exceptionIfNotFound);
     }
 
+    /**
+     * Create a formal FHIR extension.
+     *
+     * @param urn The extension URL.
+     * @return The newly created extension.
+     */
     private static FhirExtensions defaultExtension(String urn) {
         return new FhirExtensions(DEFAULT_EXTENSION_PREFIX + urn);
     }
 
+    /**
+     * Create an HSPC extension.
+     *
+     * @param urn The extension URL.
+     * @return The newly created extension.
+     */
     private static FhirExtensions hspcExtension(String urn) {
         return new FhirExtensions(HSPC_EXTENSION_PREFIX + urn);
     }
@@ -359,14 +386,25 @@ public final class FhirExtensions extends CodeSystemImpl {
         super(URI.create(urn));
     }
 
+    /**
+     * @see CodeSystemEnumerator#ordinal(Object)
+     */
     public int ordinal() {
         return delegate.ordinal(this);
     }
 
+    /**
+     * Alias for {@link #getName()}.
+     *
+     * @see CodeSystemEnumerator#name(Object)
+     */
     public String name() {
         return delegate.name(this);
     }
 
+    /**
+     * @see CodeSystemEnumerator#name(Object)
+     */
     @Override
     public String getName() {
         return name();

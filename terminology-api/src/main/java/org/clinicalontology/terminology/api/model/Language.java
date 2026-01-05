@@ -150,6 +150,7 @@ public enum Language {
     }
 
     /**
+     * Returns the language code.
      * @return The language code.
      */
     public String getCode() {
@@ -157,6 +158,7 @@ public enum Language {
     }
 
     /**
+     * Returns the human-readable language name.
      * @return The human-readable language name.
      */
     @Override
@@ -165,6 +167,7 @@ public enum Language {
     }
 
     /**
+     * Returns the language for the default locale.
      * @return The language for the default locale.
      */
     public static Language getDefault() {

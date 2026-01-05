@@ -6,6 +6,9 @@ import org.clinicalontology.terminology.api.model.Language;
 
 import java.util.Objects;
 
+/**
+ * Implementation of {@link ConceptDescription}.
+ */
 public class ConceptDescriptionImpl implements ConceptDescription {
 
     private final Language language;

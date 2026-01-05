@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
- * Associates a value set with a set of items whose semantic key are elements that set.
+ * Associates a value set with a set of items whose semantic keys are elements of that set.
  *
  * @param <T> The item type.
  */
@@ -40,7 +40,7 @@ public class ItemGroupByValueSetMembershipIndex<T extends SemanticKey> {
     /**
      * Adds a new entry to this value set - i.e., a value set and the set of references with concept keys in this value set.
      *
-     * @param valueSet Value set key for given item group.
+     * @param valueSet Value set key for the given item group.
      * @param items    The group of items associated with the value set identifier.
      */
     public void put(

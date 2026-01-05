@@ -11,21 +11,29 @@ import java.io.Serializable;
 public interface ConceptDescription extends Serializable {
 
     /**
+     * Returns the language for the description.
+     *
      * @return The language for the description.
      */
     Language getLanguage();
 
     /**
+     * Returns the description of the concept.
+     *
      * @return The description of the concept.
      */
     String getDescription();
 
     /**
+     * Returns the description type.
+     *
      * @return The description type.
      */
     DescriptionType getDescriptionType();
 
     /**
+     * Returns the version associated with this description.
+     *
      * @return The version associated with this description.
      */
     String getVersion();

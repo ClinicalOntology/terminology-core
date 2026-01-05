@@ -36,7 +36,10 @@ public class TerminologyUtils {
      * @param codes      The codes belonging to the above code system.
      * @return A string consisting of comma-delimited code system|code pairs.
      */
-    public static String codesToQueryParam(CodeSystem codeSystem, String... codes) {
+    public static String codesToQueryParam(
+        CodeSystem codeSystem,
+        String... codes
+    ) {
         return codesToQueryParam(codeSystem.getUrnAsString(), codes);
     }
 
@@ -48,7 +51,10 @@ public class TerminologyUtils {
      * @param codes      The codes belonging to the above code system.
      * @return A string consisting of comma-delimited code system|code pairs.
      */
-    public static String codesToQueryParam(String codeSystem, String... codes) {
+    public static String codesToQueryParam(
+        String codeSystem,
+        String... codes
+    ) {
         return Arrays.stream(codes)
             .map(code -> codeSystem + "|" + code)
             .sorted()
@@ -83,7 +89,10 @@ public class TerminologyUtils {
      * @param codes  The codes.
      * @return The concept set.
      */
-    public static ConceptSet newConceptSet(CodeSystem system, String... codes) {
+    public static ConceptSet newConceptSet(
+        CodeSystem system,
+        String... codes
+    ) {
         return new ConceptSetImpl(Arrays.stream(codes)
             .map(code -> ConceptImpl.create(system, code))
             .toList());

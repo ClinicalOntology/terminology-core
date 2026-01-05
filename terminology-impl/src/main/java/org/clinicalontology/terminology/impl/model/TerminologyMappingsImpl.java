@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link TerminologyMappings}.
+ */
 public class TerminologyMappingsImpl implements TerminologyMappings {
 
     private final List<TerminologyMapping> mappings = new ArrayList<>();

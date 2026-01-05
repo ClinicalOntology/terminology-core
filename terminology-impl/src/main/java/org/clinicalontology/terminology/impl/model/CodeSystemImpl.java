@@ -12,10 +12,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a terminology namespace such as the URN assigned to an ontology. Typically, code systems represent
- * the namespace that ensure the uniqueness of codes in the terminology.
+ * Implementation of {@link CodeSystem}.
  */
-@SuppressWarnings("unused")
 public class CodeSystemImpl implements CodeSystem {
 
     /**
@@ -29,7 +27,7 @@ public class CodeSystemImpl implements CodeSystem {
     private final String description;
 
     /**
-     * The unique URN representing this code system. E.g., http://hl7.org/fhir/sid/icd-10-cm.
+     * The unique URN representing this code system.
      */
     private final URI urn;
 
@@ -53,7 +51,7 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
-     * Create a code system.  Returns null if the URN ({@link String}) is null or empty.
+     * Create a code system.  Returns null if the URN is null or empty.
      *
      * @param urn The URN.
      * @return The newly created code system.
@@ -84,6 +82,8 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn The URN for this code system.
      */
     public CodeSystemImpl(URI urn) {
@@ -91,6 +91,8 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn The URN for this code system as a string.
      */
     public CodeSystemImpl(String urn) {
@@ -98,8 +100,10 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn  The URN associated with this code system.
-     * @param name The name associated to this code system.
+     * @param name The name associated with this code system.
      */
     public CodeSystemImpl(
         URI urn,
@@ -109,8 +113,10 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn  The URN associated with this code system.
-     * @param name The name associated to this code system.
+     * @param name The name associated with this code system.
      */
     public CodeSystemImpl(
         String urn,
@@ -120,8 +126,10 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn         The URN associated with this code system.
-     * @param name        The name associated to this code system.
+     * @param name        The name associated with this code system.
      * @param description A description of the code system.
      * @param oids        OIDs associated with this code system.
      */
@@ -139,8 +147,10 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     /**
+     * Create a code system.
+     *
      * @param urn         The URN associated with this code system.
-     * @param name        The name associated to this code system.
+     * @param name        The name associated with this code system.
      * @param description A description of the code system.
      * @param oids        OIDs associated with this code system.
      */
@@ -153,33 +163,21 @@ public class CodeSystemImpl implements CodeSystem {
         this(URI.create(urn), name, description, oids);
     }
 
-    /**
-     * @return The name of the code system.
-     */
     @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * @return The description of this code system.
-     */
     @Override
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @return The URN of this code system.
-     */
     @Override
     public URI getUrn() {
         return urn;
     }
 
-    /**
-     * @return The OIDs associated with this code system.
-     */
     @Override
     public Set<Oid> getOids() {
         return oids == null ? Collections.emptySet() : oids;
@@ -191,8 +189,8 @@ public class CodeSystemImpl implements CodeSystem {
     }
 
     @Override
-    public boolean equals(Object o) {
-        return isEqual(o);
+    public boolean equals(Object other) {
+        return other instanceof CodeSystem && isEqual(other);
     }
 
     @Override

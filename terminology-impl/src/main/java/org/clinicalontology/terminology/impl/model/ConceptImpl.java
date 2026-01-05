@@ -11,6 +11,9 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Implementation of {@link Concept}.
+ */
 public class ConceptImpl implements Concept {
 
     private final CodeSystem codeSystem;

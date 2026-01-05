@@ -1,38 +1,35 @@
 package org.clinicalontology.terminology.api.model;
 
 import java.net.URI;
+import java.util.Objects;
 
-public class Namespace {
-        private String alias;
-        private URI uri;
+/**
+ * A namespace is a conceptual space that qualifies classes, identifiers, etc. to avoid conflicts with unrelated items
+ * that have the same names.
+ */
+public interface Namespace {
 
-        public Namespace(String alias, URI uri) {
-            this.alias = alias;
-            this.uri = uri;
-        }
+    /**
+     * Returns the alias of the namespace.
+     *
+     * @return The alias of the namespace.
+     */
+    String getAlias();
 
-        public Namespace(String alias, String uri) {
-            this.alias = alias;
-            this.uri = URI.create(uri);
-        }
+    /**
+     * Returns the identifier of the namespace.
+     *
+     * @return The identifier of the namespace.
+     */
+    URI getId();
 
-        public String getAlias() {
-            return alias;
-        }
-
-        public void setAlias(String alias) {
-            this.alias = alias;
-        }
-
-        public URI getUri() {
-            return uri;
-        }
-
-        public String getUriAsString() {
-            return uri.toString();
-        }
-
-        public void setUrl(URI uri) {
-            this.uri = uri;
-        }
+    /**
+     * Returns the namespace identifier as a string.
+     *
+     * @return The namespace identifier as a string.
+     */
+    default String getIdAsString() {
+        return Objects.toString(getId());
     }
+
+}

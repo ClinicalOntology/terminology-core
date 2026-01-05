@@ -8,6 +8,8 @@ package org.clinicalontology.terminology.api.transformation;
 public interface TerminologyTransformer<T> {
 
     /**
+     * Returns the resource type handled by the transform.
+     *
      * @return The resource type handled by the transform.
      */
     Class<T> getTargetClass();

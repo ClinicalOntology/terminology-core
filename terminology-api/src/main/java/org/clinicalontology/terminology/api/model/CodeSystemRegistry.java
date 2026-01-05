@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.net.URI;
 import java.util.*;
 
+/**
+ * A centralized registry of code systems.  Each code system must register itself.
+ */
 @SuppressWarnings("unused")
 public class CodeSystemRegistry {
 
@@ -124,7 +127,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Search for code system that contains the specified URN.
+     * Search for a code system that contains the specified URN.
      *
      * @param urn The URN to match.
      * @return The matching code system, or null if not found.
@@ -139,7 +142,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Search for code system that contains the specified OID.
+     * Search for a code system that contains the specified OID.
      *
      * @param oid The OID as a string value (with or without the OID prefix).
      * @return The matching code system, or null if not found.
@@ -153,7 +156,7 @@ public class CodeSystemRegistry {
     }
 
     /**
-     * Search for code system that contains the specified OID.
+     * Search for a code system that contains the specified OID.
      *
      * @param oid The OID to match.
      * @return The matching code system, or null if not found.

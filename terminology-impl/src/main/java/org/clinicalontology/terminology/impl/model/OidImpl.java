@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of an OID with full validation.
+ * Implementation of {@link Oid} with full validation.
  */
 public class OidImpl implements Oid {
 
@@ -68,6 +68,8 @@ public class OidImpl implements Oid {
     }
 
     /**
+     * Returns the string equivalent of the OID.
+     *
      * @return The string equivalent of the OID.
      */
     @Override

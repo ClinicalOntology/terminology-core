@@ -8,5 +8,6 @@ package org.clinicalontology.terminology.api.transformation;
  */
 public record SiteInfo(
     String siteId,
-    String siteDomain) {
+    String siteDomain
+) {
 }

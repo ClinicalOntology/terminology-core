@@ -9,26 +9,36 @@ import java.io.Serializable;
 public interface TerminologyMapping extends Serializable {
 
     /**
+     * Returns the mapping type.
+     *
      * @return The mapping type - e.g., equivalent, broader, narrower, partial.
      */
     TerminologyMappingType getType();
 
     /**
+     * Returns the LHS concept.
+     *
      * @return The LHS concept.
      */
     Concept getSource();
 
     /**
+     * Returns the RHS concept.
+     *
      * @return The RHS concept.
      */
     Concept getTarget();
 
     /**
+     * Returns the category of the mapping.
+     *
      * @return The category of the mapping.
      */
     Concept getCategory();
 
     /**
+     * Returns true if the mapping has an associated category.
+     *
      * @return True if the mapping has an associated category.
      */
     @Transient

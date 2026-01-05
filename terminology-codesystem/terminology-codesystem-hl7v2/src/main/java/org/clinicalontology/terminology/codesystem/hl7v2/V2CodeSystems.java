@@ -7,7 +7,9 @@ import org.clinicalontology.terminology.impl.model.CodeSystemImpl;
 import java.net.URI;
 import java.util.List;
 
-@SuppressWarnings("unused")
+/**
+ * HL7 v2 code systems.
+ */
 public final class V2CodeSystems extends CodeSystemImpl {
 
     public static final V2CodeSystems AdministrativeSex = new V2CodeSystems("0001", "2");
@@ -32,18 +34,30 @@ public final class V2CodeSystems extends CodeSystemImpl {
     public static void load() {
     }
 
+    /**
+     * @see CodeSystemEnumerator#values()
+     */
     public static List<V2CodeSystems> values() {
         return delegate.values();
     }
 
+    /**
+     * @see CodeSystemEnumerator#names()
+     */
     public static List<String> names() {
         return delegate.names();
     }
 
+    /**
+     * @see CodeSystemEnumerator#valueOf(String) ()
+     */
     public static V2CodeSystems valueOf(String name) {
         return delegate.valueOf(name);
     }
 
+    /**
+     * @see CodeSystemEnumerator#valueOf(String, boolean)
+     */
     public static V2CodeSystems valueOf(
         String name,
         boolean exceptionIfNotFound
@@ -59,14 +73,25 @@ public final class V2CodeSystems extends CodeSystemImpl {
         CodeSystemRegistry.registerCodeSystemNormalization(LEGACY_CODESYSTEM_PREFIX + urn, this);
     }
 
+    /**
+     * @see CodeSystemEnumerator#ordinal(Object)
+     */
     public int ordinal() {
         return delegate.ordinal(this);
     }
 
+    /**
+     * Alias for {@link #getName()}.
+     *
+     * @see CodeSystemEnumerator#name(Object)
+     */
     public String name() {
         return delegate.name(this);
     }
 
+    /**
+     * @see CodeSystemEnumerator#name(Object)
+     */
     @Override
     public String getName() {
         return name();

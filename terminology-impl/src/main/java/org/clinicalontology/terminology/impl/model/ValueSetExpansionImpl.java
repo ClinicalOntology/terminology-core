@@ -8,9 +8,12 @@ import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Implementation of {@link ValueSetExpansion}.
+ */
 public class ValueSetExpansionImpl implements ValueSetExpansion {
 
-    // TODO Do we need this? If so, should it not be multicardinality? Should it be a derived field based on the expansion? Should it rather reside in ValueSetIdentifier?
+    // TODO Do we need this? If so, should it not be multi-cardinality? Should it be a derived field based on the expansion? Should it rather reside in ValueSetIdentifier?
     // private final CodeSystem codeSystem = null;
 
     private final ValueSetIdentifier valueSetIdentifier;
@@ -66,16 +69,6 @@ public class ValueSetExpansionImpl implements ValueSetExpansion {
     @Override
     public Set<Concept> getExpansion() {
         return this.expansion;
-    }
-
-    /**
-     * Optional.
-     *
-     * @return The semantic identifier.
-     */
-    @Override
-    public Concept getSemanticIdentifier() {
-        return null;
     }
 
 }

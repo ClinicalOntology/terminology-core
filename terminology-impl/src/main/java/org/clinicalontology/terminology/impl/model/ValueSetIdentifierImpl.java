@@ -7,7 +7,10 @@ import org.clinicalontology.terminology.api.model.ValueSetIdentifier;
 
 import java.net.URI;
 
-public class ValueSetIdentifierImpl implements ValueSetIdentifier {
+/**
+ * Implementation of {@link ValueSetIdentifier}.
+ */
+public class ValueSetIdentifierImpl extends VersionedNamespaceImpl implements ValueSetIdentifier {
 
     public static ValueSetIdentifier create(String vsid) {
         if (StringUtils.isBlank(vsid)) {
@@ -22,26 +25,15 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
             ArrayUtils.get(pcs, 3));
     }
 
-    private final URI id;
-
-    private final URI versionedId;
-
-    private final String version;
-
     private final String displayName;
-
-    private final String alias;
 
     /**
      * For deserialization.
      */
     @SuppressWarnings("unused")
     private ValueSetIdentifierImpl() {
-        this.id = null;
-        this.versionedId = null;
-        this.version = null;
+        super((URI) null, null, null);
         this.displayName = null;
-        this.alias = null;
     }
 
     public ValueSetIdentifierImpl(
@@ -50,12 +42,9 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         String displayName,
         String alias
     ) {
+        super(id, version, alias);
         Validate.isTrue(id != null, "You must specify an id.");
-        this.id = id;
-        this.version = version == null ? "1.0.0" : version;
         this.displayName = displayName;
-        this.alias = alias;
-        this.versionedId = URI.create(id + "/" + this.version);
     }
 
     public ValueSetIdentifierImpl(
@@ -94,17 +83,7 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
         String id,
         String version
     ) {
-        this(URI.create(id), version);
-    }
-
-    @Override
-    public URI getId() {
-        return id;
-    }
-
-    @Override
-    public String getVersion() {
-        return version;
+        this(id, version, null);
     }
 
     @Override
@@ -113,28 +92,19 @@ public class ValueSetIdentifierImpl implements ValueSetIdentifier {
     }
 
     @Override
-    public String getAlias() {
-        return alias;
-    }
-
-    @Override
-    public URI getVersionedIdentifier() {
-        return versionedId;
-    }
-
-    @Override
     public boolean equals(Object object) {
-        return object instanceof ValueSetIdentifierImpl && ((ValueSetIdentifierImpl) object).versionedId.equals(versionedId);
+        return object instanceof ValueSetIdentifierImpl valueSetIdentifier
+            && valueSetIdentifier.getVersionedId().equals(getVersionedId());
     }
 
     @Override
-    public int compareTo(ValueSetIdentifier o) {
-        return getVersionedIdentifier().compareTo(o.getVersionedIdentifier());
+    public int compareTo(ValueSetIdentifier other) {
+        return getVersionedId().compareTo(other.getVersionedId());
     }
 
     @Override
     public int hashCode() {
-        return getVersionedIdentifier().hashCode();
+        return getVersionedId().hashCode();
     }
 
     @Override

@@ -10,6 +10,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Standard code systems used in FHIR.
+ */
 @SuppressWarnings("unused")
 public final class FhirCodeSystems extends CodeSystemImpl {
 
@@ -1410,6 +1413,7 @@ public final class FhirCodeSystems extends CodeSystemImpl {
             if (VERSION_PREFIX_REGEX.matcher(codeSystemString).matches()) {
                 codeSystemString = codeSystemString.replaceFirst("-", "/");
             }
+
             codeSystem = new FhirCodeSystems(
                 LEGACY_CODESYSTEM_PREFIX + codeSystemString,
                 codeSystem.getOids().stream()

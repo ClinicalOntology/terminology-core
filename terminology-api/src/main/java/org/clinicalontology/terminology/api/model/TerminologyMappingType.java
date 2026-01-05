@@ -6,12 +6,12 @@ package org.clinicalontology.terminology.api.model;
 public enum TerminologyMappingType {
 
     /**
-     * Target concept is broader than source (e.g., Beta-blocker is broader than Metoprolol). Generally this means that the source is a subset/element of the target.
+     * Target concept is broader than the source (e.g., Beta-blocker is broader than Metoprolol). Generally this means that the source is a subset/element of the target.
      */
     TARGET_BROADER,
 
     /**
-     * Target concept is narrower than source (e.g., Metoprolol is narrower than Beta-blocker). Generally this means the target is a subset/element of the source.
+     * Target concept is narrower than the source (e.g., Metoprolol is narrower than Beta-blocker). Generally this means the target is a subset/element of the source.
      */
     TARGET_NARROWER,
 
