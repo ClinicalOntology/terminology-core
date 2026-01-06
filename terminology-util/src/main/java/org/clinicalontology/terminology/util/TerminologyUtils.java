@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+/**
+ * Utility methods for working with terminology objects.
+ */
 public class TerminologyUtils {
 
     /**

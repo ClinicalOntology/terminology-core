@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 /**
  * Standard code systems used in FHIR.
  */
-@SuppressWarnings("unused")
 public final class FhirCodeSystems extends CodeSystemImpl {
 
     private static final Pattern VERSION_PREFIX_REGEX = Pattern.compile("^v\\d.*$");

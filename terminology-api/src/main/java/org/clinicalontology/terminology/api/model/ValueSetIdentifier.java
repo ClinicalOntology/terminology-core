@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * An identifier of a value set. A value set is a collection of unique concept references.
  */
-@SuppressWarnings("unused")
 public interface ValueSetIdentifier extends VersionedNamespace, Serializable, Comparable<ValueSetIdentifier> {
 
     /**

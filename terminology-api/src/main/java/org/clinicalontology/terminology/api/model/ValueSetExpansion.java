@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
  * A value set expansion is generated after evaluating a value set expression (whether intentional or extensional).
  * It is a collection of unique concept references.
  */
-@SuppressWarnings("unused")
 public interface ValueSetExpansion extends SemanticKey, Serializable {
 
     /**

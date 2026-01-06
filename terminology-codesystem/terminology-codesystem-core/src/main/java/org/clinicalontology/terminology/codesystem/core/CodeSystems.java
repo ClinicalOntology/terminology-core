@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Derived from <a href="https://vsac.nlm.nih.gov/">VSAC</a>
  */
-@SuppressWarnings("unused")
 public final class CodeSystems extends CodeSystemImpl {
 
     public static final CodeSystems ATC = new CodeSystems("www.whocc.no/atc", "2.16.840.1.113883.6.73");

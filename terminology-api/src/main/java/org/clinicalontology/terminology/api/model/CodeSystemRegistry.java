@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * A centralized registry of code systems.  Each code system must register itself.
  */
-@SuppressWarnings("unused")
 public class CodeSystemRegistry {
 
     private static final Map<String, CodeSystem> normalizedCodeSystemMap = new HashMap<>();

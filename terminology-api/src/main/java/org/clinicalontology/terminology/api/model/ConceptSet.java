@@ -16,7 +16,6 @@ import java.util.stream.Stream;
  * A set of synonymous concepts (across terminologies). For a collection of non-synonymous
  * concepts use a Set&lt;Concept&gt; instead.
  */
-@SuppressWarnings("unused")
 public interface ConceptSet extends Serializable, Iterable<Concept> {
 
     /**

@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Recognized FHIR extensions.
  */
-@SuppressWarnings("unused")
 public final class FhirExtensions extends CodeSystemImpl {
 
     public static final FhirExtensions EXT_MEDICATIONREQUEST_CATEGORY = new FhirExtensions("http://hl7.org/fhir/3.0/StructureDefinition/extension-MedicationRequest.category");

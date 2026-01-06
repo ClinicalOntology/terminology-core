@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 /**
  * Represents a reference to a concept in a terminology or ontology.
  */
-@SuppressWarnings("unused")
 public interface Concept extends Serializable {
 
     /**
