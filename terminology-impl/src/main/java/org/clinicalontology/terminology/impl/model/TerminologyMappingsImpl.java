@@ -29,7 +29,7 @@ public class TerminologyMappingsImpl implements TerminologyMappings {
     @Override
     public TerminologyMapping findFirstMatch(CodeSystem targetCodeSystem) {
         return mappings.stream()
-            .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
+            .filter(m -> m.getTarget().hasCodeSystem(targetCodeSystem))
             .findFirst()
             .orElse(null);
     }
@@ -37,7 +37,7 @@ public class TerminologyMappingsImpl implements TerminologyMappings {
     @Override
     public List<TerminologyMapping> findMatches(CodeSystem targetCodeSystem) {
         return mappings.stream()
-            .filter(m -> m.getTarget().getCodeSystem().equals(targetCodeSystem))
+            .filter(m -> m.getTarget().hasCodeSystem(targetCodeSystem))
             .collect(Collectors.toList());
     }
 

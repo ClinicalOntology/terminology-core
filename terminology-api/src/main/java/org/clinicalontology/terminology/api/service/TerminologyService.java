@@ -85,7 +85,8 @@ public interface TerminologyService {
      * @return A list of concepts in the form codeSystem|code(,codeSystem|code)*
      */
     default String getValueSetExpansionAsString(ValueSetIdentifier valueSetIdentifier) {
-        return getValueSetExpansion(valueSetIdentifier).asString();
+        ValueSetExpansion expansion = getValueSetExpansion(valueSetIdentifier);
+        return expansion == null ? "" : expansion.asString();
     }
 
     //--------------- Concepts ---------------

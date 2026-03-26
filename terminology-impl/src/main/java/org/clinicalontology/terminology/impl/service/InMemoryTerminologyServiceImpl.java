@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Only use for demos and tests. Not intended for use for actual terminology services as all value set expansions
@@ -109,7 +110,7 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
         Concept category
     ) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
-        getMappingsForConcept(source).getMappings().stream()
+        getMappingsForConceptAsStream(source)
             .filter(m -> category.isEqual(m.getCategory()))
             .forEach(filtered::add);
         return filtered;
@@ -121,12 +122,31 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
         String targetCodeSystem
     ) {
         TerminologyMappings filtered = new TerminologyMappingsImpl();
-        getMappingsForConcept(source).getMappings().stream()
-            .filter(m -> targetCodeSystem.equals(m.getTarget().getCodeAsString()))
+        getMappingsForConceptAsStream(source)
+            .filter(m -> m.getTarget().hasCodeSystem(targetCodeSystem))
             .forEach(filtered::add);
         return filtered;
     }
 
+    /**
+     * Returns a stream of mappings for the specified source concept.
+     *
+     * @param source The source concept.
+     * @return A stream of mappings for the specified source concept.
+     */
+    private Stream<TerminologyMapping> getMappingsForConceptAsStream(Concept source) {
+        TerminologyMappings mappings = mappingIndex.get(source);
+        List<TerminologyMapping> mappingsList = mappings == null ? Collections.emptyList() : mappings.getMappings();
+        return mappingsList.stream();
+    }
+
+    /**
+     * Adds a terminology mapping.
+     *
+     * @param source The source concept.
+     * @param target The target concept.
+     * @param type The mapping type.  Defaults to {@link TerminologyMappingType#TARGET_EQUIVALENT TARGET_EQUIVALENT}.
+     */
     public void addTerminologyMapping(
         Concept source,
         Concept target,
@@ -154,6 +174,12 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
         return expansion != null && expansion.hasConcept(concept);
     }
 
+    /**
+     * Registers a value set.  If the value set already exists, the concepts are merged.
+     *
+     * @param valueSetIdentifier The value set identifier.
+     * @param concepts The concepts in the value set.
+     */
     public void registerValueSet(
         ValueSetIdentifier valueSetIdentifier,
         List<Concept> concepts
@@ -162,6 +188,12 @@ public class InMemoryTerminologyServiceImpl implements TerminologyService {
             .addAll(concepts == null ? Collections.emptySet() : concepts);
     }
 
+    /**
+     * Adds a concept to a value set.  If the value set does not exist, it is created.
+     *
+     * @param valueSetIdentifier The value set identifier.
+     * @param concept The concept to add.
+     */
     public void addConceptToValueSet(
         ValueSetIdentifier valueSetIdentifier,
         Concept concept

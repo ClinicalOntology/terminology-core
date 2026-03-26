@@ -1,5 +1,7 @@
 package org.clinicalontology.terminology.api.model;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.io.Serializable;
 
 /**
@@ -20,8 +22,9 @@ public interface ValueSetIdentifier extends VersionedNamespace, Serializable, Co
      * @param other The value set identifier to compare.
      * @return The result of the comparison.
      */
+    @Override
     default int compareTo(ValueSetIdentifier other) {
-        return getVersionedId().compareTo(other.getVersionedId());
+        return ObjectUtils.compare(getVersionedId(), other.getVersionedId());
     }
 
 }

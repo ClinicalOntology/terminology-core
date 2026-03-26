@@ -101,8 +101,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      */
     default Stream<Concept> getStreamByCodeSystem(URI system) {
         return getConcepts().stream()
-            .filter(concept -> concept.hasCodeSystem() && (
-                system.equals(concept.getCodeSystem().getUrn())));
+            .filter(concept -> concept.hasCodeSystem(system));
     }
 
     /**
@@ -163,7 +162,7 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
      */
     default Concept getFirstByCodeSystem(CodeSystem system) {
         return getConcepts().stream()
-            .filter(concept -> concept.getCodeSystem().equals(system))
+            .filter(concept -> concept.hasCodeSystem(system))
             .findFirst()
             .orElse(null);
     }
@@ -183,12 +182,12 @@ public interface ConceptSet extends Serializable, Iterable<Concept> {
     /**
      * Returns the first concept in the set that belongs to the specified code system.
      *
-     * @param system The code system to the match.
+     * @param codeSystem The code system to the match.
      * @return The first concept with the specified code system, or null if there is none.
      */
-    default Concept getFirstConcept(String system) {
+    default Concept getFirstConcept(String codeSystem) {
         return getConcepts().stream()
-            .filter(concept -> system.equals(concept.getCodeSystemAsString()))
+            .filter(concept -> concept.hasCodeSystem(codeSystem))
             .findFirst()
             .orElse(null);
     }
