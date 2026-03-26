@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,6 +39,39 @@ public interface Concept extends Serializable {
     @Transient
     default boolean hasCodeSystem() {
         return getCodeSystem() != null;
+    }
+
+    /**
+     * Returns true if the concept has the specified code system.
+     *
+     * @param codeSystem The code system to match.
+     * @return True if the concept has the specified code system. False otherwise.
+     */
+    @Transient
+    default boolean hasCodeSystem(CodeSystem codeSystem) {
+        return hasCodeSystem() && getCodeSystem().isEqual(codeSystem);
+    }
+
+    /**
+     * Returns true if the concept has the specified code system.
+     *
+     * @param codeSystem The code system to match.
+     * @return True if the concept has the specified code system. False otherwise.
+     */
+    @Transient
+    default boolean hasCodeSystem(String codeSystem) {
+        return hasCodeSystem() && getCodeSystemAsString().equals(codeSystem);
+    }
+
+    /**
+     * Returns true if the concept has the specified code system.
+     *
+     * @param codeSystem The code system to match.
+     * @return True if the concept has the specified code system. False otherwise.
+     */
+    @Transient
+    default boolean hasCodeSystem(URI codeSystem) {
+        return hasCodeSystem() && getCodeSystem().getUrn().equals(codeSystem);
     }
 
     /**
