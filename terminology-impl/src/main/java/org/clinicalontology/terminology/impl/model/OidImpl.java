@@ -40,7 +40,7 @@ public class OidImpl implements Oid {
     }
 
     /**
-     * Create and OID from its string equivalent.
+     * Create an OID from its string equivalent.
      *
      * @param oid The string value. The URN prefix is optional.
      */

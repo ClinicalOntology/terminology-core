@@ -23,7 +23,7 @@ public class TerminologyMappingsImpl implements TerminologyMappings {
 
     @Override
     public List<TerminologyMapping> getMappings() {
-        return mappings;
+        return Collections.unmodifiableList(mappings);
     }
 
     @Override

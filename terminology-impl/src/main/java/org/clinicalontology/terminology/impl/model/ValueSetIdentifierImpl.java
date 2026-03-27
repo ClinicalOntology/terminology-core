@@ -91,7 +91,7 @@ public class ValueSetIdentifierImpl extends VersionedNamespaceImpl implements Va
 
     @Override
     public boolean equals(Object object) {
-        return object instanceof ValueSetIdentifierImpl valueSetIdentifier
+        return object instanceof ValueSetIdentifier valueSetIdentifier
             && valueSetIdentifier.getVersionedId().equals(getVersionedId());
     }
 
