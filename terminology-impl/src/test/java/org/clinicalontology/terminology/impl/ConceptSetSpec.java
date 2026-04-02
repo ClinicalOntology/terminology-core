@@ -4,8 +4,9 @@ import org.clinicalontology.terminology.api.model.Concept;
 import org.clinicalontology.terminology.api.model.ConceptSet;
 import org.clinicalontology.terminology.impl.model.ConceptImpl;
 import org.clinicalontology.terminology.impl.model.ConceptSetImpl;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConceptSetSpec {
 
@@ -24,17 +25,17 @@ public class ConceptSetSpec {
         ConceptSet set1_4 = new ConceptSetImpl(cpt1, cpt4);
         ConceptSet set3_4 = new ConceptSetImpl(cpt3, cpt4);
         ConceptSet set3_4_1 = new ConceptSetImpl(cpt3, cpt4, cpt1);
-        Assert.assertTrue(set1.contains(cpt1_1));
-        Assert.assertFalse(set1.contains(cpt2));
-        Assert.assertEquals("set1", set1.getDisplayText());
-        Assert.assertEquals("cpt2", set2.getDisplayText());
-        Assert.assertEquals("code3", set3.getDisplayText());
-        Assert.assertTrue(set3_1.contains(cpt1));
-        Assert.assertFalse(set3_1.contains(cpt2));
-        Assert.assertTrue(set3_1.contains(cpt3));
-        Assert.assertEquals("cpt1", set3_1.getDisplayText());
-        Assert.assertEquals("cpt1", set1_4.getDisplayText());
-        Assert.assertEquals("code3", set3_4.getDisplayText());
-        Assert.assertEquals("cpt1", set3_4_1.getDisplayText());
+        assertTrue(set1.contains(cpt1_1));
+        assertFalse(set1.contains(cpt2));
+        assertEquals("set1", set1.getDisplayText());
+        assertEquals("cpt2", set2.getDisplayText());
+        assertEquals("code3", set3.getDisplayText());
+        assertTrue(set3_1.contains(cpt1));
+        assertFalse(set3_1.contains(cpt2));
+        assertTrue(set3_1.contains(cpt3));
+        assertEquals("cpt1", set3_1.getDisplayText());
+        assertEquals("cpt1", set1_4.getDisplayText());
+        assertEquals("code3", set3_4.getDisplayText());
+        assertEquals("cpt1", set3_4_1.getDisplayText());
     }
 }

@@ -1,7 +1,8 @@
 package org.clinicalontology.terminology.codesystem.fhir;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FhirCodeSystemsSpec {
 
@@ -21,14 +22,14 @@ public class FhirCodeSystemsSpec {
 
     @Test
     public void testLegacyConversion() {
-        Assert.assertEquals(V2_LEGACY, FhirCodeSystems.toLegacyCodeSystem(V2_NEW));
-        Assert.assertEquals(V2_NEW, FhirCodeSystems.fromLegacyCodeSystem(V2_LEGACY));
-        Assert.assertEquals(V3_LEGACY, FhirCodeSystems.toLegacyCodeSystem(V3_NEW));
-        Assert.assertEquals(V3_NEW, FhirCodeSystems.fromLegacyCodeSystem(V3_LEGACY));
-        Assert.assertEquals(NO_CONVERSION1, FhirCodeSystems.toLegacyCodeSystem(NO_CONVERSION1));
-        Assert.assertEquals(NO_CONVERSION1, FhirCodeSystems.fromLegacyCodeSystem(NO_CONVERSION1));
-        Assert.assertEquals(NO_CONVERSION2, FhirCodeSystems.toLegacyCodeSystem(NO_CONVERSION2));
-        Assert.assertEquals(NO_CONVERSION3, FhirCodeSystems.fromLegacyCodeSystem(NO_CONVERSION3));
+        assertEquals(V2_LEGACY, FhirCodeSystems.toLegacyCodeSystem(V2_NEW));
+        assertEquals(V2_NEW, FhirCodeSystems.fromLegacyCodeSystem(V2_LEGACY));
+        assertEquals(V3_LEGACY, FhirCodeSystems.toLegacyCodeSystem(V3_NEW));
+        assertEquals(V3_NEW, FhirCodeSystems.fromLegacyCodeSystem(V3_LEGACY));
+        assertEquals(NO_CONVERSION1, FhirCodeSystems.toLegacyCodeSystem(NO_CONVERSION1));
+        assertEquals(NO_CONVERSION1, FhirCodeSystems.fromLegacyCodeSystem(NO_CONVERSION1));
+        assertEquals(NO_CONVERSION2, FhirCodeSystems.toLegacyCodeSystem(NO_CONVERSION2));
+        assertEquals(NO_CONVERSION3, FhirCodeSystems.fromLegacyCodeSystem(NO_CONVERSION3));
     }
 
 }

@@ -3,12 +3,12 @@ package org.clinicalontology.terminology.codesystem.core;
 import org.clinicalontology.terminology.api.model.CodeSystem;
 import org.clinicalontology.terminology.api.model.CodeSystemRegistry;
 import org.clinicalontology.terminology.api.model.Oid;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CodeSystemSpec {
 
